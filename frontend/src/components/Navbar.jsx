@@ -1,8 +1,16 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import navbarImage from "../assets/img/navbar.png";
 
 function NavbarComponent() {
+  const [userRole, setUserRole] = useState("");
+
+  useEffect(() => {
+    const role = localStorage.getItem("userRole") || "";
+    setUserRole(role);
+  }, []);
+
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
@@ -21,7 +29,11 @@ function NavbarComponent() {
             <Nav.Link as={Link} to="/">Inicio</Nav.Link>
             <Nav.Link as={Link} to="/nosotros">Nosotros</Nav.Link>
             <Nav.Link as={Link} to="/contacto">Contacto</Nav.Link>
-            <Nav.Link as={Link} to="/login">Iniciar Sesión</Nav.Link>
+            {userRole === "alumno" ? (
+              <Nav.Link as={Link} to="/alumno">Portal Alumno</Nav.Link>
+            ) : (
+              <Nav.Link as={Link} to="/login">Iniciar Sesión</Nav.Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

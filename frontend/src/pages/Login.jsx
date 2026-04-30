@@ -1,14 +1,17 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Container, Form, Button, Alert } from "react-bootstrap";
+import alumnos from "../data/alumnos.json";
 
 function Login() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({ rut: "", password: "" });
   const [errors, setErrors] = useState({});
   const [sent, setSent] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const cleanRut = (value) =>
-    value.replace(/[\.]/g, "").trim().toLowerCase();
+    value.replace(/[-\.]/g, "").trim().toLowerCase();
 
   const validate = () => {
     const e = {};
@@ -16,8 +19,8 @@ function Login() {
 
     if (!value) {
       e.rut = "Ingresa tu RUT";
-    } else if (!/^\d{7,8}-[0-9kK]$/.test(value)) {
-      e.rut = "Ingresa un RUT válido (ej: 12345678-9)";
+    } else if (!/^\d{7,8}$/.test(value)) {
+      e.rut = "Ingresa un RUT válido (ej: 219807430 o 12345678-9)";
     }
 
     if (!form.password || form.password.trim().length < 4) {
@@ -36,10 +39,23 @@ function Login() {
     setSent(null);
 
     setTimeout(() => {
-      localStorage.setItem("userRut", cleanRut(form.rut));
+      const rutLimpio = cleanRut(form.rut);
+      const usuario = alumnos.find(
+        (alumno) => alumno.rut === rutLimpio && alumno.password === form.password
+      );
+
+      if (!usuario) {
+        setSent(false);
+        setIsLoading(false);
+        return;
+      }
+
+      localStorage.setItem("userRut", usuario.rut);
+      localStorage.setItem("userRole", usuario.rol);
       setSent(true);
       setIsLoading(false);
-      setForm({ rut: "" });
+      setForm({ rut: "", password: "" });
+      navigate("/alumno");
     }, 600);
   };
 

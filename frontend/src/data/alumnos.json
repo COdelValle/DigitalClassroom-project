@@ -1,0 +1,227 @@
+[
+  {
+    "id": "01",
+    "rut": "219807430",
+    "password": "JavierRojas18",
+    "rol": "alumno",
+    "nombre": "Javier Rojas",
+    "clases": [
+      { "id": 1, "nombre": "Matemáticas", "profesor": "María González", "salon": "A101", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.5", "comentario": "Buen manejo de operaciones." }, { "periodo": "Evaluación 2", "puntaje": "6.8", "comentario": "Excelente análisis de problemas." }] },
+      { "id": 2, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.1", "comentario": "Muy buena comprensión lectora." }, { "periodo": "Evaluación 2", "puntaje": "6.5", "comentario": "Excelente redacción." }] },
+      { "id": 3, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C201", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.8", "comentario": "Buena conversación oral." }, { "periodo": "Evaluación 2", "puntaje": "6.2", "comentario": "Excelente vocabulario." }] },
+      { "id": 4, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B203", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.0", "comentario": "Participación activa." }, { "periodo": "Evaluación 2", "puntaje": "6.0", "comentario": "Buen análisis del contexto." }] },
+      { "id": 5, "nombre": "Ciencias", "profesor": "Ana Torres", "salon": "C102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.3", "comentario": "Dominio de conceptos científicos." }, { "periodo": "Evaluación 2", "puntaje": "6.0", "comentario": "Excelente trabajo práctico." }] },
+      { "id": 6, "nombre": "Educación Física", "profesor": "Jorge Paredes", "salon": "G101", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.5", "comentario": "Muy buena energía y actitud." }, { "periodo": "Evaluación 2", "puntaje": "6.7", "comentario": "Buen desempeño en deportes." }] }
+    ]
+  },
+  {
+    "id": "02",
+    "rut": "198765432",
+    "password": "CamilaPerez22",
+    "rol": "alumno",
+    "nombre": "Camila Pérez",
+    "clases": [
+      { "id": 1, "nombre": "Matemáticas", "profesor": "María González", "salon": "A101", "notas": [{ "periodo": "Evaluación 1", "puntaje": "4.8", "comentario": "Buen esfuerzo en álgebra." }, { "periodo": "Evaluación 2", "puntaje": "5.5", "comentario": "Mayor precisión en fracciones." }] },
+      { "id": 2, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.0", "comentario": "Buena interpretación de textos." }, { "periodo": "Evaluación 2", "puntaje": "5.7", "comentario": "Mejorar la ortografía." }] },
+      { "id": 3, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C201", "notas": [{ "periodo": "Evaluación 1", "puntaje": "4.5", "comentario": "Comprensión básica correcta." }, { "periodo": "Evaluación 2", "puntaje": "5.2", "comentario": "Avance en lectura." }] },
+      { "id": 4, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B203", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.2", "comentario": "Excelente memoria histórica." }, { "periodo": "Evaluación 2", "puntaje": "6.0", "comentario": "Muy buen trabajo en clase." }] },
+      { "id": 5, "nombre": "Ciencias", "profesor": "Ana Torres", "salon": "C102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.5", "comentario": "Buen razonamiento científico." }, { "periodo": "Evaluación 2", "puntaje": "5.9", "comentario": "Excelente presentación de proyecto." }] },
+      { "id": 7, "nombre": "Artes", "profesor": "Sofía Blanco", "salon": "D104", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.7", "comentario": "Creatividad destacada." }, { "periodo": "Evaluación 2", "puntaje": "6.8", "comentario": "Muy buen uso del color." }] }
+    ]
+  },
+  {
+    "id": "03",
+    "rut": "213456789",
+    "password": "SebastianL15",
+    "rol": "alumno",
+    "nombre": "Sebastián López",
+    "clases": [
+      { "id": 1, "nombre": "Matemáticas", "profesor": "María González", "salon": "A101", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.0", "comentario": "Fuerte en geometría." }, { "periodo": "Evaluación 2", "puntaje": "6.4", "comentario": "Excelente resolución de problemas." }] },
+      { "id": 2, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.2", "comentario": "Buena expresión escrita." }, { "periodo": "Evaluación 2", "puntaje": "5.8", "comentario": "Mejor manejo de párrafos." }] },
+      { "id": 3, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C201", "notas": [{ "periodo": "Evaluación 1", "puntaje": "4.9", "comentario": "Avance en escucha." }, { "periodo": "Evaluación 2", "puntaje": "5.4", "comentario": "Mejor pronunciación." }] },
+      { "id": 4, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B203", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.8", "comentario": "Muy buena línea de tiempo." }, { "periodo": "Evaluación 2", "puntaje": "6.6", "comentario": "Análisis profundo." }] },
+      { "id": 5, "nombre": "Ciencias", "profesor": "Ana Torres", "salon": "C102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.9", "comentario": "Buen trabajo de laboratorio." }, { "periodo": "Evaluación 2", "puntaje": "6.2", "comentario": "Excelente explicación de resultados." }] },
+      { "id": 8, "nombre": "Tecnología", "profesor": "Luis Gómez", "salon": "E202", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.5", "comentario": "Muy buena resolución de retos digitales." }, { "periodo": "Evaluación 2", "puntaje": "6.9", "comentario": "Proyecto digital destacado." }] }
+    ]
+  },
+  {
+    "id": "04",
+    "rut": "205678901",
+    "password": "DanielaT2024",
+    "rol": "alumno",
+    "nombre": "Daniela Torres",
+    "clases": [
+      { "id": 2, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.3", "comentario": "Buena lectura crítica." }, { "periodo": "Evaluación 2", "puntaje": "6.1", "comentario": "Muy buen ensayo." }] },
+      { "id": 3, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C201", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.0", "comentario": "Buena fluidez verbal." }, { "periodo": "Evaluación 2", "puntaje": "6.3", "comentario": "Excelente pronunciación." }] },
+      { "id": 4, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B203", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.6", "comentario": "Buena comprensión de fechas." }, { "periodo": "Evaluación 2", "puntaje": "6.0", "comentario": "Muy buen trabajo grupal." }] },
+      { "id": 5, "nombre": "Ciencias", "profesor": "Ana Torres", "salon": "C102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.8", "comentario": "Excelente con experimentos." }, { "periodo": "Evaluación 2", "puntaje": "6.4", "comentario": "Muy buena explicación científica." }] },
+      { "id": 6, "nombre": "Educación Física", "profesor": "Jorge Paredes", "salon": "G101", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.2", "comentario": "Actitud y constancia." }, { "periodo": "Evaluación 2", "puntaje": "6.5", "comentario": "Buena resistencia." }] },
+      { "id": 7, "nombre": "Artes", "profesor": "Sofía Blanco", "salon": "D104", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.7", "comentario": "Creatividad interesante." }, { "periodo": "Evaluación 2", "puntaje": "6.2", "comentario": "Muy buen uso de formas." }] }
+    ]
+  },
+  {
+    "id": "05",
+    "rut": "222333444",
+    "password": "FelipeM9",
+    "rol": "alumno",
+    "nombre": "Felipe Morales",
+    "clases": [
+      { "id": 1, "nombre": "Matemáticas", "profesor": "María González", "salon": "A101", "notas": [{ "periodo": "Evaluación 1", "puntaje": "3.5", "comentario": "Debe reforzar multiplicación." }, { "periodo": "Evaluación 2", "puntaje": "4.2", "comentario": "Mejoró en divisiones." }] },
+      { "id": 2, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "4.0", "comentario": "Buena expresión." }, { "periodo": "Evaluación 2", "puntaje": "4.8", "comentario": "Trabajar en ortografía." }] },
+      { "id": 3, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C201", "notas": [{ "periodo": "Evaluación 1", "puntaje": "3.9", "comentario": "Necesita más práctica oral." }, { "periodo": "Evaluación 2", "puntaje": "4.5", "comentario": "Avance en lectura." }] },
+      { "id": 4, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B203", "notas": [{ "periodo": "Evaluación 1", "puntaje": "4.7", "comentario": "Buena comprensión." }, { "periodo": "Evaluación 2", "puntaje": "5.3", "comentario": "Mejoró en análisis." }] },
+      { "id": 8, "nombre": "Tecnología", "profesor": "Luis Gómez", "salon": "E202", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.6", "comentario": "Muy buena navegación digital." }, { "periodo": "Evaluación 2", "puntaje": "6.1", "comentario": "Buen uso de herramientas." }] },
+      { "id": 7, "nombre": "Artes", "profesor": "Sofía Blanco", "salon": "D104", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.0", "comentario": "Interesante propuesta visual." }, { "periodo": "Evaluación 2", "puntaje": "5.8", "comentario": "Muy buena técnica." }] }
+    ]
+  },
+  {
+    "id": "06",
+    "rut": "229001122",
+    "password": "ValentinaF77",
+    "rol": "alumno",
+    "nombre": "Valentina Fuentes",
+    "clases": [
+      { "id": 1, "nombre": "Matemáticas", "profesor": "María González", "salon": "A101", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.3", "comentario": "Excelente en ecuaciones." }, { "periodo": "Evaluación 2", "puntaje": "6.6", "comentario": "Muy clara la lógica." }] },
+      { "id": 2, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.9", "comentario": "Buena interpretación." }, { "periodo": "Evaluación 2", "puntaje": "6.1", "comentario": "Muy buena creatividad escrita." }] },
+      { "id": 3, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C201", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.0", "comentario": "Muy buena comprensión." }, { "periodo": "Evaluación 2", "puntaje": "6.4", "comentario": "Excelente uso de frases." }] },
+      { "id": 5, "nombre": "Ciencias", "profesor": "Ana Torres", "salon": "C102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.7", "comentario": "Muy buena investigación." }, { "periodo": "Evaluación 2", "puntaje": "6.8", "comentario": "Excelente análisis de datos." }] },
+      { "id": 8, "nombre": "Tecnología", "profesor": "Luis Gómez", "salon": "E202", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.2", "comentario": "Muy buena programación." }, { "periodo": "Evaluación 2", "puntaje": "6.5", "comentario": "Propuesta digital muy sólida." }] },
+      { "id": 6, "nombre": "Educación Física", "profesor": "Jorge Paredes", "salon": "G101", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.1", "comentario": "Muy buena actitud física." }, { "periodo": "Evaluación 2", "puntaje": "6.3", "comentario": "Buen esfuerzo en equipo." }] }
+    ]
+  },
+  {
+    "id": "07",
+    "rut": "211223344",
+    "password": "NicolasD12",
+    "rol": "alumno",
+    "nombre": "Nicolás Díaz",
+    "clases": [
+      { "id": 1, "nombre": "Matemáticas", "profesor": "María González", "salon": "A101", "notas": [{ "periodo": "Evaluación 1", "puntaje": "4.1", "comentario": "Aprobación con esfuerzo." }, { "periodo": "Evaluación 2", "puntaje": "5.0", "comentario": "Mejorando en resolución." }] },
+      { "id": 2, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "4.9", "comentario": "Buen resumen." }, { "periodo": "Evaluación 2", "puntaje": "5.4", "comentario": "Buena argumentación." }] },
+      { "id": 3, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C201", "notas": [{ "periodo": "Evaluación 1", "puntaje": "3.8", "comentario": "Necesita más práctica." }, { "periodo": "Evaluación 2", "puntaje": "4.3", "comentario": "Avance en lectura." }] },
+      { "id": 4, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B203", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.5", "comentario": "Buena memoria histórica." }, { "periodo": "Evaluación 2", "puntaje": "5.9", "comentario": "Muy buen análisis." }] },
+      { "id": 5, "nombre": "Ciencias", "profesor": "Ana Torres", "salon": "C102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "4.8", "comentario": "Requiere más práctica." }, { "periodo": "Evaluación 2", "puntaje": "5.5", "comentario": "Buen progreso experimental." }] },
+      { "id": 7, "nombre": "Artes", "profesor": "Sofía Blanco", "salon": "D104", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.4", "comentario": "Creativo en trabajos." }, { "periodo": "Evaluación 2", "puntaje": "5.9", "comentario": "Muy buena técnica." }] }
+    ]
+  },
+  {
+    "id": "08",
+    "rut": "219001100",
+    "password": "IsidoraR5",
+    "rol": "alumno",
+    "nombre": "Isidora Rivas",
+    "clases": [
+      { "id": 2, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.4", "comentario": "Muy buen análisis de textos." }, { "periodo": "Evaluación 2", "puntaje": "6.7", "comentario": "Excelente síntesis." }] },
+      { "id": 3, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C201", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.2", "comentario": "Muy buen nivel conversacional." }, { "periodo": "Evaluación 2", "puntaje": "6.5", "comentario": "Excelente comprensión auditiva." }] },
+      { "id": 1, "nombre": "Matemáticas", "profesor": "María González", "salon": "A101", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.8", "comentario": "Buen trabajo con fracciones." }, { "periodo": "Evaluación 2", "puntaje": "6.1", "comentario": "Muy buena resolución de ecuaciones." }] },
+      { "id": 5, "nombre": "Ciencias", "profesor": "Ana Torres", "salon": "C102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.9", "comentario": "Excelente planteamiento de hipótesis." }, { "periodo": "Evaluación 2", "puntaje": "6.0", "comentario": "Muy buenos resultados de laboratorio." }] },
+      { "id": 4, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B203", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.7", "comentario": "Buen repaso de épocas." }, { "periodo": "Evaluación 2", "puntaje": "5.9", "comentario": "Muy buen trabajo en clase." }] },
+      { "id": 8, "nombre": "Tecnología", "profesor": "Luis Gómez", "salon": "E202", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.0", "comentario": "Buen manejo de herramientas." }, { "periodo": "Evaluación 2", "puntaje": "6.3", "comentario": "Proyecto digital muy bien construido." }] }
+    ]
+  },
+  {
+    "id": "09",
+    "rut": "220112233",
+    "password": "MatiasV55",
+    "rol": "alumno",
+    "nombre": "Matías Vega",
+    "clases": [
+      { "id": 1, "nombre": "Matemáticas", "profesor": "María González", "salon": "A101", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.2", "comentario": "Avance constante." }, { "periodo": "Evaluación 2", "puntaje": "5.7", "comentario": "Buen trabajo con funciones." }] },
+      { "id": 2, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "4.4", "comentario": "Mejorar ortografía." }, { "periodo": "Evaluación 2", "puntaje": "5.1", "comentario": "Progreso en escritura." }] },
+      { "id": 3, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C201", "notas": [{ "periodo": "Evaluación 1", "puntaje": "4.9", "comentario": "Buena comprensión básica." }, { "periodo": "Evaluación 2", "puntaje": "5.6", "comentario": "Mejora en conversaciones." }] },
+      { "id": 4, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B203", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.1", "comentario": "Muy buena participación." }, { "periodo": "Evaluación 2", "puntaje": "6.0", "comentario": "Buen análisis de fuentes." }] },
+      { "id": 8, "nombre": "Tecnología", "profesor": "Luis Gómez", "salon": "E202", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.4", "comentario": "Excelente pensamiento digital." }, { "periodo": "Evaluación 2", "puntaje": "6.8", "comentario": "Muy buen proyecto de programación." }] },
+      { "id": 7, "nombre": "Artes", "profesor": "Sofía Blanco", "salon": "D104", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.8", "comentario": "Interesante propuesta visual." }, { "periodo": "Evaluación 2", "puntaje": "6.0", "comentario": "Buen uso del color." }] }
+    ]
+  },
+  {
+    "id": "10",
+    "rut": "224455667",
+    "password": "AntoniaS33",
+    "rol": "alumno",
+    "nombre": "Antonia Silva",
+    "clases": [
+      { "id": 2, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.3", "comentario": "Muy buena comprensión de textos." }, { "periodo": "Evaluación 2", "puntaje": "6.6", "comentario": "Excelente expresión escrita." }] },
+      { "id": 3, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C201", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.1", "comentario": "Muy buena lectura en inglés." }, { "periodo": "Evaluación 2", "puntaje": "6.4", "comentario": "Excelente pronunciación." }] },
+      { "id": 1, "nombre": "Matemáticas", "profesor": "María González", "salon": "A101", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.5", "comentario": "Buen enfoque lógico." }, { "periodo": "Evaluación 2", "puntaje": "6.0", "comentario": "Muy buena resolución de ejercicios." }] },
+      { "id": 5, "nombre": "Ciencias", "profesor": "Ana Torres", "salon": "C102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.2", "comentario": "Muy buen trabajo experimental." }, { "periodo": "Evaluación 2", "puntaje": "6.5", "comentario": "Excelente documentación científica." }] },
+      { "id": 4, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B203", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.9", "comentario": "Buena comprensión histórica." }, { "periodo": "Evaluación 2", "puntaje": "6.2", "comentario": "Muy buen trabajo en clase." }] },
+      { "id": 6, "nombre": "Educación Física", "profesor": "Jorge Paredes", "salon": "G101", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.0", "comentario": "Muy buena energía." }, { "periodo": "Evaluación 2", "puntaje": "6.3", "comentario": "Buen desempeño en actividades." }] }
+    ]
+  },
+  {
+    "id": "11",
+    "rut": "226677889",
+    "password": "GonzaloH44",
+    "rol": "alumno",
+    "nombre": "Gonzalo Herrera",
+    "clases": [
+      { "id": 1, "nombre": "Matemáticas", "profesor": "María González", "salon": "A101", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.1", "comentario": "Avance en álgebra." }, { "periodo": "Evaluación 2", "puntaje": "5.6", "comentario": "Mejor uso de fórmulas." }] },
+      { "id": 2, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "4.7", "comentario": "Avance en ortografía." }, { "periodo": "Evaluación 2", "puntaje": "5.2", "comentario": "Buena expresión escrita." }] },
+      { "id": 3, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C201", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.0", "comentario": "Buena comprensión básica." }, { "periodo": "Evaluación 2", "puntaje": "5.5", "comentario": "Avance en lectura." }] },
+      { "id": 4, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B203", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.0", "comentario": "Muy buena participación." }, { "periodo": "Evaluación 2", "puntaje": "6.1", "comentario": "Buen análisis de eventos." }] },
+      { "id": 7, "nombre": "Artes", "profesor": "Sofía Blanco", "salon": "D104", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.5", "comentario": "Buena creatividad." }, { "periodo": "Evaluación 2", "puntaje": "5.8", "comentario": "Muy buena técnica de dibujo." }] },
+      { "id": 8, "nombre": "Tecnología", "profesor": "Luis Gómez", "salon": "E202", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.0", "comentario": "Buena solución técnica." }, { "periodo": "Evaluación 2", "puntaje": "6.2", "comentario": "Buen proyecto digital." }] }
+    ]
+  },
+  {
+    "id": "12",
+    "rut": "227788990",
+    "password": "FranciscaO88",
+    "rol": "alumno",
+    "nombre": "Francisca Ortiz",
+    "clases": [
+      { "id": 2, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.5", "comentario": "Excelente lectura crítica." }, { "periodo": "Evaluación 2", "puntaje": "6.7", "comentario": "Muy buena redacción." }] },
+      { "id": 3, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C201", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.4", "comentario": "Muy buena comunicación oral." }, { "periodo": "Evaluación 2", "puntaje": "6.6", "comentario": "Excelente comprensión escrita." }] },
+      { "id": 1, "nombre": "Matemáticas", "profesor": "María González", "salon": "A101", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.8", "comentario": "Buen trabajo con ecuaciones." }, { "periodo": "Evaluación 2", "puntaje": "6.0", "comentario": "Muy buena lógica." }] },
+      { "id": 5, "nombre": "Ciencias", "profesor": "Ana Torres", "salon": "C102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.9", "comentario": "Trabajo muy completo." }, { "periodo": "Evaluación 2", "puntaje": "7.0", "comentario": "Excelente presentación de proyecto." }] },
+      { "id": 4, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B203", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.1", "comentario": "Muy buen análisis histórico." }, { "periodo": "Evaluación 2", "puntaje": "6.3", "comentario": "Excelente trabajo en equipo." }] },
+      { "id": 7, "nombre": "Artes", "profesor": "Sofía Blanco", "salon": "D104", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.2", "comentario": "Creatividad destacada." }, { "periodo": "Evaluación 2", "puntaje": "6.5", "comentario": "Muy buen uso de técnicas." }] }
+    ]
+  },
+  {
+    "id": "13",
+    "rut": "228899001",
+    "password": "TomasB77",
+    "rol": "alumno",
+    "nombre": "Tomás Bravo",
+    "clases": [
+      { "id": 1, "nombre": "Matemáticas", "profesor": "María González", "salon": "A101", "notas": [{ "periodo": "Evaluación 1", "puntaje": "4.5", "comentario": "Aprobado justo." }, { "periodo": "Evaluación 2", "puntaje": "5.3", "comentario": "Mejor en problemas de aplicar fórmulas." }] },
+      { "id": 2, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.7", "comentario": "Buena comprensión de textos." }, { "periodo": "Evaluación 2", "puntaje": "5.9", "comentario": "Buena argumentación." }] },
+      { "id": 3, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C201", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.1", "comentario": "Avance en vocabulario." }, { "periodo": "Evaluación 2", "puntaje": "5.6", "comentario": "Mejor pronunciación." }] },
+      { "id": 4, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B203", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.9", "comentario": "Muy buena participación." }, { "periodo": "Evaluación 2", "puntaje": "6.0", "comentario": "Excelente análisis." }] },
+      { "id": 5, "nombre": "Ciencias", "profesor": "Ana Torres", "salon": "C102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.2", "comentario": "Mejorar la explicación de experimentos." }, { "periodo": "Evaluación 2", "puntaje": "5.8", "comentario": "Buen progreso práctico." }] },
+      { "id": 8, "nombre": "Tecnología", "profesor": "Luis Gómez", "salon": "E202", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.1", "comentario": "Muy buena solución técnica." }, { "periodo": "Evaluación 2", "puntaje": "6.4", "comentario": "Excelente proyecto digital." }] }
+    ]
+  },
+  {
+    "id": "14",
+    "rut": "230011122",
+    "password": "CatalinaM66",
+    "rol": "alumno",
+    "nombre": "Catalina Medina",
+    "clases": [
+      { "id": 2, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.2", "comentario": "Muy buena lectura crítica." }, { "periodo": "Evaluación 2", "puntaje": "6.4", "comentario": "Excelente composición escrita." }] },
+      { "id": 3, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C201", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.9", "comentario": "Muy buen nivel de conversación." }, { "periodo": "Evaluación 2", "puntaje": "6.2", "comentario": "Excelente lectura en inglés." }] },
+      { "id": 1, "nombre": "Matemáticas", "profesor": "María González", "salon": "A101", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.6", "comentario": "Buena resolución de ejercicios." }, { "periodo": "Evaluación 2", "puntaje": "6.0", "comentario": "Muy buen trabajo en clase." }] },
+      { "id": 5, "nombre": "Ciencias", "profesor": "Ana Torres", "salon": "C102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.4", "comentario": "Muy buena investigación." }, { "periodo": "Evaluación 2", "puntaje": "6.6", "comentario": "Excelente resultados." }] },
+      { "id": 4, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B203", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.1", "comentario": "Muy buen análisis histórico." }, { "periodo": "Evaluación 2", "puntaje": "6.3", "comentario": "Excelente trabajo en equipo." }] },
+      { "id": 6, "nombre": "Educación Física", "profesor": "Jorge Paredes", "salon": "G101", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.0", "comentario": "Muy buena energía." }, { "periodo": "Evaluación 2", "puntaje": "6.3", "comentario": "Buen desempeño en actividades." }] }
+    ]
+  },
+  {
+    "id": "15",
+    "rut": "231122233",
+    "password": "AlejandroC99",
+    "rol": "alumno",
+    "nombre": "Alejandro Cruz",
+    "clases": [
+      { "id": 1, "nombre": "Matemáticas", "profesor": "María González", "salon": "A101", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.2", "comentario": "Muy buen razonamiento." }, { "periodo": "Evaluación 2", "puntaje": "6.7", "comentario": "Excelente enfoque en problemas." }] },
+      { "id": 2, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.0", "comentario": "Muy buena expresión verbal." }, { "periodo": "Evaluación 2", "puntaje": "6.3", "comentario": "Excelente estructura de texto." }] },
+      { "id": 3, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C201", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.4", "comentario": "Muy buena comprensión." }, { "periodo": "Evaluación 2", "puntaje": "6.8", "comentario": "Excelente conversación." }] },
+      { "id": 4, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B203", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.3", "comentario": "Muy buen análisis histórico." }, { "periodo": "Evaluación 2", "puntaje": "6.5", "comentario": "Excelente trabajo de investigación." }] },
+      { "id": 5, "nombre": "Ciencias", "profesor": "Ana Torres", "salon": "C102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.6", "comentario": "Muy buen análisis experimental." }, { "periodo": "Evaluación 2", "puntaje": "6.9", "comentario": "Excelente exposición científica." }] },
+      { "id": 7, "nombre": "Artes", "profesor": "Sofía Blanco", "salon": "D104", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.0", "comentario": "Muy buena creatividad." }, { "periodo": "Evaluación 2", "puntaje": "6.4", "comentario": "Excelente técnica pictórica." }] }
+    ]
+  }
+]
