@@ -26,7 +26,7 @@ public class Student {
     @NotBlank(message = "Se requiere ingresar RUT")
     @RUT(message = "RUT invalido")
     @Column(unique = true, nullable = false)
-    private String RUT;
+    private String rut;
 
     @NotBlank(message = "El nombre no puede estar vacio")
     @Size(min = 2, max = 50, message = "El nombre tiene que tener entre 2 a 50 caracteres")
@@ -51,8 +51,12 @@ public class Student {
     @Column(nullable = true)
     private List<String> allergies;
 
-    @Size(min = 1, message = "Tiene que haber 1 representante mínimo")
+    @ElementCollection
+    @CollectionTable(
+            name = "student_representatives",
+            joinColumns = @JoinColumn(name = "student_id", nullable = false)
+    )
+    @NotEmpty(message = "Tiene que haber al menos 1 representante")
     @Valid
-    @Column(nullable = false)
     private List<LegalRepresentativeDTO> legalRepresentatives;
 }

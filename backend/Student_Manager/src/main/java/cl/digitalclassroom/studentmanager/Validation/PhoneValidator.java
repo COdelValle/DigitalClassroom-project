@@ -9,11 +9,11 @@ public class PhoneValidator implements ConstraintValidator<Phone, String> {
         if (value == null) return true;
         String phone = value.replace("+", "").replace(" ", "").trim();
 
-        for (char c : value.toCharArray()) {
+        for (char c : phone.toCharArray()) {
             if (!Character.isDigit(c)) {
                 return false;
             }
         }
-        return value.length() >= 9 && value.length() <= 15;
+        return phone.length() >= 9 && phone.length() <= 15;
     }
 }
