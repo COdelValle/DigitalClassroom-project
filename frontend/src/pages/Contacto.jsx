@@ -48,17 +48,73 @@ function Contacto() {
 
   return (
     <div className="container my-5">
+      <style>
+        {`
+          @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          @keyframes slideInLeft {
+            from {
+              opacity: 0;
+              transform: translateX(-50px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+          @keyframes slideInRight {
+            from {
+              opacity: 0;
+              transform: translateX(50px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+          .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+          }
+          .slide-in-left {
+            animation: slideInLeft 1s ease-out;
+          }
+          .slide-in-right {
+            animation: slideInRight 1s ease-out;
+          }
+          .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+          }
+          .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+          }
+          .btn-glow {
+            transition: box-shadow 0.3s ease;
+          }
+          .btn-glow:hover {
+            box-shadow: 0 0 20px rgba(0,123,255,0.5);
+          }
+        `}
+      </style>
       <div className="row g-4">
         <div className="col-lg-7">
-          <div className="card shadow-sm border-0">
+          <div className="card shadow-sm border-0 card-hover slide-in-left">
             <div className="card-body p-4">
-              <h2 className="card-title mb-3">Contacto</h2>
-              <p className="text-muted mb-4">
+              <h2 className="card-title mb-3 fade-in-up">Contacto</h2>
+              <p className="text-muted mb-4 fade-in-up" style={{ animationDelay: "0.1s" }}>
                 ¿Tienes alguna pregunta o quieres encargar un pastel? Escríbenos
                 y te responderemos pronto.
               </p>
 
-              <form onSubmit={onSubmit} noValidate>
+              <form onSubmit={onSubmit} noValidate className="fade-in-up" style={{ animationDelay: "0.2s" }}>
                 <div className="mb-3">
                   <label className="form-label">Nombre</label>
                   <input
@@ -102,11 +158,11 @@ function Contacto() {
                 </div>
 
                 <div className="d-flex align-items-center">
-                  <button type="submit" className="btn btn-primary me-3">
+                  <button type="submit" className="btn btn-primary me-3 btn-glow">
                     Enviar mensaje
                   </button>
                   {sent && (
-                    <div className="text-success">Mensaje enviado</div>
+                    <div className="text-success fade-in-up">Mensaje enviado</div>
                   )}
                 </div>
               </form>
@@ -115,26 +171,26 @@ function Contacto() {
         </div>
 
         <div className="col-lg-5">
-          <div className="card shadow-sm border-0 mb-4">
+          <div className="card shadow-sm border-0 mb-4 card-hover slide-in-right">
             <div className="card-body p-4">
-              <h5 className="mb-3">Nuestra tienda</h5>
-              <p className="mb-1">
+              <h5 className="mb-3 fade-in-up">Nuestra tienda</h5>
+              <p className="mb-1 fade-in-up" style={{ animationDelay: "0.1s" }}>
                 <strong>Dirección:</strong> Av. Principal 123, Santiago
               </p>
-              <p className="mb-1">
+              <p className="mb-1 fade-in-up" style={{ animationDelay: "0.2s" }}>
                 <strong>Teléfono:</strong> +56 9 1234 5678
               </p>
-              <p className="mb-0">
+              <p className="mb-0 fade-in-up" style={{ animationDelay: "0.3s" }}>
                 <strong>Horario:</strong> Lun-Sab 9:00 - 20:00
               </p>
             </div>
           </div>
 
-          <div className="card shadow-sm border-0 p-3">
-            <h6 className="mb-3">Contáctanos en redes</h6>
+          <div className="card shadow-sm border-0 p-3 card-hover slide-in-right" style={{ animationDelay: "0.4s" }}>
+            <h6 className="mb-3 fade-in-up">Contáctanos en redes</h6>
             <div className="d-flex gap-2 flex-wrap">
               <a
-                className="btn btn-primary flex-grow-1 py-2"
+                className="btn btn-primary flex-grow-1 py-2 btn-glow"
                 href="https://instagram.com"
                 target="_blank"
                 rel="noreferrer"
@@ -143,7 +199,7 @@ function Contacto() {
                 Instagram
               </a>
               <a
-                className="btn btn-success flex-grow-1 py-2"
+                className="btn btn-success flex-grow-1 py-2 btn-glow"
                 href="https://wa.me/56912345678"
                 target="_blank"
                 rel="noreferrer"
@@ -151,7 +207,7 @@ function Contacto() {
                 WhatsApp
               </a>
               <a
-                className="btn btn-primary flex-grow-1 py-2"
+                className="btn btn-primary flex-grow-1 py-2 btn-glow"
                 href="https://facebook.com"
                 target="_blank"
                 rel="noreferrer"

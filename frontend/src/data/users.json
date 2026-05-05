@@ -5,5 +5,26 @@
     "password": "JavierRojas18",
     "rol": "alumno",
     "nombre": "Javier Rojas"
+  },
+  {
+    "id": "10",
+    "rut": "309876542",
+    "password": "ProfMaria2026",
+    "rol": "profesor",
+    "nombre": "María González"
+  },
+  {
+    "id": "11",
+    "rut": "309876543",
+    "password": "ProfVeronica2026",
+    "rol": "profesor",
+    "nombre": "Verónica Andrade"
+  },
+  {
+    "id": "12",
+    "rut": "309876544",
+    "password": "ProfCarolina2026",
+    "rol": "profesor",
+    "nombre": "Carolina Smith"
   }
 ]
