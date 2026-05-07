@@ -6,12 +6,12 @@
     "rol": "alumno",
     "nombre": "Javier Rojas",
     "clases": [
-      { "id": 1, "nombre": "Matemáticas", "profesor": "María González", "salon": "A101", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.5", "comentario": "Buen manejo de operaciones." }, { "periodo": "Evaluación 2", "puntaje": "6.8", "comentario": "Excelente análisis de problemas." }] },
-      { "id": 2, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.1", "comentario": "Muy buena comprensión lectora." }, { "periodo": "Evaluación 2", "puntaje": "6.5", "comentario": "Excelente redacción." }] },
-      { "id": 3, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C201", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.8", "comentario": "Buena conversación oral." }, { "periodo": "Evaluación 2", "puntaje": "6.2", "comentario": "Excelente vocabulario." }] },
-      { "id": 4, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B203", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.0", "comentario": "Participación activa." }, { "periodo": "Evaluación 2", "puntaje": "6.0", "comentario": "Buen análisis del contexto." }] },
-      { "id": 5, "nombre": "Ciencias", "profesor": "Ana Torres", "salon": "C102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.3", "comentario": "Dominio de conceptos científicos." }, { "periodo": "Evaluación 2", "puntaje": "6.0", "comentario": "Excelente trabajo práctico." }] },
-      { "id": 6, "nombre": "Educación Física", "profesor": "Jorge Paredes", "salon": "G101", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.5", "comentario": "Muy buena energía y actitud." }, { "periodo": "Evaluación 2", "puntaje": "6.7", "comentario": "Buen desempeño en deportes." }] }
+      { "id": 1, "nombre": "Matemáticas", "profesor": "María González", "salon": "A101", "asistencia": 85, "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.5", "comentario": "Buen manejo de operaciones." }, { "periodo": "Evaluación 2", "puntaje": "6.8", "comentario": "Excelente análisis de problemas." }] },
+      { "id": 2, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B102", "asistencia": 92, "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.1", "comentario": "Muy buena comprensión lectora." }, { "periodo": "Evaluación 2", "puntaje": "6.5", "comentario": "Excelente redacción." }] },
+      { "id": 3, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C201", "asistencia": 78, "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.8", "comentario": "Buena conversación oral." }, { "periodo": "Evaluación 2", "puntaje": "6.2", "comentario": "Excelente vocabulario." }] },
+      { "id": 4, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B203", "asistencia": 88, "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.0", "comentario": "Participación activa." }, { "periodo": "Evaluación 2", "puntaje": "6.0", "comentario": "Buen análisis del contexto." }] },
+      { "id": 5, "nombre": "Ciencias", "profesor": "Ana Torres", "salon": "C102", "asistencia": 95, "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.3", "comentario": "Dominio de conceptos científicos." }, { "periodo": "Evaluación 2", "puntaje": "6.0", "comentario": "Excelente trabajo práctico." }] },
+      { "id": 6, "nombre": "Educación Física", "profesor": "Jorge Paredes", "salon": "G101", "asistencia": 70, "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.5", "comentario": "Muy buena energía y actitud." }, { "periodo": "Evaluación 2", "puntaje": "6.7", "comentario": "Buen desempeño en deportes." }] }
     ]
   },
   {
@@ -21,12 +21,12 @@
     "rol": "alumno",
     "nombre": "Camila Pérez",
     "clases": [
-      { "id": 1, "nombre": "Matemáticas", "profesor": "María González", "salon": "A101", "notas": [{ "periodo": "Evaluación 1", "puntaje": "4.8", "comentario": "Buen esfuerzo en álgebra." }, { "periodo": "Evaluación 2", "puntaje": "5.5", "comentario": "Mayor precisión en fracciones." }] },
-      { "id": 2, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.0", "comentario": "Buena interpretación de textos." }, { "periodo": "Evaluación 2", "puntaje": "5.7", "comentario": "Mejorar la ortografía." }] },
-      { "id": 3, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C201", "notas": [{ "periodo": "Evaluación 1", "puntaje": "4.5", "comentario": "Comprensión básica correcta." }, { "periodo": "Evaluación 2", "puntaje": "5.2", "comentario": "Avance en lectura." }] },
-      { "id": 4, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B203", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.2", "comentario": "Excelente memoria histórica." }, { "periodo": "Evaluación 2", "puntaje": "6.0", "comentario": "Muy buen trabajo en clase." }] },
-      { "id": 5, "nombre": "Ciencias", "profesor": "Ana Torres", "salon": "C102", "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.5", "comentario": "Buen razonamiento científico." }, { "periodo": "Evaluación 2", "puntaje": "5.9", "comentario": "Excelente presentación de proyecto." }] },
-      { "id": 7, "nombre": "Artes", "profesor": "Sofía Blanco", "salon": "D104", "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.7", "comentario": "Creatividad destacada." }, { "periodo": "Evaluación 2", "puntaje": "6.8", "comentario": "Muy buen uso del color." }] }
+      { "id": 1, "nombre": "Matemáticas", "profesor": "María González", "salon": "A101", "asistencia": 75, "notas": [{ "periodo": "Evaluación 1", "puntaje": "4.8", "comentario": "Buen esfuerzo en álgebra." }, { "periodo": "Evaluación 2", "puntaje": "5.5", "comentario": "Mayor precisión en fracciones." }] },
+      { "id": 2, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B102", "asistencia": 82, "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.0", "comentario": "Buena interpretación de textos." }, { "periodo": "Evaluación 2", "puntaje": "5.7", "comentario": "Mejorar la ortografía." }] },
+      { "id": 3, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C201", "asistencia": 65, "notas": [{ "periodo": "Evaluación 1", "puntaje": "4.5", "comentario": "Comprensión básica correcta." }, { "periodo": "Evaluación 2", "puntaje": "5.2", "comentario": "Avance en lectura." }] },
+      { "id": 4, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B203", "asistencia": 90, "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.2", "comentario": "Excelente memoria histórica." }, { "periodo": "Evaluación 2", "puntaje": "6.0", "comentario": "Muy buen trabajo en clase." }] },
+      { "id": 5, "nombre": "Ciencias", "profesor": "Ana Torres", "salon": "C102", "asistencia": 85, "notas": [{ "periodo": "Evaluación 1", "puntaje": "5.5", "comentario": "Buen razonamiento científico." }, { "periodo": "Evaluación 2", "puntaje": "5.9", "comentario": "Excelente presentación de proyecto." }] },
+      { "id": 7, "nombre": "Artes", "profesor": "Sofía Blanco", "salon": "D104", "asistencia": 95, "notas": [{ "periodo": "Evaluación 1", "puntaje": "6.7", "comentario": "Creatividad destacada." }, { "periodo": "Evaluación 2", "puntaje": "6.8", "comentario": "Muy buen uso del color." }] }
     ]
   },
   {

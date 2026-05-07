@@ -10,6 +10,7 @@ import Clase from "./pages/Clase";
 import ClaseDetalle from "./pages/ClaseDetalle";
 import Perfil from "./pages/Perfil";
 import Profesor from "./pages/Profesor";
+import GestionClase from "./pages/GestionClase";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/clase/:claseId" element={<ClaseDetalle />} />
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/profesor" element={<Profesor />} />
+        <Route path="/gestion-clase/:claseId" element={<GestionClase />} />
       </Routes>
 
       <Footer />

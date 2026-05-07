@@ -121,8 +121,8 @@ function Profesor() {
                             Sala {clase.salon}
                           </div>
                         </div>
-                        <Button variant="outline-primary" size="sm" onClick={() => navigate(`/perfil`)}>
-                          Ver perfil
+                        <Button variant="outline-primary" size="sm" onClick={() => navigate(`/gestion-clase/${clase.id}`)}>
+                          Gestionar
                         </Button>
                       </ListGroup.Item>
                     ))}

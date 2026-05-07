@@ -26,5 +26,40 @@
     "password": "ProfCarolina2026",
     "rol": "profesor",
     "nombre": "Carolina Smith"
+  },
+  {
+    "id": "13",
+    "rut": "309876545",
+    "password": "ProfFelipe2026",
+    "rol": "profesor",
+    "nombre": "Felipe Ramírez"
+  },
+  {
+    "id": "14",
+    "rut": "309876546",
+    "password": "ProfAna2026",
+    "rol": "profesor",
+    "nombre": "Ana Torres"
+  },
+  {
+    "id": "15",
+    "rut": "309876547",
+    "password": "ProfJorge2026",
+    "rol": "profesor",
+    "nombre": "Jorge Paredes"
+  },
+  {
+    "id": "16",
+    "rut": "309876548",
+    "password": "ProfSofia2026",
+    "rol": "profesor",
+    "nombre": "Sofía Blanco"
+  },
+  {
+    "id": "17",
+    "rut": "309876549",
+    "password": "ProfLuis2026",
+    "rol": "profesor",
+    "nombre": "Luis Gómez"
   }
 ]

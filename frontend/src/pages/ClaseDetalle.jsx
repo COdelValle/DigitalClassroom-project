@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Container, Row, Col, Card, Button, ListGroup, Badge } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, ListGroup, Badge, Tab, Tabs } from "react-bootstrap";
 import alumnos from "../data/alumnos.json";
 
 function ClaseDetalle() {
@@ -27,6 +27,13 @@ function ClaseDetalle() {
     const suma = claseSeleccionada.notas.reduce((acc, nota) => acc + parseFloat(nota.puntaje), 0);
     return (suma / claseSeleccionada.notas.length).toFixed(1);
   }, [claseSeleccionada]);
+
+  const getAsistenciaVariant = (asistencia) => {
+    if (asistencia <= 69) return 'danger';
+    if (asistencia <= 79) return 'warning';
+    if (asistencia <= 89) return 'success';
+    return 'success';
+  };
 
   if (!alumno) {
     return <div className="py-5">Cargando información del alumno...</div>;
@@ -105,38 +112,56 @@ function ClaseDetalle() {
                       Profesor: {claseSeleccionada.profesor} · Sala: {claseSeleccionada.salon}
                     </Card.Subtitle>
 
-                    <div className="mb-5">
-                      <h4 className="mb-3">Notas de la clase</h4>
-                      <p className="text-muted mb-4">Escala de notas: 1.0 a 7.0.</p>
-                      <ListGroup variant="flush">
-                        {claseSeleccionada.notas.map((nota, index) => (
-                          <ListGroup.Item key={index} className="py-4 fade-in-up border-0 border-bottom" style={{ animationDelay: `${index * 0.1}s` }}>
-                            <div className="d-flex justify-content-between align-items-center mb-2">
-                              <strong className="fs-5">{nota.periodo}</strong>
-                              <Badge
-                                bg={
-                                  parseFloat(nota.puntaje) < 4
-                                    ? "danger"
-                                    : parseFloat(nota.puntaje) < 6
-                                    ? "light"
-                                    : "success"
-                                }
-                                text={parseFloat(nota.puntaje) < 6 ? "dark" : undefined}
-                                style={
-                                  parseFloat(nota.puntaje) >= 4 && parseFloat(nota.puntaje) < 6
-                                    ? { backgroundColor: "#8bc34a", color: "#000" }
-                                    : undefined
-                                }
-                                className="badge-pulse fs-5 px-3 py-2"
-                              >
-                                {nota.puntaje}
-                              </Badge>
+                    <Tabs defaultActiveKey="notas" id="clase-tabs" className="mb-3">
+                      <Tab eventKey="notas" title="Notas">
+                        <div className="mb-5">
+                          <h4 className="mb-3">Notas de la clase</h4>
+                          <p className="text-muted mb-4">Escala de notas: 1.0 a 7.0.</p>
+                          <ListGroup variant="flush">
+                            {claseSeleccionada.notas.map((nota, index) => (
+                              <ListGroup.Item key={index} className="py-4 fade-in-up border-0 border-bottom" style={{ animationDelay: `${index * 0.1}s` }}>
+                                <div className="d-flex justify-content-between align-items-center mb-2">
+                                  <strong className="fs-5">{nota.periodo}</strong>
+                                  <Badge
+                                    bg={
+                                      parseFloat(nota.puntaje) < 4
+                                        ? "danger"
+                                        : parseFloat(nota.puntaje) < 6
+                                        ? "light"
+                                        : "success"
+                                    }
+                                    text={parseFloat(nota.puntaje) < 6 ? "dark" : undefined}
+                                    style={
+                                      parseFloat(nota.puntaje) >= 4 && parseFloat(nota.puntaje) < 6
+                                        ? { backgroundColor: "#8bc34a", color: "#000" }
+                                        : undefined
+                                    }
+                                    className="badge-pulse fs-5 px-3 py-2"
+                                  >
+                                    {nota.puntaje}
+                                  </Badge>
+                                </div>
+                                <div className="text-muted">{nota.comentario}</div>
+                              </ListGroup.Item>
+                            ))}
+                          </ListGroup>
+                        </div>
+                      </Tab>
+                      <Tab eventKey="asistencia" title="Asistencia">
+                        <div className="mb-5">
+                          <h4 className="mb-3">Asistencia de la clase</h4>
+                          <p className="text-muted mb-4">Porcentaje de asistencia al curso.</p>
+                          <div className="d-flex align-items-center">
+                            <div className="progress flex-grow-1 me-3" style={{ height: '25px' }}>
+                              <div className={`progress-bar bg-${getAsistenciaVariant(claseSeleccionada.asistencia)}`} style={{ width: `${claseSeleccionada.asistencia}%` }}>
+                                {claseSeleccionada.asistencia}%
+                              </div>
                             </div>
-                            <div className="text-muted">{nota.comentario}</div>
-                          </ListGroup.Item>
-                        ))}
-                      </ListGroup>
-                    </div>
+                            <Badge bg={getAsistenciaVariant(claseSeleccionada.asistencia)} className="fs-5 px-3 py-2">{claseSeleccionada.asistencia}%</Badge>
+                          </div>
+                        </div>
+                      </Tab>
+                    </Tabs>
 
                     <div className="d-flex justify-content-between align-items-center fade-in-up bg-light p-4 rounded">
                       <div>
