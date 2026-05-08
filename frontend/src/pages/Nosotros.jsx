@@ -147,52 +147,6 @@ const Nosotros = () => {
           />
         </Col>
       </Row>
-
-      <div className="text-center mb-4 fade-in-up">
-        <h3 className="fw-semibold text-primary">Equipo</h3>
-        <p className="text-muted mb-0">
-          Nuestro equipo está formado por profesionales comprometidos con la educación y la tecnología.
-        </p>
-      </div>
-
-      <Row className="g-4 justify-content-center">
-        <Col xs={12} md={4} className="zoom-in">
-          <div className="bg-white rounded shadow-sm p-4 text-center h-100 card-hover">
-            <img
-              src={new URL("../assets/img/entrada.png", import.meta.url).href}
-              alt="Directora"
-              className="rounded-circle mb-3"
-              style={{ width: 96, height: 96, objectFit: "cover" }}
-            />
-            <h5 className="mb-1">María González</h5>
-            <p className="text-muted mb-0">Directora</p>
-          </div>
-        </Col>
-        <Col xs={12} md={4} className="zoom-in" style={{ animationDelay: "0.1s" }}>
-          <div className="bg-white rounded shadow-sm p-4 text-center h-100 card-hover">
-            <img
-              src={new URL("../assets/img/patio.png", import.meta.url).href}
-              alt="Coordinador TIC"
-              className="rounded-circle mb-3"
-              style={{ width: 96, height: 96, objectFit: "cover" }}
-            />
-            <h5 className="mb-1">Juan Pérez</h5>
-            <p className="text-muted mb-0">Coordinador TIC</p>
-          </div>
-        </Col>
-        <Col xs={12} md={4} className="zoom-in" style={{ animationDelay: "0.2s" }}>
-          <div className="bg-white rounded shadow-sm p-4 text-center h-100 card-hover">
-            <img
-              src={new URL("../assets/img/sala_clase.png", import.meta.url).href}
-              alt="Jefe de Estudios"
-              className="rounded-circle mb-3"
-              style={{ width: 96, height: 96, objectFit: "cover" }}
-            />
-            <h5 className="mb-1">Ana López</h5>
-            <p className="text-muted mb-0">Jefe de Estudios</p>
-          </div>
-        </Col>
-      </Row>
     </Container>
   );
 };
