@@ -1,0 +1,65 @@
+[
+  {
+    "id": "01",
+    "rut": "219807430",
+    "password": "JavierRojas18",
+    "rol": "alumno",
+    "nombre": "Javier Rojas"
+  },
+  {
+    "id": "10",
+    "rut": "309876542",
+    "password": "ProfMaria2026",
+    "rol": "profesor",
+    "nombre": "María González"
+  },
+  {
+    "id": "11",
+    "rut": "309876543",
+    "password": "ProfVeronica2026",
+    "rol": "profesor",
+    "nombre": "Verónica Andrade"
+  },
+  {
+    "id": "12",
+    "rut": "309876544",
+    "password": "ProfCarolina2026",
+    "rol": "profesor",
+    "nombre": "Carolina Smith"
+  },
+  {
+    "id": "13",
+    "rut": "309876545",
+    "password": "ProfFelipe2026",
+    "rol": "profesor",
+    "nombre": "Felipe Ramírez"
+  },
+  {
+    "id": "14",
+    "rut": "309876546",
+    "password": "ProfAna2026",
+    "rol": "profesor",
+    "nombre": "Ana Torres"
+  },
+  {
+    "id": "15",
+    "rut": "309876547",
+    "password": "ProfJorge2026",
+    "rol": "profesor",
+    "nombre": "Jorge Paredes"
+  },
+  {
+    "id": "16",
+    "rut": "309876548",
+    "password": "ProfSofia2026",
+    "rol": "profesor",
+    "nombre": "Sofía Blanco"
+  },
+  {
+    "id": "17",
+    "rut": "309876549",
+    "password": "ProfLuis2026",
+    "rol": "profesor",
+    "nombre": "Luis Gómez"
+  }
+]
