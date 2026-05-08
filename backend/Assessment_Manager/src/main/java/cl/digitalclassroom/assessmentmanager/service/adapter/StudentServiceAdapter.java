@@ -1,0 +1,34 @@
+package cl.digitalclassroom.assessmentmanager.service.adapter;
+
+import cl.digitalclassroom.assessmentmanager.service.feignclient.StudentFeignClient;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+@Component
+@RequiredArgsConstructor
+@Slf4j
+public class StudentServiceAdapter {
+
+    private final StudentFeignClient studentFeignClient;
+
+    @CircuitBreaker(name = "studentServiceCB", fallbackMethod = "fallbackStudentValidation")
+    public boolean studentExists(Long studentId) {
+        log.info("Validando existencia del estudiante ID: {} vía Feign", studentId);
+        // Feign lanzará una excepción si recibe un 404 o un 500
+        var response = studentFeignClient.getStudentProfile(studentId);
+        return response != null;
+    }
+
+    // FALLBACK: Se ejecuta si el microservicio de Estudiantes está caído
+    // o si el circuito se abrió por demasiados errores.
+    private boolean fallbackStudentValidation(Long studentId, Throwable e) {
+        log.error("Circuit Breaker ACTIVADO. No se pudo validar al estudiante {}. Motivo: {}",
+                studentId, e.getMessage());
+
+        // Estrategia realista: Si el servicio de alumnos está caído,
+        // rechazamos la nota por seguridad, o podríamos consultar una caché.
+        return false;
+    }
+}

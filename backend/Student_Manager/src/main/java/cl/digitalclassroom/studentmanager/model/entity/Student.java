@@ -1,6 +1,6 @@
 package cl.digitalclassroom.studentmanager.model.entity;
 
-import cl.digitalclassroom.studentmanager.Validation.RUT;
+import cl.digitalclassroom.studentmanager.validation.RUT;
 import cl.digitalclassroom.studentmanager.model.dto.LegalRepresentativeDTO;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
