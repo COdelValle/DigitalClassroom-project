@@ -147,6 +147,43 @@ const Nosotros = () => {
           />
         </Col>
       </Row>
+
+      <div className="text-center mb-5 fade-in-up">
+        <h2 className="fw-semibold text-primary mb-4">Equipo</h2>
+        <p className="lead text-muted mb-4">
+          Conoce al equipo dedicado que impulsa la excelencia educativa en nuestro colegio.
+        </p>
+      </div>
+
+      <Row className="mb-5 gx-4 gy-4">
+        <Col md={4} className="slide-in-left">
+          <div className="p-4 rounded shadow-sm bg-white h-100 card-hover fade-in-up zoom-in">
+            <h3 className="h5 text-primary mb-3">Dirección</h3>
+            <p>
+              Liderazgo estratégico y visión educativa para guiar el colegio hacia la excelencia
+              académica y el bienestar integral de la comunidad escolar.
+            </p>
+          </div>
+        </Col>
+        <Col md={4} className="slide-in-left">
+          <div className="p-4 rounded shadow-sm bg-white h-100 card-hover fade-in-up zoom-in">
+            <h3 className="h5 text-primary mb-3">Docentes</h3>
+            <p>
+              Profesionales capacitados comprometidos con la enseñanza innovadora y el desarrollo
+              integral de cada estudiante.
+            </p>
+          </div>
+        </Col>
+        <Col md={4} className="slide-in-right">
+          <div className="p-4 rounded shadow-sm bg-white h-100 card-hover fade-in-up zoom-in">
+            <h3 className="h5 text-primary mb-3">Apoyo Técnico</h3>
+            <p>
+              Equipo de expertos que garantiza la seguridad, funcionamiento y mejora continua de
+              nuestras plataformas digitales.
+            </p>
+          </div>
+        </Col>
+      </Row>
     </Container>
   );
 };
