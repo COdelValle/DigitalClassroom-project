@@ -17,8 +17,8 @@ public class StudentServiceAdapter {
     public boolean studentExists(Long studentId) {
         log.info("Validando existencia del estudiante ID: {} vía Feign", studentId);
         // Feign lanzará una excepción si recibe un 404 o un 500
-        var response = studentFeignClient.getStudentProfile(studentId);
-        return response != null;
+        var response = studentFeignClient.exists(studentId);
+        return response != false;
     }
 
     // FALLBACK: Se ejecuta si el microservicio de Estudiantes está caído

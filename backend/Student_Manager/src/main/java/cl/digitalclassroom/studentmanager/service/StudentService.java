@@ -89,6 +89,10 @@ public class StudentService {
         log.info("Estudiante con ID: {} eliminado", id);
     }
 
+    public boolean exist(Long id){
+        return studentRepository.existsById(id);
+    }
+
     // MÉTODOS PRIVADOS DE MAPEO
     // Mapea la Request para pasarla a una Entidad viable
     private Student mapRequestToEntity(StudentRequestDTO request) {

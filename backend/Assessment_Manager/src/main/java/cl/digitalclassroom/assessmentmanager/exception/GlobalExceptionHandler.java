@@ -1,5 +1,6 @@
 package cl.digitalclassroom.assessmentmanager.exception;
 
+import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -52,5 +53,20 @@ public class GlobalExceptionHandler {
         response.put("status", HttpStatus.BAD_REQUEST.value());
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    // 4. Manejo de Solicitud incorrecta
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<Map<String, Object>> handleBadRequest(BadRequestException ex) {
+        Map<String, Object> response = Map.of(
+                "timestamp", LocalDateTime.now(),
+                "message", ex.getMessage(),
+                "status", HttpStatus.BAD_REQUEST.value(),
+                "error", "Bad Request"
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(response);
     }
 }

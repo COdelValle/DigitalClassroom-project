@@ -41,7 +41,6 @@ public class GradeService {
                 .build();
 
         assessment.getGrades().add(grade);
-        assessment.setGraded(true);
 
         assessmentRepository.save(assessment);
 

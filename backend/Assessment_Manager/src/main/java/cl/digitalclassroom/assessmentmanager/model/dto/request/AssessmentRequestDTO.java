@@ -19,12 +19,15 @@ public class AssessmentRequestDTO {
     private String title;
 
     @NotBlank(message = "El ID de asignatura es obligatorio")
+    @Schema(example = "MAT-1")
     private String subjectId;
 
     @NotBlank(message = "El ID de clase es obligatorio")
+    @Schema(example = "2mA")
     private String classId;
 
     @NotNull(message = "La fecha es obligatoria")
+    @Schema(example = "2026-06-18")
     private LocalDate examDate;
 
     @Valid
