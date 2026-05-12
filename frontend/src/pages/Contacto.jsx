@@ -116,8 +116,9 @@ function Contacto() {
 
               <form onSubmit={onSubmit} noValidate className="fade-in-up" style={{ animationDelay: "0.2s" }}>
                 <div className="mb-3">
-                  <label className="form-label">Nombre</label>
+                  <label htmlFor="nombre" className="form-label">Nombre</label>
                   <input
+                    id="nombre"
                     className={`form-control ${errors.name ? "is-invalid" : ""}`}
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -128,8 +129,9 @@ function Contacto() {
                 </div>
 
                 <div className="mb-3">
-                  <label className="form-label">Email</label>
+                  <label htmlFor="email" className="form-label">Email</label>
                   <input
+                    id="email"
                     type="email"
                     className={`form-control ${errors.email ? "is-invalid" : ""}`}
                     value={form.email}
@@ -143,8 +145,9 @@ function Contacto() {
                 </div>
 
                 <div className="mb-3">
-                  <label className="form-label">Mensaje</label>
+                  <label htmlFor="mensaje" className="form-label">Mensaje</label>
                   <textarea
+                    id="mensaje"
                     rows={5}
                     className={`form-control ${errors.message ? "is-invalid" : ""}`}
                     value={form.message}
@@ -173,7 +176,7 @@ function Contacto() {
         <div className="col-lg-5">
           <div className="card shadow-sm border-0 mb-4 card-hover slide-in-right">
             <div className="card-body p-4">
-              <h5 className="mb-3 fade-in-up">Nuestra tienda</h5>
+              <h5 className="mb-3 fade-in-up">colegio </h5>
               <p className="mb-1 fade-in-up" style={{ animationDelay: "0.1s" }}>
                 <strong>Dirección:</strong> Av. Principal 123, Santiago
               </p>

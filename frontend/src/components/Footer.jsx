@@ -117,7 +117,7 @@ function Footer() {
           <Col md={4} className="footer-col">
             <h5>Contacto</h5>
             <p>
-              Dirección: Calle Ficticia 123, Ciudad<br />
+              Dirección:Av. Principal 123, Santiago<br />
               Teléfono: +56 9 1234 5678<br />
               Email: info@colegiobohiggins.cl
             </p>
