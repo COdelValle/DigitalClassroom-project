@@ -2,7 +2,7 @@ package cl.digitalclassroom.assessmentmanager.service;
 
 import cl.digitalclassroom.assessmentmanager.exception.BadRequestException;
 import cl.digitalclassroom.assessmentmanager.exception.ResourceNotFoundException;
-import cl.digitalclassroom.assessmentmanager.model.dto.request.AssessmentModifyRequestDTO;
+import cl.digitalclassroom.assessmentmanager.model.dto.request.modify.AssessmentModifyRequestDTO;
 import cl.digitalclassroom.assessmentmanager.model.dto.request.AssessmentRequestDTO;
 import cl.digitalclassroom.assessmentmanager.model.dto.response.AssessmentResponseDTO;
 import cl.digitalclassroom.assessmentmanager.model.entity.Assessment;
@@ -106,10 +106,10 @@ public class AssessmentService {
     }
 
     @Transactional
-    public AssessmentResponseDTO updateAssessment(AssessmentModifyRequestDTO request) {
+    public AssessmentResponseDTO updateAssessment(Long id, AssessmentModifyRequestDTO request) {
         // 1. Buscar el encargo existente
-        Assessment assessment = assessmentRepository.findById(request.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("No se encontró el encargo con ID: " + request.getId()));
+        Assessment assessment = assessmentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No se encontró el encargo con ID: " + id));
 
         // 2. Validar y actualizar campos de forma selectiva (Evitamos pisar con null)
         if (request.getTitle() != null && !request.getTitle().isBlank()) {

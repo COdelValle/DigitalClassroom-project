@@ -1,14 +1,9 @@
-package cl.digitalclassroom.assessmentmanager.model.dto.request;
+package cl.digitalclassroom.assessmentmanager.model.dto.request.modify;
 
-import cl.digitalclassroom.assessmentmanager.validation.ChileanGrade;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @Schema(description = "DTO para modificar un encargo")

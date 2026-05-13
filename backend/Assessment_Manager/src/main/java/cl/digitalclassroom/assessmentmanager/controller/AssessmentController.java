@@ -1,11 +1,10 @@
 package cl.digitalclassroom.assessmentmanager.controller;
 
-import cl.digitalclassroom.assessmentmanager.model.dto.request.AssessmentModifyRequestDTO;
+import cl.digitalclassroom.assessmentmanager.model.dto.request.modify.AssessmentModifyRequestDTO;
 import cl.digitalclassroom.assessmentmanager.model.dto.request.AssessmentRequestDTO;
 import cl.digitalclassroom.assessmentmanager.model.dto.response.AssessmentResponseDTO;
 import cl.digitalclassroom.assessmentmanager.service.AssessmentService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -51,9 +50,9 @@ class AssessmentController {
         return ResponseEntity.created(location).body(createdAssessment);
     }
 
-    @PutMapping
-    public ResponseEntity<AssessmentResponseDTO> put(AssessmentModifyRequestDTO request) {
-        return ResponseEntity.ok(assessmentService.updateAssessment(request));
+    @PutMapping("/{id}")
+    public ResponseEntity<AssessmentResponseDTO> put(@PathVariable Long id, @RequestBody AssessmentModifyRequestDTO request) {
+        return ResponseEntity.ok(assessmentService.updateAssessment(id,request));
     }
 
     @DeleteMapping("/{id}")

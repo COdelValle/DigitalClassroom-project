@@ -1,5 +1,6 @@
 package cl.digitalclassroom.assessmentmanager.service.adapter;
 
+import cl.digitalclassroom.assessmentmanager.exception.ServiceUnavailableException;
 import cl.digitalclassroom.assessmentmanager.service.feignclient.StudentFeignClient;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
@@ -26,9 +27,8 @@ public class StudentServiceAdapter {
     private boolean fallbackStudentValidation(Long studentId, Throwable e) {
         log.error("Circuit Breaker ACTIVADO. No se pudo validar al estudiante {}. Motivo: {}",
                 studentId, e.getMessage());
-
-        // Estrategia realista: Si el servicio de alumnos está caído,
-        // rechazamos la nota por seguridad, o podríamos consultar una caché.
-        return false;
+        throw new ServiceUnavailableException(
+                "El servicio de validación estudiantil no responde. No se puede procesar la solicitud en este momento."
+        );
     }
 }

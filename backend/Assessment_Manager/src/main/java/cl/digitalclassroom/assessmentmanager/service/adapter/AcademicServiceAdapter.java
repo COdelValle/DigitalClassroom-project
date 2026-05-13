@@ -1,5 +1,6 @@
 package cl.digitalclassroom.assessmentmanager.service.adapter;
 
+import cl.digitalclassroom.assessmentmanager.exception.ServiceUnavailableException;
 import cl.digitalclassroom.assessmentmanager.service.feignclient.AcademicFeignClient;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,8 @@ public class AcademicServiceAdapter {
     private boolean fallbackAcademic(String id, Throwable e) {
         log.error("Circuit Breaker activo para el servicio Académico. No se pudo validar ID: {}. Error: {}",
                 id, e.getMessage());
-        return false; // Por seguridad, si no podemos validar, rechazamos la creación
+        throw new ServiceUnavailableException(
+                "El servicio de validación académica no responde. No se puede procesar la solicitud en este momento."
+        );
     }
 }

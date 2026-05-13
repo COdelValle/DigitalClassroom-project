@@ -69,4 +69,15 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .body(response);
     }
+
+    // 5. Manejo de Servicio no disponible
+    @ExceptionHandler(ServiceUnavailableException.class)
+    public ResponseEntity<Map<String, Object>> handleServiceUnavailable(ServiceUnavailableException ex) {
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(Map.of(
+                "timestamp", LocalDateTime.now(),
+                "status", HttpStatus.SERVICE_UNAVAILABLE.value(),
+                "error", "Servicio No Disponible",
+                "message", ex.getMessage()
+        ));
+    }
 }
