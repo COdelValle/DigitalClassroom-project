@@ -3,6 +3,7 @@ package cl.digitalclassroom.assessmentmanager.controller;
 import cl.digitalclassroom.assessmentmanager.model.dto.request.GradeRequestDTO;
 import cl.digitalclassroom.assessmentmanager.model.dto.request.modify.GradeModifyRequestDTO;
 import cl.digitalclassroom.assessmentmanager.model.dto.response.GradeResponseDTO;
+import cl.digitalclassroom.assessmentmanager.model.entity.SLA;
 import cl.digitalclassroom.assessmentmanager.service.GradeService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +34,10 @@ class GradeController {
             @RequestParam(required = false) Double maxScore,
             @RequestParam(required = false) LocalDate date
     ) {
-        return ResponseEntity.ok(gradeService.searchGrades(studentId, minScore, maxScore, date));
+        SLA sla = new SLA(LocalDate.now(),null, "GET /search", null);
+        List<GradeResponseDTO> dtos = gradeService.searchGrades(studentId, minScore, maxScore, date);
+        sla.setFechaFinal(LocalDate.now());
+        return ResponseEntity.ok(dtos);
     }
 
     @PostMapping
