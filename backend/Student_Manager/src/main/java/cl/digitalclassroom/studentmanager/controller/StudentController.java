@@ -59,4 +59,10 @@ public class StudentController {
     public void delete(@PathVariable Long id) {
         studentService.delete(id);
     }
+
+    @Operation(summary = "Verifica que un estudiante existe por el id")
+    @GetMapping("/{id}/exists")
+    public boolean exists(@PathVariable Long id) {
+        return studentService.exist(id);
+    }
 }

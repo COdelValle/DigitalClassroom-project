@@ -1,4 +1,4 @@
-package cl.digitalclassroom.studentmanager.Validation;
+package cl.digitalclassroom.studentmanager.validation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

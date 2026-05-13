@@ -1,7 +1,7 @@
 package cl.digitalclassroom.studentmanager.model.dto;
 
-import cl.digitalclassroom.studentmanager.Validation.Phone;
-import cl.digitalclassroom.studentmanager.Validation.RUT;
+import cl.digitalclassroom.studentmanager.validation.Phone;
+import cl.digitalclassroom.studentmanager.validation.RUT;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.Email;
