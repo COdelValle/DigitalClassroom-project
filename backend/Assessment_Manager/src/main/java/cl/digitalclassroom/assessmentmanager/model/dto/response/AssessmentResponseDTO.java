@@ -13,8 +13,7 @@ import java.util.List;
 public class AssessmentResponseDTO {
     private Long id;
     private String title;
-    private String subjectId;
-    private String classId;
+    private Long courseId;
     private LocalDate examDate;
     private boolean isGraded;
     private List<GradeResponseDTO> grades;
@@ -23,8 +22,7 @@ public class AssessmentResponseDTO {
         return AssessmentResponseDTO.builder()
                 .id(entity.getId())
                 .title(entity.getTitle())
-                .subjectId(entity.getSubjectId())
-                .classId(entity.getClassId())
+                .courseId(entity.getCourseId())
                 .examDate(entity.getExamDate())
                 .isGraded(entity.isGraded())
                 .grades(entity.getGrades() != null ?

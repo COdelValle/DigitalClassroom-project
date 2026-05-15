@@ -29,11 +29,10 @@ class AssessmentController {
 
     @GetMapping("/search")
     public ResponseEntity<List<AssessmentResponseDTO>> search(
-            @RequestParam(required = false) String subjectId,
-            @RequestParam(required = false) String classId,
+            @RequestParam(required = false) Long courseId,
             @RequestParam(required = false) String title,
             @RequestParam(required = false) Date examDate) {
-        return ResponseEntity.ok(assessmentService.searchAssessments(subjectId, classId, title, examDate));
+        return ResponseEntity.ok(assessmentService.searchAssessments(courseId, title, examDate));
     }
 
     @PostMapping

@@ -12,7 +12,6 @@ public class AssessmentModifyRequestDTO {
 
     @Schema(example = "Ensayo sobre el Quijote")
     private String title;
-    private String subjectId;
-    private String classId;
+    private Long courseId;
     private LocalDate examDate;
 }

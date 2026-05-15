@@ -37,15 +37,11 @@ public class AssessmentService {
     }
 
     @Transactional(readOnly = true)
-    public List<AssessmentResponseDTO> searchAssessments(String subjectId, String classId, String title, Date examDate) {
+    public List<AssessmentResponseDTO> searchAssessments(Long courseId, String title, Date examDate) {
         Specification<Assessment> spec = Specification.where((root, query, cb) -> cb.conjunction());
 
-        if (subjectId != null && !subjectId.isBlank()) {
-            spec = spec.and(AssessmentSpecifications.hasSubjectId(subjectId));
-        }
-
-        if (classId != null && !classId.isBlank()) {
-            spec = spec.and(AssessmentSpecifications.hasClassId(classId));
+        if (courseId != null) {
+            spec = spec.and(AssessmentSpecifications.hasCourseId(courseId));
         }
 
         if (title != null && !title.isBlank()) {
@@ -65,26 +61,20 @@ public class AssessmentService {
     @Transactional
     public AssessmentResponseDTO createAssessment(AssessmentRequestDTO request) {
 
-        // 1. Validar que la CLASE existe
-        if (!academicAdapter.classExists(request.getClassId())) {
-            throw new ResourceNotFoundException("La clase con ID " + request.getClassId() + " no existe.");
+        // 1. Validar que la relacion entre la clase y la asignatura existe
+        if (!academicAdapter.courseExists(request.getCourseId())) {
+            throw new ResourceNotFoundException("No existe una relación entre la asignatura y la clase de ID " + request.getCourseId() + "  no existe.");
         }
 
-        // 2. Validar que la ASIGNATURA existe
-        if (!academicAdapter.subjectExists(request.getSubjectId())) {
-            throw new ResourceNotFoundException("La asignatura con ID " + request.getSubjectId() + " no existe.");
-        }
-
-        // 3. Preparar la entidad Assessment
+        // 2. Preparar la entidad Assessment
         Assessment assessment = Assessment.builder()
                 .title(request.getTitle())
-                .subjectId(request.getSubjectId())
-                .classId(request.getClassId())
+                .courseId(request.getCourseId())
                 .examDate(request.getExamDate())
                 .isGraded(request.getGrades() != null && !request.getGrades().isEmpty())
                 .build();
 
-        // 4. Si incluye notas, validar cada ESTUDIANTE mediante su propio adapter
+        // 3. Si incluye notas, validar cada ESTUDIANTE mediante su propio adapter
         if (assessment.isGraded()) {
             List<Grade> gradeEntities = request.getGrades().stream()
                     .map(dto -> {
@@ -100,7 +90,7 @@ public class AssessmentService {
             assessment.setGrades(gradeEntities);
         }
 
-        // 5. Guardar y retornar usando el método estático del DTO
+        // 4. Guardar y retornar usando el método estático del DTO
         Assessment saved = assessmentRepository.save(assessment);
         return AssessmentResponseDTO.fromEntity(saved);
     }
@@ -121,18 +111,11 @@ public class AssessmentService {
         }
 
         // 3. Validaciones externas (si cambian el curso o materia, hay que validar que existan)
-        if (request.getClassId() != null && !request.getClassId().equals(assessment.getClassId())) {
-            if (!academicAdapter.classExists(request.getClassId())) {
-                throw new BadRequestException("La nueva clase indicada no existe");
+        if (request.getCourseId() != null && !request.getCourseId().equals(assessment.getCourseId())) {
+            if (!academicAdapter.courseExists(request.getCourseId())) {
+                throw new BadRequestException("La relación indicada no existe");
             }
-            assessment.setClassId(request.getClassId());
-        }
-
-        if (request.getSubjectId() != null && !request.getSubjectId().equals(assessment.getSubjectId())) {
-            if (!academicAdapter.subjectExists(request.getSubjectId())) {
-                throw new BadRequestException("La nueva asignatura indicada no existe");
-            }
-            assessment.setSubjectId(request.getSubjectId());
+            assessment.setCourseId(request.getCourseId());
         }
 
         // 4. Guardar cambios y retornar
