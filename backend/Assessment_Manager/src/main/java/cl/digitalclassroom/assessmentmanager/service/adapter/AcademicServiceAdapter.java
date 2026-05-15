@@ -15,20 +15,14 @@ public class AcademicServiceAdapter {
 
     // Validación de Asignatura
     @CircuitBreaker(name = "academicServiceCB", fallbackMethod = "fallbackAcademic")
-    public boolean subjectExists(String subjectId) {
-        return Boolean.TRUE.equals(academicFeignClient.verifySubject(subjectId));
-    }
-
-    // Validación de Clase
-    @CircuitBreaker(name = "academicServiceCB", fallbackMethod = "fallbackAcademic")
-    public boolean classExists(String classId) {
-        return Boolean.TRUE.equals(academicFeignClient.verifyClass(classId));
+    public boolean courseExists(Long courseId) {
+        return Boolean.TRUE.equals(academicFeignClient.verifyClass(courseId));
     }
 
     // Fallback común para ambos
-    private boolean fallbackAcademic(String id, Throwable e) {
-        log.error("Circuit Breaker activo para el servicio Académico. No se pudo validar ID: {}. Error: {}",
-                id, e.getMessage());
+    private boolean fallbackAcademic(Long courseId, Throwable e) {
+        log.error("Circuit Breaker activo para el servicio Académico. No se pudo validar courseId: {}. Error: {}",
+                courseId, e.getMessage());
         throw new ServiceUnavailableException(
                 "El servicio de validación académica no responde. No se puede procesar la solicitud en este momento."
         );

@@ -56,4 +56,9 @@ class CourseController {
     public void delete(@PathVariable Long id) {
         courseService.deleteCourse(id);
     }
+
+    @GetMapping("/{id}/exists")
+    public Boolean verifyCourse(@PathVariable Long id) {
+        return courseService.exist(id);
+    }
 }

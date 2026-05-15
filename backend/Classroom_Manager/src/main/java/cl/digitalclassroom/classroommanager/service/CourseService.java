@@ -82,4 +82,8 @@ public class CourseService {
     public void deleteCourse(Long id) {
         courseRepository.deleteById(id);
     }
+
+    public boolean exist(Long id){
+        return courseRepository.existsById(id);
+    }
 }

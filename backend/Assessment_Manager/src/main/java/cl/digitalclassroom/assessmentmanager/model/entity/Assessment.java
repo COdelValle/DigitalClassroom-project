@@ -21,8 +21,7 @@ public class Assessment {
     private Long id;
 
     private String title;
-    private String subjectId;
-    private String classId;
+    private Long courseId;
     private LocalDate examDate;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)

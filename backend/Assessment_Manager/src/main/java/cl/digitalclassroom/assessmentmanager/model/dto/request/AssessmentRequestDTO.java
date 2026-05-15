@@ -18,13 +18,9 @@ public class AssessmentRequestDTO {
     @Schema(example = "Ensayo sobre el Quijote")
     private String title;
 
-    @NotBlank(message = "El ID de asignatura es obligatorio")
-    @Schema(example = "MAT-1")
-    private String subjectId;
-
-    @NotBlank(message = "El ID de clase es obligatorio")
-    @Schema(example = "2mA")
-    private String classId;
+    @NotBlank(message = "El ID del curso es obligatorio")
+    @Schema(example = "1")
+    private Long courseId;
 
     @NotNull(message = "La fecha es obligatoria")
     @Schema(example = "2026-06-18")

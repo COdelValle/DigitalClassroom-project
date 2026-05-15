@@ -75,6 +75,13 @@ public class ClassroomService {
                 .orElseThrow(() -> new ResourceNotFoundException("Aula no encontrada"));
 
         classroom.setName(request.getName());
+
+        request.getStudentIds().forEach(idStudent -> {
+            if (!studentAdapter.studentExists(idStudent)) {
+                throw new ResourceNotFoundException("El estudiante con ID " + idStudent + " no existe.");
+            }
+        });
+
         classroom.setStudentIds(request.getStudentIds());
 
         return ClassroomResponseDTO.fromEntity(classroomRepository.save(classroom), null);

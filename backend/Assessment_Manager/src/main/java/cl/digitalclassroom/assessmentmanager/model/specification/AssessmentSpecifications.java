@@ -7,14 +7,9 @@ import java.util.Date;
 
 public class AssessmentSpecifications {
 
-    public static Specification<Assessment> hasSubjectId(String subjectId) {
+    public static Specification<Assessment> hasCourseId(Long courseId) {
         return (root, query, cb) ->
-                subjectId == null ? cb.conjunction() : cb.equal(root.get("subjectId"), subjectId);
-    }
-
-    public static Specification<Assessment> hasClassId(String classId) {
-        return (root, query, cb) ->
-                classId == null ? cb.conjunction() : cb.equal(root.get("classId"), classId);
+                courseId == null ? cb.conjunction() : cb.equal(root.get("subjectId"), courseId);
     }
 
     public static Specification<Assessment> titleContains(String title) {
