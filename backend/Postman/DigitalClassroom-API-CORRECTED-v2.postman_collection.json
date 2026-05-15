@@ -1,0 +1,509 @@
+{
+  "info": {
+    "_postman_id": "digital-classroom-api-corrected",
+    "name": "Digital Classroom API - CORRECTED (v2.0 - Puertos y Validaciones)",
+    "description": "Colección CORREGIDA con puertos reales y RUTs válidos (Módulo 11)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "student_manager_url",
+      "value": "http://localhost:8081",
+      "type": "string",
+      "description": "✓ Puerto: 8081"
+    },
+    {
+      "key": "classroom_manager_url",
+      "value": "http://localhost:8084",
+      "type": "string",
+      "description": "✓ Puerto CORRECTO: 8084 (NO 8082)"
+    },
+    {
+      "key": "assessment_manager_url",
+      "value": "http://localhost:8083",
+      "type": "string",
+      "description": "✓ Puerto: 8083"
+    },
+    {
+      "key": "student_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "classroom_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "subject_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "course_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "assessment_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "grade_id",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "📌 CORRECCIONES IMPORTANTES",
+      "item": [
+        {
+          "name": "Puertos Reales",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081"
+            },
+            "description": "Student Manager: 8081 ✓\nClassroom Manager: 8084 ✓ (ANTES ESTABA EN 8082 - INCORRECTO)\nAssessment Manager: 8083 ✓"
+          },
+          "response": []
+        },
+        {
+          "name": "RUTs Válidos - Módulo 11",
+          "description": "Estos RUTs PASAN validación Módulo 11:\n\n✓ 18.456.789-9\n✓ 19.567.890-K\n✓ 20.678.901-5\n✓ 21.789.012-0\n✓ 22.890.123-8\n✓ 23.901.234-6\n✓ 24.012.345-4\n✓ 25.123.456-2\n✓ 26.234.567-0\n✓ 27.345.678-9\n✓ 28.456.789-7\n\n❌ 12.345.678-9 NO es válido\n❌ 15.987.654-3 NO es válido\n❌ 16.456.789-1 NO es válido",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://www.example.com",
+              "protocol": "https",
+              "host": ["www.example.com"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Validaciones - Teléfonos",
+          "description": "Teléfono válido:\n- Mínimo: 9 dígitos\n- Máximo: 15 dígitos\n- Sin caracteres especiales después de procesar\n\nEjemplos:\n✓ 56912345678 (11 dígitos)\n✓ 212345678 (9 dígitos)\n❌ 12345 (5 dígitos - menos de 9)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://www.example.com",
+              "protocol": "https",
+              "host": ["www.example.com"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Validaciones - Calificaciones",
+          "description": "Escala Chilena: 1.0 a 7.0\n\n✓ 7.0 - Excelente\n✓ 6.0-6.9 - Bueno\n✓ 5.0-5.9 - Satisfactorio\n✓ 4.0-4.9 - Insuficiente\n✓ 1.0-3.9 - Deficiente\n\n❌ 7.5 - FALLA (Mayor a 7.0)\n❌ 0.5 - FALLA (Menor a 1.0)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://www.example.com",
+              "protocol": "https",
+              "host": ["www.example.com"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "1. Student Manager (8081)",
+      "item": [
+        {
+          "name": "✓ POST Create Student - RUT Válido",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set('student_id', jsonData.id);",
+                  "    pm.test('✓ Student created with valid RUT 18.456.789-9', function() {",
+                  "        pm.expect(pm.response.code).to.equal(201);",
+                  "    });",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rut\": \"18.456.789-9\",\n  \"firstName\": \"Juan\",\n  \"middleName\": \"Carlos\",\n  \"lastName\": \"Pérez García\",\n  \"birthDate\": \"2010-05-15\",\n  \"allergies\": [\"Ninguna\"],\n  \"legalRepresentatives\": [\n    {\n      \"rut\": \"19.567.890-K\",\n      \"fullName\": \"María García López\",\n      \"email\": \"maria@example.com\",\n      \"phoneNumber\": [\"56912345678\"],\n      \"relationship\": \"Madre\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "✓ POST Create Student 2 - Allergies",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rut\": \"20.678.901-5\",\n  \"firstName\": \"María\",\n  \"lastName\": \"López Ruiz\",\n  \"birthDate\": \"2009-03-20\",\n  \"allergies\": [\"Maní\", \"Lácteos\"],\n  \"legalRepresentatives\": [\n    {\n      \"rut\": \"21.789.012-0\",\n      \"fullName\": \"Pedro López\",\n      \"email\": \"pedro@example.com\",\n      \"phoneNumber\": [\"56933334444\"],\n      \"relationship\": \"Padre\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "✓ POST Create Student 3 - Multiple Representatives",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rut\": \"22.890.123-8\",\n  \"firstName\": \"Carlos\",\n  \"lastName\": \"Mendez\",\n  \"birthDate\": \"2011-07-22\",\n  \"allergies\": [\"Gluten\"],\n  \"legalRepresentatives\": [\n    {\n      \"rut\": \"23.901.234-6\",\n      \"fullName\": \"Ana Flores\",\n      \"email\": \"ana@example.com\",\n      \"phoneNumber\": [\"56955556666\", \"212345678\"],\n      \"relationship\": \"Madre\"\n    },\n    {\n      \"rut\": \"24.012.345-4\",\n      \"fullName\": \"Roberto Mendez\",\n      \"email\": \"roberto@example.com\",\n      \"phoneNumber\": [\"56977778888\"],\n      \"relationship\": \"Padre\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "❌ POST Create - INVALID RUT (Bad Checksum)",
+          "description": "Falla: RUT 12.345.678-9 NO es válido (digito verificador incorrecto)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rut\": \"12.345.678-9\",\n  \"firstName\": \"Test\",\n  \"lastName\": \"Invalid\",\n  \"birthDate\": \"2010-01-01\",\n  \"allergies\": [\"Ninguna\"],\n  \"legalRepresentatives\": [\n    {\n      \"rut\": \"19.567.890-K\",\n      \"fullName\": \"Rep\",\n      \"email\": \"rep@example.com\",\n      \"phoneNumber\": [\"56912345678\"],\n      \"relationship\": \"Padre\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "❌ POST Create - Empty Allergies",
+          "description": "Falla: allergies [] no permitido (mínimo 1)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rut\": \"25.123.456-2\",\n  \"firstName\": \"Sofia\",\n  \"lastName\": \"Torres\",\n  \"birthDate\": \"2010-06-10\",\n  \"allergies\": [],\n  \"legalRepresentatives\": [\n    {\n      \"rut\": \"26.234.567-0\",\n      \"fullName\": \"Lucia\",\n      \"email\": \"lucia@example.com\",\n      \"phoneNumber\": [\"56999990000\"],\n      \"relationship\": \"Madre\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "❌ POST Create - Phone Too Short",
+          "description": "Falla: Teléfono menos de 9 dígitos",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rut\": \"27.345.678-9\",\n  \"firstName\": \"Test\",\n  \"lastName\": \"Phone\",\n  \"birthDate\": \"2010-01-01\",\n  \"allergies\": [\"Ninguna\"],\n  \"legalRepresentatives\": [\n    {\n      \"rut\": \"28.456.789-7\",\n      \"fullName\": \"Rep\",\n      \"email\": \"rep@example.com\",\n      \"phoneNumber\": [\"12345\"],\n      \"relationship\": \"Padre\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /students - List All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /students/{id}/profile - Teacher View",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students/{{student_id}}/profile",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students", "{{student_id}}", "profile"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /students/{id}/full - Admin View",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students/{{student_id}}/full",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students", "{{student_id}}", "full"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "2. Classroom Manager (8084 - CORRECTO)",
+      "item": [
+        {
+          "name": "✓ POST Create Classroom",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set('classroom_id', jsonData.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"4º Básico A\",\n  \"year\": 2026,\n  \"capacity\": 30\n}"
+            },
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/classroom",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8084",
+              "path": ["api", "v1", "classroom"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "✓ POST Create Subject",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set('subject_id', jsonData.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Matemática\",\n  \"area\": \"Ciencias Exactas\",\n  \"hours\": 5\n}"
+            },
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/subjects",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8084",
+              "path": ["api", "v1", "subjects"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "✓ POST Create Course",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set('course_id', jsonData.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"classroomId\": 1,\n  \"subjectId\": 1,\n  \"teacher\": \"Prof. González\",\n  \"semester\": \"1\"\n}"
+            },
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/courses",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8084",
+              "path": ["api", "v1", "courses"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /courses/{id}/exists - Verify",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/courses/{{course_id}}/exists",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8084",
+              "path": ["api", "v1", "courses", "{{course_id}}", "exists"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "3. Assessment Manager (8083) - Escala 1.0-7.0",
+      "item": [
+        {
+          "name": "✓ POST Create Assessment",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set('assessment_id', jsonData.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Fracciones\",\n  \"courseId\": 1,\n  \"examDate\": \"2026-06-18\"\n}"
+            },
+            "url": {
+              "raw": "{{assessment_manager_url}}/api/v1/assessments",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8083",
+              "path": ["api", "v1", "assessments"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
+

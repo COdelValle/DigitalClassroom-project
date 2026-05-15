@@ -1,0 +1,1425 @@
+{
+  "info": {
+    "_postman_id": "digital-classroom-api",
+    "name": "Digital Classroom API - Complete Test Suite",
+    "description": "Comprehensive collection for testing all microservices endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "student_manager_url",
+      "value": "http://localhost:8081",
+      "type": "string"
+    },
+    {
+      "key": "classroom_manager_url",
+      "value": "http://localhost:8084",
+      "type": "string"
+    },
+    {
+      "key": "assessment_manager_url",
+      "value": "http://localhost:8083",
+      "type": "string"
+    },
+    {
+      "key": "student_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "classroom_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "subject_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "course_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "assessment_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "grade_id",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Student Manager",
+      "description": "All Student Management endpoints",
+      "item": [
+        {
+          "name": "Students - Create New",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set('student_id', jsonData.id);",
+                  "    pm.test('Student created successfully', function() {",
+                  "        pm.expect(jsonData.id).to.exist;",
+                  "        pm.expect(jsonData.rut).to.exist;",
+                  "    });",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rut\": \"12.345.678-9\",\n  \"firstName\": \"Juan\",\n  \"middleName\": \"Carlos\",\n  \"lastName\": \"Pérez García\",\n  \"birthDate\": \"2010-05-15\",\n  \"allergies\": [\"Ninguna\"],\n  \"legalRepresentatives\": [\n    {\n      \"rut\": \"10.123.456-7\",\n      \"fullName\": \"María García\",\n      \"email\": \"maria@example.com\",\n      \"phoneNumber\": [\"+56 9 1111 2222\"],\n      \"relationship\": \"Madre\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Students - Create with Allergies",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rut\": \"15.987.654-3\",\n  \"firstName\": \"María\",\n  \"middleName\": \"Elena\",\n  \"lastName\": \"López Ruiz\",\n  \"birthDate\": \"2009-03-20\",\n  \"allergies\": [\"Maní\", \"Lácteos\"],\n  \"legalRepresentatives\": [\n    {\n      \"rut\": \"11.234.567-8\",\n      \"fullName\": \"Pedro López\",\n      \"email\": \"pedro@example.com\",\n      \"phoneNumber\": [\"+56 9 3333 4444\"],\n      \"relationship\": \"Padre\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Students - Create with Multiple Representatives",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rut\": \"16.456.789-1\",\n  \"firstName\": \"Carlos\",\n  \"lastName\": \"Mendez Flores\",\n  \"birthDate\": \"2011-07-22\",\n  \"allergies\": [\"Gluten\"],\n  \"legalRepresentatives\": [\n    {\n      \"rut\": \"12.345.678-9\",\n      \"fullName\": \"Ana Flores\",\n      \"email\": \"ana@example.com\",\n      \"phoneNumber\": [\"+56 9 5555 6666\", \"+56 2 1234 5678\"],\n      \"relationship\": \"Madre\"\n    },\n    {\n      \"rut\": \"13.456.789-0\",\n      \"fullName\": \"Roberto Mendez\",\n      \"email\": \"roberto@example.com\",\n      \"phoneNumber\": [\"+56 9 7777 8888\"],\n      \"relationship\": \"Padre\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Students - Create (Invalid RUT)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rut\": \"invalid-rut\",\n  \"firstName\": \"Test\",\n  \"lastName\": \"User\",\n  \"birthDate\": \"2010-01-01\",\n  \"allergies\": [\"Ninguna\"],\n  \"legalRepresentatives\": [\n    {\n      \"rut\": \"10.123.456-7\",\n      \"fullName\": \"Representative\",\n      \"email\": \"rep@example.com\",\n      \"phoneNumber\": [\"+56 9 1111 2222\"],\n      \"relationship\": \"Padre\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Students - Create (Empty Allergies)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rut\": \"17.567.890-2\",\n  \"firstName\": \"Sofia\",\n  \"lastName\": \"Torres\",\n  \"birthDate\": \"2010-06-10\",\n  \"allergies\": [],\n  \"legalRepresentatives\": [\n    {\n      \"rut\": \"14.567.890-3\",\n      \"fullName\": \"Lucia Torres\",\n      \"email\": \"lucia@example.com\",\n      \"phoneNumber\": [\"+56 9 9999 0000\"],\n      \"relationship\": \"Madre\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Students - Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Students - Get Profile by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students/{{student_id}}/profile",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students", "{{student_id}}", "profile"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Students - Get Full Details by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students/{{student_id}}/full",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students", "{{student_id}}", "full"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Students - Check if Exists",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students/{{student_id}}/exists",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students", "{{student_id}}", "exists"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Students - Check if Exists (Non-existing)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students/9999/exists",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students", "9999", "exists"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Students - Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rut\": \"12.345.678-9\",\n  \"firstName\": \"Juan Updated\",\n  \"middleName\": \"Carlos\",\n  \"lastName\": \"Pérez García\",\n  \"birthDate\": \"2010-05-15\",\n  \"allergies\": [\"Maní\"],\n  \"legalRepresentatives\": [\n    {\n      \"rut\": \"10.123.456-7\",\n      \"fullName\": \"María García\",\n      \"email\": \"maria.updated@example.com\",\n      \"phoneNumber\": [\"+56 9 1111 2222\"],\n      \"relationship\": \"Madre\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students/{{student_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students", "{{student_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Students - Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students/{{student_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students", "{{student_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Students - Get Profile (Non-existing ID)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students/9999/profile",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students", "9999", "profile"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "2. Classroom Manager - Classrooms",
+      "description": "Classroom CRUD operations",
+      "item": [
+        {
+          "name": "Classrooms - Create",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set('classroom_id', jsonData.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"4º Básico A\",\n  \"year\": 2026,\n  \"capacity\": 30\n}"
+            },
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/classroom",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "classroom"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Classrooms - Create Multiple",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"5º Básico B\",\n  \"year\": 2026,\n  \"capacity\": 28\n}"
+            },
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/classroom",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "classroom"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Classrooms - Get by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/classroom/{{classroom_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "classroom", "{{classroom_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Classrooms - Search by Name",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/classroom/search?name=4º Básico&year=2026",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "classroom", "search"],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "4º Básico"
+                },
+                {
+                  "key": "year",
+                  "value": "2026"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Classrooms - Search by Year",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/classroom/search?year=2026",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "classroom", "search"],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "2026"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Classrooms - Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"4º Básico A Updated\",\n  \"year\": 2026,\n  \"capacity\": 32\n}"
+            },
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/classroom/{{classroom_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "classroom", "{{classroom_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Classrooms - Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/classroom/{{classroom_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "classroom", "{{classroom_id}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "3. Classroom Manager - Subjects",
+      "description": "Subject CRUD operations",
+      "item": [
+        {
+          "name": "Subjects - Create",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set('subject_id', jsonData.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Matemática\",\n  \"area\": \"Ciencias Exactas\",\n  \"hours\": 5\n}"
+            },
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/subjects",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "subjects"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Subjects - Create (Lenguaje)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Lenguaje y Comunicación\",\n  \"area\": \"Humanidades\",\n  \"hours\": 4\n}"
+            },
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/subjects",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "subjects"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Subjects - Get by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/subjects/{{subject_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "subjects", "{{subject_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Subjects - Search by Name",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/subjects/search?name=Matemática",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "subjects", "search"],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "Matemática"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Subjects - Search by Area",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/subjects/search?area=Humanidades",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "subjects", "search"],
+              "query": [
+                {
+                  "key": "area",
+                  "value": "Humanidades"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Subjects - Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Matemática Avanzada\",\n  \"area\": \"Ciencias Exactas\"\n}"
+            },
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/subjects/{{subject_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "subjects", "{{subject_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Subjects - Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/subjects/{{subject_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "subjects", "{{subject_id}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "4. Classroom Manager - Courses",
+      "description": "Course (Asignatura por Curso) CRUD operations",
+      "item": [
+        {
+          "name": "Courses - Create",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set('course_id', jsonData.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"classroomId\": 1,\n  \"subjectId\": 1,\n  \"teacher\": \"Prof. González\",\n  \"semester\": \"1\"\n}"
+            },
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/courses",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "courses"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Courses - Create (2nd Subject)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"classroomId\": 1,\n  \"subjectId\": 2,\n  \"teacher\": \"Prof. Rodríguez\",\n  \"semester\": \"1\"\n}"
+            },
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/courses",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "courses"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Courses - Get by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/courses/{{course_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "courses", "{{course_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Courses - Search by Classroom",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/courses/search?classroomId=1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "courses", "search"],
+              "query": [
+                {
+                  "key": "classroomId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Courses - Search by Teacher",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/courses/search?teacher=Prof. González",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "courses", "search"],
+              "query": [
+                {
+                  "key": "teacher",
+                  "value": "Prof. González"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Courses - Search by Semester",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/courses/search?semester=1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "courses", "search"],
+              "query": [
+                {
+                  "key": "semester",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Courses - Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"teacher\": \"Prof. González Updated\",\n  \"semester\": \"2\"\n}"
+            },
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/courses/{{course_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "courses", "{{course_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Courses - Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/courses/{{course_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "courses", "{{course_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Courses - Verify Exists",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/courses/{{course_id}}/exists",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "courses", "{{course_id}}", "exists"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "5. Assessment Manager - Assessments",
+      "description": "Assessment (Encargos) CRUD operations",
+      "item": [
+        {
+          "name": "Assessments - Create",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set('assessment_id', jsonData.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Fracciones\",\n  \"courseId\": 1,\n  \"examDate\": \"2026-06-18\"\n}"
+            },
+            "url": {
+              "raw": "{{assessment_manager_url}}/api/v1/assessments",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8083",
+              "path": ["api", "v1", "assessments"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Assessments - Create (Another Subject)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Análisis de Texto\",\n  \"courseId\": 2,\n  \"examDate\": \"2026-06-25\"\n}"
+            },
+            "url": {
+              "raw": "{{assessment_manager_url}}/api/v1/assessments",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8083",
+              "path": ["api", "v1", "assessments"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Assessments - Create (Invalid Course)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Test Assessment\",\n  \"courseId\": 9999,\n  \"examDate\": \"2026-07-01\"\n}"
+            },
+            "url": {
+              "raw": "{{assessment_manager_url}}/api/v1/assessments",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8083",
+              "path": ["api", "v1", "assessments"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Assessments - Get by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{assessment_manager_url}}/api/v1/assessments/{{assessment_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8083",
+              "path": ["api", "v1", "assessments", "{{assessment_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Assessments - Search by Course",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{assessment_manager_url}}/api/v1/assessments/search?courseId=1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8083",
+              "path": ["api", "v1", "assessments", "search"],
+              "query": [
+                {
+                  "key": "courseId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Assessments - Search by Title",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{assessment_manager_url}}/api/v1/assessments/search?title=Fracciones",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8083",
+              "path": ["api", "v1", "assessments", "search"],
+              "query": [
+                {
+                  "key": "title",
+                  "value": "Fracciones"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Assessments - Search by Date",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{assessment_manager_url}}/api/v1/assessments/search?examDate=2026-06-18",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8083",
+              "path": ["api", "v1", "assessments", "search"],
+              "query": [
+                {
+                  "key": "examDate",
+                  "value": "2026-06-18"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Assessments - Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Fracciones Simples\",\n  \"examDate\": \"2026-06-20\"\n}"
+            },
+            "url": {
+              "raw": "{{assessment_manager_url}}/api/v1/assessments/{{assessment_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8083",
+              "path": ["api", "v1", "assessments", "{{assessment_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Assessments - Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{assessment_manager_url}}/api/v1/assessments/{{assessment_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8083",
+              "path": ["api", "v1", "assessments", "{{assessment_id}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "6. Assessment Manager - Grades",
+      "description": "Grade (Notas) CRUD operations",
+      "item": [
+        {
+          "name": "Grades - Create",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set('grade_id', jsonData.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentId\": 1,\n  \"assessmentId\": 1,\n  \"score\": 7.5\n}"
+            },
+            "url": {
+              "raw": "{{assessment_manager_url}}/api/v1/grades",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8083",
+              "path": ["api", "v1", "grades"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Grades - Create (Multiple Scores)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentId\": 2,\n  \"assessmentId\": 1,\n  \"score\": 6.0\n}"
+            },
+            "url": {
+              "raw": "{{assessment_manager_url}}/api/v1/grades",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8083",
+              "path": ["api", "v1", "grades"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Grades - Create (High Score)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentId\": 3,\n  \"assessmentId\": 1,\n  \"score\": 9.5\n}"
+            },
+            "url": {
+              "raw": "{{assessment_manager_url}}/api/v1/grades",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8083",
+              "path": ["api", "v1", "grades"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Grades - Get by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{assessment_manager_url}}/api/v1/grades/{{grade_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8083",
+              "path": ["api", "v1", "grades", "{{grade_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Grades - Search by Student",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{assessment_manager_url}}/api/v1/grades/search?studentId=1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8083",
+              "path": ["api", "v1", "grades", "search"],
+              "query": [
+                {
+                  "key": "studentId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Grades - Search by Score Range (6.0 - 8.0)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{assessment_manager_url}}/api/v1/grades/search?minScore=6.0&maxScore=8.0",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8083",
+              "path": ["api", "v1", "grades", "search"],
+              "query": [
+                {
+                  "key": "minScore",
+                  "value": "6.0"
+                },
+                {
+                  "key": "maxScore",
+                  "value": "8.0"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Grades - Search by High Scores (> 8.0)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{assessment_manager_url}}/api/v1/grades/search?minScore=8.0",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8083",
+              "path": ["api", "v1", "grades", "search"],
+              "query": [
+                {
+                  "key": "minScore",
+                  "value": "8.0"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Grades - Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"score\": 7.8\n}"
+            },
+            "url": {
+              "raw": "{{assessment_manager_url}}/api/v1/grades/{{grade_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8083",
+              "path": ["api", "v1", "grades", "{{grade_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Grades - Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{assessment_manager_url}}/api/v1/grades/{{grade_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8083",
+              "path": ["api", "v1", "grades", "{{grade_id}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "7. Error Scenarios",
+      "description": "Common error cases to test",
+      "item": [
+        {
+          "name": "Error - Get Non-existent Student",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students/99999/full",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students", "99999", "full"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Error - Create Student with Duplicate RUT",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rut\": \"12.345.678-9\",\n  \"firstName\": \"Duplicate\",\n  \"lastName\": \"Student\",\n  \"birthDate\": \"2010-01-01\",\n  \"allergies\": [\"Ninguna\"],\n  \"legalRepresentatives\": [\n    {\n      \"rut\": \"10.123.456-7\",\n      \"fullName\": \"Representative\",\n      \"email\": \"rep@example.com\",\n      \"phoneNumber\": [\"+56 9 1111 2222\"],\n      \"relationship\": \"Padre\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Error - Update Non-existent Classroom",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Class\",\n  \"year\": 2026,\n  \"capacity\": 30\n}"
+            },
+            "url": {
+              "raw": "{{classroom_manager_url}}/api/v1/classroom/99999",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["api", "v1", "classroom", "99999"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Error - Create Assessment with Invalid Course",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Invalid Course Assessment\",\n  \"courseId\": 99999,\n  \"examDate\": \"2026-07-01\"\n}"
+            },
+            "url": {
+              "raw": "{{assessment_manager_url}}/api/v1/assessments",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8083",
+              "path": ["api", "v1", "assessments"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Error - Create Grade with Invalid Student",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentId\": 99999,\n  \"assessmentId\": 1,\n  \"score\": 7.5\n}"
+            },
+            "url": {
+              "raw": "{{assessment_manager_url}}/api/v1/grades",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8083",
+              "path": ["api", "v1", "grades"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Error - Invalid Request Body",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"invalidField\": \"test\"\n}"
+            },
+            "url": {
+              "raw": "{{student_manager_url}}/api/v1/students",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "v1", "students"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
+
