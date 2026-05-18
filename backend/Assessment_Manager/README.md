@@ -2,20 +2,20 @@
 
 **Versión**: 1.0.0  
 **Último actualizado**: 16 de Mayo de 2026  
-**Estado**: ✅ Producción
+**Estado**: Produccion
 
 ---
 
-## 📋 Descripción
+## Descripcion
 
 El **Assessment Manager** gestiona evaluaciones y calificaciones en el sistema. Es responsable de todo lo relacionado con pruebas, tareas y notas de los estudiantes.
 
 **Responsabilidades**:
-- ✅ Crear y gestionar evaluaciones (encargos)
-- ✅ Registrar y modificar calificaciones (notas)
-- ✅ Validar estudiantes y cursos
-- ✅ Implementar reglas de negocio educativo
-- ✅ Proteger datos históricos
+- Crear y gestionar evaluaciones (encargos)
+- Registrar y modificar calificaciones (notas)
+- Validar estudiantes y cursos
+- Implementar reglas de negocio educativo
+- Proteger datos historicos
 
 **Stack Tecnológico**:
 - Spring Boot 4.0.6
@@ -28,7 +28,7 @@ El **Assessment Manager** gestiona evaluaciones y calificaciones en el sistema. 
 
 ---
 
-## 🚀 Inicio Rápido
+## Inicio Rapido
 
 ### Requisitos
 
@@ -63,7 +63,7 @@ spring.jpa.hibernate.ddl-auto=update
 
 ---
 
-## 📚 Documentación de la API
+## Documentacion de la API
 
 ### Swagger UI
 
@@ -73,7 +73,7 @@ http://localhost:8083/docs
 
 ---
 
-## 🎯 Endpoints Principales
+## Endpoints Principales
 
 ### Assessment Controller
 
@@ -171,7 +171,7 @@ resilience4j.circuitbreaker.instances.academicServiceCB.waitDurationInOpenState=
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Ejecutar tests
@@ -183,7 +183,7 @@ mvn test jacoco:report
 
 ---
 
-## ⚙️ Configuración Avanzada
+## Configuracion Avanzada
 
 **application.properties**:
 
@@ -262,7 +262,7 @@ Solo se aceptan puntajes en el sistema chileno (1.0-7.0)
 
 ---
 
-## 📊 Monitoreo
+## Monitoreo
 
 ```
 GET /actuator/health
@@ -273,7 +273,7 @@ GET /actuator/health/circuitbreakers
 
 ---
 
-## 📝 Ejemplos de Uso
+## Ejemplos de Uso
 
 ### Crear Evaluación con Calificaciones
 
@@ -358,13 +358,13 @@ Para problemas:
 
 ---
 
-## 📋 Notas Importantes
+## Notas Importantes
 
 - ⚠️ El borrado de evaluaciones está protegido por reglas de negocio
 - ⚠️ Los puntajes deben estar en el rango chileno (1.0-7.0)
 - ⚠️ Todas las validaciones con otros servicios usan Circuit Breaker
-- ✅ Las fechas se almacenan en formato LocalDate (ISO 8601)
-- ✅ Las calificaciones generan automáticamente su fecha de creación
+- Las fechas se almacenan en formato LocalDate (ISO 8601)
+- Las calificaciones generan automaticamente su fecha de creacion
 
 ---
 

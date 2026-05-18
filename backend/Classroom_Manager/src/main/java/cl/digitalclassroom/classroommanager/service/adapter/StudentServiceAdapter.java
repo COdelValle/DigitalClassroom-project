@@ -24,6 +24,7 @@ public class StudentServiceAdapter {
 
     // FALLBACK: Se ejecuta si el microservicio de Estudiantes está caído
     // o si el circuito se abrió por demasiados errores.
+    @SuppressWarnings("unused")
     private boolean fallbackStudentValidation(Long studentId, Throwable e) {
         log.error("Circuit Breaker ACTIVADO. No se pudo validar al estudiante {}. Motivo: {}",
                 studentId, e.getMessage());

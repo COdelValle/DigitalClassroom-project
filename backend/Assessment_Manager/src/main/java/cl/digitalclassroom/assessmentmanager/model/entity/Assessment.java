@@ -1,7 +1,7 @@
 package cl.digitalclassroom.assessmentmanager.model.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -2,11 +2,11 @@
 
 **Versión**: 1.0.0  
 **Último actualizado**: 16 de Mayo de 2026  
-**Estado**: ✅ Producción
+**Estado**: Produccion
 
 ---
 
-## 📋 Descripción
+## Descripcion
 
 El **Student Manager** es un microservicio responsable de toda la gestión de estudiantes en la plataforma Digital Classroom. Maneja información personal, representantes legales, alergias y verificación de existencia de estudiantes.
 
@@ -19,7 +19,7 @@ El **Student Manager** es un microservicio responsable de toda la gestión de es
 
 ---
 
-## 🚀 Inicio Rápido
+## Inicio Rapido
 
 ### Requisitos
 
@@ -54,7 +54,7 @@ spring.jpa.hibernate.ddl-auto=update
 
 ---
 
-## 📚 Documentación de la API
+## Documentacion de la API
 
 ### Swagger UI
 
@@ -66,7 +66,7 @@ http://localhost:8081/docs
 
 ---
 
-## 🎯 Endpoints Principales
+## Endpoints Principales
 
 ### Students Controller
 
@@ -130,7 +130,7 @@ GET /api/v1/students/{id}/exists
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Ejecutar tests
@@ -146,15 +146,15 @@ mvn test jacoco:report
 
 ## 🔒 Seguridad
 
-- ✅ Validación de entrada (Jakarta Validation)
-- ✅ RUT Chileno validado con algoritmo oficial
-- ✅ Teléfono validado
-- ✅ Email válido obligatorio
-- ✅ OAuth2 configurado (ver `config/SecurityConfig.java`)
+- Validacion de entrada (Jakarta Validation)
+- RUT Chileno validado con algoritmo oficial
+- Telefono validado
+- Email valido obligatorio
+- OAuth2 configurado (ver `config/SecurityConfig.java`)
 
 ---
 
-## 📊 Monitoreo
+## Monitoreo
 
 **Actuator Endpoints**:
 
@@ -172,7 +172,7 @@ http://localhost:8081/actuator/prometheus
 
 ---
 
-## ⚙️ Configuración Avanzada
+## Configuracion Avanzada
 
 **application.properties**:
 
@@ -214,7 +214,7 @@ net start MariaDB
 
 ---
 
-## 📝 Ejemplos de Uso
+## Ejemplos de Uso
 
 ### Crear Estudiante
 

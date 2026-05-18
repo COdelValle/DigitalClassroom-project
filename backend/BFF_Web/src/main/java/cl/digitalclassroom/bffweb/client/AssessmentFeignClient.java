@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "assessment-service", url = "http://localhost:8083")
+@FeignClient(name = "assessment-service", url = "${external.services.assessment-url}")
 public interface AssessmentFeignClient {
     @PostMapping("/api/v1/grades")
     GradeResponseDTO saveGrade(@RequestBody GradeRequestDTO grade);

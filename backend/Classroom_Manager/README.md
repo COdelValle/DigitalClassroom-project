@@ -2,20 +2,20 @@
 
 **Versión**: 1.0.0  
 **Último actualizado**: 16 de Mayo de 2026  
-**Estado**: ✅ Producción
+**Estado**: Produccion
 
 ---
 
-## 📋 Descripción
+## Descripcion
 
 El **Classroom Manager** gestiona la estructura académica de la plataforma: aulas, asignaturas y la relación entre ambas (cursos). Es el corazón de la organización académica.
 
 **Responsabilidades**:
-- ✅ Crear y gestionar aulas
-- ✅ Crear y gestionar asignaturas
-- ✅ Vincular asignaturas a aulas con profesores
-- ✅ Validar existencia de recursos
-- ✅ Mantener integridad referencial
+- Crear y gestionar aulas
+- Crear y gestionar asignaturas
+- Vincular asignaturas a aulas con profesores
+- Validar existencia de recursos
+- Mantener integridad referencial
 
 **Stack Tecnológico**:
 - Spring Boot 4.0.6
@@ -27,7 +27,7 @@ El **Classroom Manager** gestiona la estructura académica de la plataforma: aul
 
 ---
 
-## 🚀 Inicio Rápido
+## Inicio Rapido
 
 ### Requisitos
 
@@ -62,7 +62,7 @@ spring.jpa.hibernate.ddl-auto=update
 
 ---
 
-## 📚 Documentación de la API
+## Documentacion de la API
 
 ### Swagger UI
 
@@ -72,7 +72,7 @@ http://localhost:8084/docs
 
 ---
 
-## 🎯 Endpoints Principales
+## Endpoints Principales
 
 ### Classroom Controller
 
@@ -164,7 +164,7 @@ Usado cuando:
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Ejecutar tests
@@ -176,7 +176,7 @@ mvn test jacoco:report
 
 ---
 
-## ⚙️ Configuración Avanzada
+## Configuracion Avanzada
 
 **application.properties**:
 
@@ -201,7 +201,7 @@ springdoc.swagger-ui.path=/docs
 
 ---
 
-## 📊 Monitoreo
+## Monitoreo
 
 ```
 GET /actuator/health
@@ -213,10 +213,10 @@ GET /actuator/prometheus
 
 ## 🔒 Seguridad
 
-- ✅ Validación de entrada (Jakarta Validation)
-- ✅ Validación de unicidad (código, nombre de asignatura)
-- ✅ Circuit Breaker para comunicación con otros servicios
-- ✅ OAuth2 configurado
+- Validacion de entrada (Jakarta Validation)
+- Validacion de unicidad (codigo, nombre de asignatura)
+- Circuit Breaker para comunicacion con otros servicios
+- OAuth2 configurado
 
 ---
 
@@ -244,7 +244,7 @@ GET /actuator/prometheus
 
 ---
 
-## 📝 Ejemplos de Uso
+## Ejemplos de Uso
 
 ### Crear Asignatura
 

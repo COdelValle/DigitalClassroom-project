@@ -38,7 +38,7 @@ public class GradeService {
     @Transactional(readOnly = true)
     public List<GradeResponseDTO> searchGrades(Long studentId, Double minScore, Double maxScore, LocalDate date) {
 
-        Specification<Grade> spec = Specification.where((root, query, cb) -> cb.conjunction());
+        Specification<Grade> spec = (root, query, cb) -> cb.conjunction();
 
         if (studentId != null) {
             spec = spec.and(GradeSpecifications.hasStudentId(studentId));

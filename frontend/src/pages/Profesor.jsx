@@ -1,20 +1,80 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Card, ListGroup, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { searchCourses } from "../services/classroomService";
+import { getStudents } from "../services/studentService";
 import usuarios from "../data/users.json";
 import clases from "../data/clases.json";
 
 function Profesor() {
   const [profesor, setProfesor] = useState(null);
+  const [cursos, setCursos] = useState([]);
+  const [estudiantes, setEstudiantes] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const rut = localStorage.getItem("userRut") || "";
-    const encontrado = usuarios.find((usuario) => usuario.rut === rut && usuario.rol === "profesor");
-    setProfesor(encontrado || null);
+    const loadProfesorData = async () => {
+      try {
+        setLoading(true);
+        const rut = localStorage.getItem("userRut") || "";
+        const encontrado = usuarios.find((usuario) => usuario.rut === rut && usuario.rol === "profesor");
+        setProfesor(encontrado || null);
+
+        if (encontrado) {
+          // Intenta obtener cursos del backend
+          try {
+            const cursosData = await searchCourses({ teacher: encontrado.nombre });
+            setCursos(cursosData || []);
+          } catch (err) {
+            console.warn("No se pudieron obtener cursos del backend:", err.message);
+            // Usa datos locales como fallback
+            const cursosLocales = clases.filter((clase) => clase.profesor === encontrado.nombre);
+            setCursos(cursosLocales);
+          }
+
+          // Intenta obtener estudiantes
+          try {
+            const estudiantesData = await getStudents();
+            setEstudiantes(estudiantesData || []);
+          } catch (err) {
+            console.warn("No se pudieron obtener estudiantes:", err.message);
+          }
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProfesorData();
   }, []);
 
-  const clasesProfesor = profesor ? clases.filter((clase) => clase.profesor === profesor.nombre) : [];
+  if (loading) {
+    return (
+      <div className="py-5">
+        <Container>
+          <div className="d-flex justify-content-center">
+            <div className="spinner-border text-primary" role="status">
+              <span className="visually-hidden">Cargando...</span>
+            </div>
+          </div>
+        </Container>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="py-5">
+        <Container>
+          <div className="alert alert-danger">Error: {error}</div>
+        </Container>
+      </div>
+    );
+  }
 
   if (!profesor) {
     return <div className="py-5">Cargando información del profesor...</div>;
@@ -111,17 +171,17 @@ function Profesor() {
             <Card className="shadow-sm h-100 card-hover slide-in-right">
               <Card.Body>
                 <Card.Title>Clases asignadas</Card.Title>
-                {clasesProfesor.length > 0 ? (
+                {cursos.length > 0 ? (
                   <ListGroup variant="flush">
-                    {clasesProfesor.map((clase, index) => (
-                      <ListGroup.Item key={clase.id} className="d-flex justify-content-between align-items-center fade-in-up" style={{ animationDelay: `${0.4 + index * 0.1}s` }}>
+                    {cursos.map((curso, index) => (
+                      <ListGroup.Item key={curso.id} className="d-flex justify-content-between align-items-center fade-in-up" style={{ animationDelay: `${0.4 + index * 0.1}s` }}>
                         <div>
-                          <strong>{clase.nombre}</strong>
+                          <strong>{curso.nombre || curso.name || curso.title}</strong>
                           <div className="text-muted" style={{ fontSize: "0.9rem" }}>
-                            Sala {clase.salon}
+                            {curso.semester || "2024"}
                           </div>
                         </div>
-                        <Button variant="outline-primary" size="sm" onClick={() => navigate(`/gestion-clase/${clase.id}`)}>
+                        <Button variant="outline-primary" size="sm" onClick={() => navigate(`/gestion-clase/${curso.id}`)}>
                           Gestionar
                         </Button>
                       </ListGroup.Item>

@@ -1,11 +1,33 @@
-# 📚 Documentación Digital Classroom - Índice General
+# Documentación Digital Classroom - Índice General
 
 **Versión**: 2.0 - Completa y Actualizada  
 **Fecha**: 16 de Mayo de 2026
 
 ---
 
-## 🎯 Inicio Rápido
+## Inicio Rápido
+
+### FASE 2: Docker Compose (RECOMENDADO)
+**Levanta TODO (BD + Backend + Frontend) con un comando:**
+
+**Windows**:
+```bash
+start-fase2.cmd
+```
+
+**Linux/Mac**:
+```bash
+bash start-fase2.sh
+```
+
+O manualmente:
+```bash
+docker-compose -f docker-compose-fase2.yml up -d
+```
+
+**Leer**: [FASE_2_README.md](./FASE_2_README.md)
+
+---
 
 ### Para Desarrolladores de Backend
 
@@ -36,13 +58,13 @@
 
 ---
 
-## 📂 Estructura de Documentación
+## Estructura de Documentación
 
 ### Backend (`/backend`)
 
 #### Documentación Principal
 
-- **[GUIA_MICROSERVICIOS.md](./backend/GUIA_MICROSERVICIOS.md)** ⭐ **LEER PRIMERO**
+- **[GUIA_MICROSERVICIOS.md](./backend/GUIA_MICROSERVICIOS.md)** ** LEER PRIMERO**
   - Descripción general del sistema
   - Arquitectura de microservicios
   - Documentación completa de cada servicio
@@ -66,15 +88,15 @@
 | **BFF Web** | 8085 | [README.md](./backend/BFF_Web/README.md) |
 
 Cada README contiene:
-- ℹ️ Descripción del servicio
-- 🚀 Cómo iniciar
-- 🎯 Endpoints principales
-- 📦 Modelos de datos
-- 🔗 Integraciones
-- 🧪 Testing
-- ⚙️ Configuración
-- 🐛 Troubleshooting
-- 📝 Ejemplos
+- Descripción del servicio
+- Como iniciar
+- Endpoints principales
+- Modelos de datos
+- Integraciones
+- Testing
+- Configuracion
+- Troubleshooting
+- Ejemplos
 
 ---
 
@@ -82,7 +104,7 @@ Cada README contiene:
 
 #### Documentación Principal
 
-- **[TUTORIAL_FRONTEND.md](./TUTORIAL_FRONTEND.md)** ⭐ **LEER PRIMERO**
+- **[TUTORIAL_FRONTEND.md](./TUTORIAL_FRONTEND.md)** ** LEER PRIMERO**
   - Configuración de clientes HTTP (Axios)
   - Servicios API (studentService, classroomService, etc.)
   - Hooks personalizados (useStudents, useClassrooms, etc.)
@@ -102,7 +124,7 @@ Cada README contiene:
 
 ---
 
-## 🔍 Búsqueda Rápida
+## Búsqueda Rápida
 
 ### Por Tema
 
@@ -158,7 +180,7 @@ Cada README contiene:
 
 ---
 
-## 🚀 Iniciar el Sistema Completo
+## Iniciar el Sistema Completo
 
 ### Opción 1: Terminal separadas (Desarrollo)
 
@@ -196,9 +218,9 @@ docker-compose up -d
 
 ---
 
-## 📋 Checklist de Configuración
+## Checklist de Configuración
 
-### Backend ✅
+### Backend COMPLETADO
 
 - [ ] Java 21+ instalado
 - [ ] MariaDB corriendo
@@ -207,7 +229,7 @@ docker-compose up -d
 - [ ] Assessment Manager en puerto 8083
 - [ ] Acceder a `localhost:8081/docs` para verificar
 
-### Frontend ✅
+### Frontend COMPLETADO
 
 - [ ] Node.js 18+ instalado
 - [ ] `npm install` ejecutado
@@ -253,7 +275,7 @@ fetch('http://localhost:8081/api/v1/students')
 
 ---
 
-## 🤔 Preguntas Frecuentes
+## Preguntas Frecuentes
 
 ### P: ¿Por dónde empiezo si soy nuevo?
 **R**: Lee primero [GUIA_MICROSERVICIOS.md](./backend/GUIA_MICROSERVICIOS.md) para entender la arquitectura, luego sigue los README específicos.
@@ -278,7 +300,7 @@ fetch('http://localhost:8081/api/v1/students')
 
 ---
 
-## 📚 Documentación Externa
+## Documentación Externa
 
 - **Spring Boot**: https://spring.io/projects/spring-boot
 - **React**: https://react.dev
@@ -332,7 +354,7 @@ fetch('http://localhost:8081/api/v1/students')
 - Java 21+ requerido
 - Node 18+ requerido para frontend
 
-✅ **DESPUÉS DE INSTALAR**:
+COMPLETADO **DESPUÉS DE INSTALAR**:
 - Prueba cada servicio en su `/docs`
 - Verifica que se conecten entre sí
 - Revisa logs si hay errores
@@ -348,7 +370,7 @@ fetch('http://localhost:8081/api/v1/students')
 ## 🤝 Contribuir a la Documentación
 
 Si encuentras:
-- ❌ Errores
+- Errores
 - ⚠️ Información faltante
 - 🤔 Explicitaciones poco claras
 - 💡 Mejoras sugerentes
@@ -357,7 +379,7 @@ Si encuentras:
 
 ---
 
-## 📞 Soporte
+## Soporte
 
 | Pregunta | Dónde Buscar |
 |----------|--------------|
@@ -370,7 +392,7 @@ Si encuentras:
 
 ---
 
-## 📅 Historial de Cambios
+## Historial de Cambios
 
 | Fecha | Versión | Cambios |
 |-------|---------|---------|
@@ -381,15 +403,15 @@ Si encuentras:
 
 **Última actualización**: 16 de Mayo de 2026  
 **Mantenedor**: Equipo de Backend  
-**Estado**: ✅ Completo y Actualizado
+**Estado**: Completo y Actualizado
 
 ---
 
-## 🎉 ¡Listo para Desarrollar!
+## Listo para Desarrollar!
 
 Elige tu rol y sigue el camino recomendado. Todo lo que necesitas está documentado. 
 
 **¿Preguntas?** Abre un issue o contacta al equipo.
 
-**¡Happy Coding! 🚀**
+**Happy Coding!**
 

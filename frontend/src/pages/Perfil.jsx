@@ -1,20 +1,53 @@
 import { useEffect, useMemo, useState } from "react";
 import { Container, Row, Col, Card, ListGroup, Button, Badge } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { getStudentProfile, getStudentFull } from "../services/studentService";
+import { searchCourses } from "../services/classroomService";
+import { getStudentReportCard } from "../services/bffService";
 import alumnos from "../data/alumnos.json";
 import usuarios from "../data/users.json";
 import clases from "../data/clases.json";
 
 function Perfil() {
   const [usuario, setUsuario] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [reportCard, setReportCard] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const rut = localStorage.getItem("userRut") || "";
-    const encontradoAlumno = alumnos.find((estudiante) => estudiante.rut === rut);
-    const encontradoUsuario = usuarios.find((usuario) => usuario.rut === rut);
-    const seleccionado = encontradoAlumno || encontradoUsuario || alumnos[0] || null;
-    setUsuario(seleccionado);
+    const loadUserData = async () => {
+      try {
+        setLoading(true);
+        const rut = localStorage.getItem("userRut") || "";
+        
+        // Primero busca en datos locales como fallback
+        const encontradoAlumno = alumnos.find((estudiante) => estudiante.rut === rut);
+        const encontradoUsuario = usuarios.find((usuario) => usuario.rut === rut);
+        const seleccionado = encontradoAlumno || encontradoUsuario || alumnos[0] || null;
+        
+        if (seleccionado) {
+          setUsuario(seleccionado);
+          
+          // Si es estudiante, intenta obtener su reporte de calificaciones del BFF
+          if (seleccionado.id && !seleccionado.rol) {
+            try {
+              const reportCardData = await getStudentReportCard(seleccionado.id);
+              setReportCard(reportCardData);
+            } catch (err) {
+              console.warn("No se pudo obtener el reporte de calificaciones:", err.message);
+            }
+          }
+        }
+      } catch (err) {
+        setError(err.message);
+        console.error("Error cargando datos del usuario:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadUserData();
   }, []);
 
   const esProfesor = usuario?.rol === "profesor";

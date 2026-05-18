@@ -1,4 +1,4 @@
-# 📚 Documentación de Endpoints - Digital Classroom Backend
+# Documentacion de Endpoints - Digital Classroom Backend
 Notas: Esta guia sirve más que nada para contextualizar, sin embargo los atributos que se devuelven no son los que corresponden, esta es una guia puramente provicional.
 ## Índice
 1. [Descripción General](#descripción-general)
@@ -1674,10 +1674,10 @@ Todos los endpoints usan API v1: `/api/v1/`
 
 ## Notas Importantes
 
-- ✅ Todos los endpoints soportan JSON
-- ✅ Códigos de respuesta HTTP: 200 (OK), 201 (Created), 204 (No Content), 400 (Bad Request), 404 (Not Found), 500 (Server Error)
-- ✅ Los IDs son Long (números enteros)
-- ✅ Las fechas usan formato ISO 8601
+- Todos los endpoints soportan JSON
+- Codigos de respuesta HTTP: 200 (OK), 201 (Created), 204 (No Content), 400 (Bad Request), 404 (Not Found), 500 (Server Error)
+- Los IDs son Long (numeros enteros)
+- Las fechas usan formato ISO 8601
 - ⚠️ El BFF aún está en desarrollo y dispondrá de nuevos endpoints
 - ⚠️ Validar siempre la lógica de negocio al integrar microservicios
 

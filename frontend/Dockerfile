@@ -1,13 +1,16 @@
-﻿# Stage 1: build the React + Vite app
-FROM node:20-alpine AS build
+﻿# Development stage - Vite dev server
+FROM node:20-alpine
 WORKDIR /app
+
+# Instalar dependencias
 COPY package*.json ./
 RUN npm install
-COPY . .
-RUN npm run build
 
-# Stage 2: serve with nginx
-FROM nginx:alpine
-COPY --from=build /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Copiar código fuente
+COPY . .
+
+# Exponer puerto de Vite
+EXPOSE 5173
+
+# Comando para ejecutar dev server
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]

@@ -20,6 +20,7 @@ public class AcademicServiceAdapter {
     }
 
     // Fallback común para ambos
+    @SuppressWarnings("unused")
     private boolean fallbackAcademic(Long courseId, Throwable e) {
         log.error("Circuit Breaker activo para el servicio Académico. No se pudo validar courseId: {}. Error: {}",
                 courseId, e.getMessage());

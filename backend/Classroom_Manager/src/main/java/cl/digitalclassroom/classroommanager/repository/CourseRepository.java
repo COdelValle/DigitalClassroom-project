@@ -1,8 +1,7 @@
 package cl.digitalclassroom.classroommanager.repository;
 
 import cl.digitalclassroom.classroommanager.model.entity.Course;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;

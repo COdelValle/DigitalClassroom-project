@@ -38,7 +38,7 @@ public class AssessmentService {
 
     @Transactional(readOnly = true)
     public List<AssessmentResponseDTO> searchAssessments(Long courseId, String title, Date examDate) {
-        Specification<Assessment> spec = Specification.where((root, query, cb) -> cb.conjunction());
+        Specification<Assessment> spec = (root, query, cb) -> cb.conjunction();
 
         if (courseId != null) {
             spec = spec.and(AssessmentSpecifications.hasCourseId(courseId));

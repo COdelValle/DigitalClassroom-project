@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Container, Row, Col, Card, Button, ListGroup, Modal, Form, Alert, Tab, Tabs } from "react-bootstrap";
+import { searchCourses, getCourse } from "../services/classroomService";
+import { getStudents } from "../services/studentService";
+import { searchGrades, createGrade, updateGrade } from "../services/assessmentService";
 import alumnos from "../data/alumnos.json";
 import clases from "../data/clases.json";
 import usuarios from "../data/users.json";
@@ -8,7 +11,7 @@ import usuarios from "../data/users.json";
 function GestionClase() {
   const { claseId } = useParams();
   const [profesor, setProfesor] = useState(null);
-  const [clase, setClase] = useState(null);
+  const [curso, setCurso] = useState(null);
   const [alumnosClase, setAlumnosClase] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedAlumno, setSelectedAlumno] = useState(null);
@@ -16,31 +19,61 @@ function GestionClase() {
   const [activeTab, setActiveTab] = useState("notas");
   const [editingNoteIndex, setEditingNoteIndex] = useState(null);
   const [attendanceStatus, setAttendanceStatus] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const rut = localStorage.getItem("userRut") || "";
-    const encontrado = usuarios.find((usuario) => usuario.rut === rut && usuario.rol === "profesor");
-    setProfesor(encontrado || null);
-  }, []);
+    const loadProfesorData = async () => {
+      try {
+        setLoading(true);
+        const rut = localStorage.getItem("userRut") || "";
+        const encontrado = usuarios.find((usuario) => usuario.rut === rut && usuario.rol === "profesor");
+        setProfesor(encontrado || null);
 
-  useEffect(() => {
-    if (!profesor) return;
-    const claseEncontrada = clases.find((c) => c.id.toString() === claseId && c.profesor === profesor.nombre);
-    setClase(claseEncontrada || null);
-  }, [profesor, claseId]);
+        if (encontrado) {
+          // Intenta obtener el curso del backend
+          try {
+            const cursoData = await getCourse(claseId);
+            setCurso(cursoData);
+          } catch (err) {
+            console.warn("No se pudo obtener curso del backend:", err.message);
+            // Usa datos locales como fallback
+            const claseLocal = clases.find((c) => c.id.toString() === claseId && c.profesor === encontrado.nombre);
+            setCurso(claseLocal);
+          }
 
-  useEffect(() => {
-    if (!clase) return;
-    const alumnosDeClase = alumnos.filter((alumno) =>
-      alumno.clases.some((c) => c.id === clase.id)
+          // Intenta obtener estudiantes
+          try {
+            const estudiantesData = await getStudents();
+            // Filtra estudiantes de esta clase
+            const alumnosDeClase = estudiantesData.filter((est) =>
+              alumnosLocales.some((a) => a.id === est.id)
+            );
+            setAlumnosClase(alumnosDeClase.length > 0 ? alumnosDeClase : alumnosLocales);
+          } catch (err) {
+            console.warn("No se pudieron obtener estudiantes del backend:", err.message);
+            // Usa datos locales
+            const alumnosDeClase = alumnos.filter((alumno) =>
+              alumno.clases.some((c) => c.id.toString() === claseId)
+            );
+            setAlumnosClase(alumnosDeClase);
+          }
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    // Obtener lista local primero como fallback
+    const alumnosLocales = alumnos.filter((alumno) =>
+      alumno.clases.some((c) => c.id.toString() === claseId)
     );
-    setAlumnosClase(alumnosDeClase);
-  }, [clase]);
 
-  useEffect(() => {
-    if (alumnosClase.length === 0) return;
-    setAttendanceStatus(alumnosClase.map(() => false));
-  }, [alumnosClase]);
+    loadProfesorData();
+  }, [claseId]);
 
   const handleEdit = (alumno, tipo) => {
     setSelectedAlumno(alumno);
@@ -71,25 +104,38 @@ function GestionClase() {
     }));
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (activeTab === "notas") {
       const nuevaNota = {
         periodo: formData.periodo,
         puntaje: formData.nota,
-        comentario: formData.comentario
+        comentario: formData.comentario,
+        studentId: selectedAlumno.id,
+        courseId: curso.id,
       };
+
+      try {
+        // Intenta guardar en el backend
+        if (editingNoteIndex !== null) {
+          await updateGrade(selectedAlumno.id, nuevaNota);
+        } else {
+          await createGrade(nuevaNota);
+        }
+      } catch (err) {
+        console.warn("No se pudo guardar la nota en el backend:", err.message);
+      }
+
+      // Guarda localmente también
       setAlumnosClase(prev => prev.map(alumno => {
         if (alumno.id === selectedAlumno.id) {
           const updatedClases = alumno.clases.map(c => {
-            if (c.id === clase.id) {
+            if (c.id === curso.id) {
               let updatedNotas;
               if (editingNoteIndex !== null) {
-                // Editar nota existente
                 updatedNotas = [...c.notas];
-                updatedNotas[editingNoteIndex] = nuevaNota;
+                updatedNotas[editingNoteIndex] = { periodo: formData.periodo, puntaje: formData.nota, comentario: formData.comentario };
               } else {
-                // Agregar nueva nota
-                updatedNotas = [...c.notas, nuevaNota];
+                updatedNotas = [...c.notas, { periodo: formData.periodo, puntaje: formData.nota, comentario: formData.comentario }];
               }
               return { ...c, notas: updatedNotas };
             }
@@ -106,7 +152,7 @@ function GestionClase() {
   };
 
   const handleEditNote = (index) => {
-    const claseAlumno = selectedAlumno.clases.find((c) => c.id === clase.id);
+    const claseAlumno = selectedAlumno.clases.find((c) => c.id === curso.id);
     const nota = claseAlumno.notas[index];
     setFormData({
       periodo: nota.periodo,
@@ -120,7 +166,31 @@ function GestionClase() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  if (!profesor || !clase) {
+  if (loading) {
+    return (
+      <div className="py-5">
+        <Container>
+          <div className="d-flex justify-content-center">
+            <div className="spinner-border text-primary" role="status">
+              <span className="visually-hidden">Cargando...</span>
+            </div>
+          </div>
+        </Container>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="py-5">
+        <Container>
+          <div className="alert alert-danger">Error: {error}</div>
+        </Container>
+      </div>
+    );
+  }
+
+  if (!profesor || !curso) {
     return <div className="py-5">Cargando...</div>;
   }
 
@@ -129,8 +199,8 @@ function GestionClase() {
       <Container>
         <Row className="mb-4">
           <Col>
-            <h1>Gestión de {clase.nombre}</h1>
-            <p className="text-muted">Profesor: {profesor.nombre} | Sala: {clase.salon}</p>
+            <h1>Gestión de {curso.nombre || curso.name || curso.title}</h1>
+            <p className="text-muted">Profesor: {profesor.nombre} | Semestre: {curso.semester || "2024"}</p>
           </Col>
         </Row>
 
@@ -142,13 +212,14 @@ function GestionClase() {
                   <Tab eventKey="notas" title="Notas">
                     <ListGroup variant="flush">
                       {alumnosClase.map((alumno) => {
-                        const claseAlumno = alumno.clases.find((c) => c.id === clase.id);
+                        const claseAlumno = alumno.clases.find((c) => c.id === curso.id);
+                        const notas = claseAlumno?.notas || [];
                         return (
                           <ListGroup.Item key={alumno.id} className="d-flex justify-content-between align-items-center">
                             <div>
                               <strong>{alumno.nombre}</strong>
                               <div className="text-muted">
-                                Notas: {claseAlumno.notas.length} | Última: {claseAlumno.notas.length > 0 ? claseAlumno.notas[claseAlumno.notas.length - 1].puntaje : "Sin notas"}
+                                Notas: {notas.length} | Última: {notas.length > 0 ? notas[notas.length - 1].puntaje : "Sin notas"}
                               </div>
                             </div>
                             <Button variant="outline-primary" size="sm" onClick={() => handleEdit(alumno, "notas")}>
@@ -169,7 +240,7 @@ function GestionClase() {
                           <div>
                             <strong>{alumno.nombre}</strong>
                             <div className="text-muted">
-                              Asistencia actual: {alumno.clases.find((c) => c.id === clase.id).asistencia || 0}%
+                              Asistencia actual: {alumno.clases?.find((c) => c.id === curso.id)?.asistencia || 0}%
                             </div>
                           </div>
                           <div className="btn-group" role="group">

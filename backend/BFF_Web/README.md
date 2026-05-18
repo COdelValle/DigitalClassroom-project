@@ -6,16 +6,16 @@
 
 ---
 
-## 📋 Descripción
+## Descripcion
 
 El **BFF Web** es un microservicio en desarrollo que actuará como punto centralizado entre el Frontend y los demás microservicios. Su propósito es:
 
-- ✅ Agregar datos de múltiples microservicios
-- ✅ Transformar datos para el consumo del Frontend
-- ✅ Implementar lógica de negocio compleja
-- ✅ Cachear datos para mejorar rendimiento
-- ✅ Reducir la complejidad en el Frontend
-- ✅ Manejo centralizado de errores
+- Agregar datos de multiples microservicios
+- Transformar datos para el consumo del Frontend
+- Implementar logica de negocio compleja
+- Cachear datos para mejorar rendimiento
+- Reducir la complejidad en el Frontend
+- Manejo centralizado de errores
 
 **Stack Tecnológico**:
 - Spring Boot 4.0.6
@@ -26,7 +26,7 @@ El **BFF Web** es un microservicio en desarrollo que actuará como punto central
 
 ---
 
-## 🚀 Inicio Rápido
+## Inicio Rapido
 
 ### Requisitos
 
@@ -46,15 +46,15 @@ mvn clean install
 mvn spring-boot:run
 ```
 
-**Puerto por defecto**: `8085` (configurable)
+**Puerto por defecto**: `8080` (configurable)
 
 ### Base de Datos
 
-❌ Este microservicio **NO tiene base de datos** - solo consume APIs de otros servicios
+Este microservicio **NO tiene base de datos** - solo consume APIs de otros servicios
 
 ---
 
-## 📚 Documentación de la API
+## Documentacion de la API
 
 ### Swagger UI (cuando esté implementado)
 
@@ -126,7 +126,7 @@ public interface AssessmentClient {
 
 ---
 
-## 📋 Servicios Planificados
+## Servicios Planificados
 
 ### 1. DashboardService
 
@@ -167,7 +167,7 @@ public class DashboardService {
 
 ---
 
-## 📋 Endpoints Planificados
+## Endpoints Planificados
 
 **Fase 1 - Dashboards**:
 
@@ -199,7 +199,7 @@ ws://localhost:8085/api/v1/bff/notifications
 
 ---
 
-## ⚙️ Configuración
+## Configuracion
 
 ### application.properties
 
@@ -258,7 +258,7 @@ Retorna: Gateway error o caché
 
 ---
 
-## 📊 Caching (Planificado)
+## Caching (Planificado)
 
 ```java
 @Cacheable(value = "student-profiles", key = "#studentId")
@@ -279,7 +279,7 @@ public void clearCache() {
 
 ---
 
-## 🧪 Testing (Próximo)
+## Testing (Proximo)
 
 ```bash
 mvn test
@@ -314,7 +314,7 @@ mvn test
 
 ---
 
-## 📝 Ejemplo de Respuesta Esperada
+## Ejemplo de Respuesta Esperada
 
 ```json
 {
@@ -394,13 +394,13 @@ Para problemas durante el desarrollo:
 
 ---
 
-## 📋 Notas Importantes
+## Notas Importantes
 
 - ⚠️ Microservicio en desarrollo - funcionalidades limitadas
 - ⚠️ No tiene base de datos propia
-- ✅ Usa OpenFeign para comunicación
-- ✅ Circuit Breaker habilitado para todos los servicios
-- ✅ OAuth2 configurado pero no completamente habilitado
+- Usa OpenFeign para comunicacion
+- Circuit Breaker habilitado para todos los servicios
+- OAuth2 configurado pero no completamente habilitado
 
 ---
 

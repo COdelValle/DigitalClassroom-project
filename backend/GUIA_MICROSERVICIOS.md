@@ -1,4 +1,4 @@
-# 📚 Guía Completa - Digital Classroom Microservicios
+# Guía Completa - Digital Classroom Microservicios
 
 **Última actualización**: 16 de Mayo de 2026  
 **Versión**: 2.0  
@@ -6,7 +6,7 @@
 
 ---
 
-## 📖 Índice
+## Índice
 
 1. [Descripción General](#descripción-general)
 2. [Arquitectura del Sistema](#arquitectura-del-sistema)
@@ -32,11 +32,11 @@
 
 ### Características Principales
 
-✅ **Validación cruzada** entre microservicios con Circuit Breaker (Resilience4j)  
-✅ **API REST** con OpenAPI/Swagger documentada  
-✅ **Bases de datos independientes** (MariaDB)  
-✅ **Transaccionalidad** por microservicio  
-✅ **Testing configurado** en cada módulo  
+Validacion cruzada entre microservicios con Circuit Breaker (Resilience4j)
+API REST con OpenAPI/Swagger documentada
+Bases de datos independientes (MariaDB)
+Transaccionalidad por microservicio
+Testing configurado en cada modulo  
 
 ---
 
@@ -93,10 +93,10 @@
 **Ruta API**: `/api/v1/students`
 
 **Responsabilidades**:
-- ✅ Crear, leer, actualizar y eliminar estudiantes
-- ✅ Gestionar representantes legales
-- ✅ Registrar alergias y datos personales
-- ✅ Validar datos únicos (RUT chileno)
+- Crear, leer, actualizar y eliminar estudiantes
+- Gestionar representantes legales
+- Registrar alergias y datos personales
+- Validar datos unicos (RUT chileno)
 
 ---
 
@@ -186,12 +186,12 @@ Content-Type: application/json
 - `Location: /api/v1/students/1`
 
 **Validaciones**:
-- ❌ RUT inválido
-- ❌ RUT duplicado (ya existe)
-- ❌ Nombre vacío o < 2 caracteres
-- ❌ Fecha de nacimiento futura
-- ❌ Sin representantes legales
-- ❌ Representante sin RUT válido
+- RUT invalido
+- RUT duplicado (ya existe)
+- Nombre vacio o < 2 caracteres
+- Fecha de nacimiento futura
+- Sin representantes legales
+- Representante sin RUT valido
 
 **Casos de Uso**:
 - Matricular nuevo estudiante
@@ -427,10 +427,10 @@ true  o  false
 - `/api/v1/subjects` - Gestión de asignaturas
 
 **Responsabilidades**:
-- ✅ Crear y gestionar aulas
-- ✅ Crear y gestionar asignaturas
-- ✅ Vincular asignaturas a aulas con profesores
-- ✅ Validar existencia de estudiantes
+- Crear y gestionar aulas
+- Crear y gestionar asignaturas
+- Vincular asignaturas a aulas con profesores
+- Validar existencia de estudiantes
 
 ---
 
@@ -565,9 +565,9 @@ Content-Type: application/json
 ```
 
 **Validaciones**:
-- ❌ Nombre vacío
-- ❌ Nombre duplicado
-- ❌ Área vacía
+- Nombre vacio
+- Nombre duplicado
+- Area vacia
 
 ---
 
@@ -614,7 +614,7 @@ DELETE /api/v1/subjects/{id}
 
 **Response** (204 No Content)
 
-✅ Los cursos vinculados determinan si se puede eliminar
+Los cursos vinculados determinan si se puede eliminar
 
 ---
 
@@ -710,10 +710,10 @@ Content-Type: application/json
 ```
 
 **Validaciones** (consulta Student Manager):
-- ❌ Código vacío o duplicado
-- ❌ Nombre corto (< 3 caracteres)
-- ❌ Año < 2024
-- ❌ Estudiante inexistente (valida con Student Manager)
+- Codigo vacio o duplicado
+- Nombre corto (< 3 caracteres)
+- Ano < 2024
+- Estudiante inexistente (valida con Student Manager)
 
 ---
 
@@ -849,9 +849,9 @@ Content-Type: application/json
 ```
 
 **Validaciones**:
-- ❌ Asignatura inexistente
-- ❌ Aula inexistente
-- ❌ Combinación duplicada (misma asignatura, aula, año, semestre)
+- Asignatura inexistente
+- Aula inexistente
+- Combinacion duplicada (misma asignatura, aula, ano, semestre)
 
 ---
 
@@ -914,10 +914,10 @@ true  o  false
 - `/api/v1/grades` - Gestión de calificaciones
 
 **Responsabilidades**:
-- ✅ Crear y gestionar evaluaciones
-- ✅ Registrar y modificar calificaciones
-- ✅ Validar estudiantes (con Classroom Manager)
-- ✅ Validar cursos (con Assessment Manager)
+- Crear y gestionar evaluaciones
+- Registrar y modificar calificaciones
+- Validar estudiantes (con Classroom Manager)
+- Validar cursos (con Assessment Manager)
 
 ---
 
@@ -952,9 +952,9 @@ true  o  false
 ```
 
 **Validación de Puntaje (ChileanGrade)**:
-- ✅ Rango: 1.0 - 7.0
-- ✅ Acepta decimales (ej: 5.5)
-- ❌ Rechaza fuera de rango
+- Rango: 1.0 - 7.0
+- Acepta decimales (ej: 5.5)
+- Rechaza fuera de rango
 
 ---
 
@@ -1064,11 +1064,11 @@ Content-Type: application/json
 ```
 
 **Validaciones** (consulta otros microservicios):
-- ❌ Curso inexistente (consulta Classroom Manager)
-- ❌ Estudiante inexistente (consulta Student Manager)
-- ❌ Puntaje fuera de rango (1.0-7.0)
-- ❌ examDate vacío
-- ❌ Título vacío
+- Curso inexistente (consulta Classroom Manager)
+- Estudiante inexistente (consulta Student Manager)
+- Puntaje fuera de rango (1.0-7.0)
+- examDate vacio
+- Titulo vacio
 
 **Nota**: `grades` es OPCIONAL. Puedes crear sin calificaciones.
 
@@ -1101,8 +1101,8 @@ DELETE /api/v1/assessments/{id}
 ```
 
 **⚠️ Restricciones de Borrado**:
-- ❌ NO se puede eliminar si es del año actual Y tiene calificaciones
-- ❌ NO se puede eliminar si es de años anteriores (datos históricos)
+- NO se puede eliminar si es del ano actual Y tiene calificaciones
+- NO se puede eliminar si es de anos anteriores (datos historicos)
 
 **Response** (204 No Content) o (400 Bad Request)
 
@@ -1191,9 +1191,9 @@ Content-Type: application/json
 ```
 
 **Validaciones**:
-- ❌ Estudiante inexistente
-- ❌ Evaluación inexistente
-- ❌ Puntaje fuera de rango
+- Estudiante inexistente
+- Evaluacion inexistente
+- Puntaje fuera de rango
 
 **Nota**: La `registrationDate` se genera automáticamente
 
@@ -1228,7 +1228,7 @@ DELETE /api/v1/grades/{id}
 ```
 
 **⚠️ Restricción**:
-- ❌ NO se puede eliminar si es de años académicos anteriores
+- NO se puede eliminar si es de anos academicos anteriores
 
 **Response** (204 No Content)
 
@@ -1859,11 +1859,11 @@ Puedes ver la documentación interactiva en:
 
 ## Mejores Prácticas
 
-✅ **Valida siempre** antes de crear recursos  
-✅ **Usa filtros** en búsquedas (no traer todo)  
-✅ **Maneja errores** apropiadamente en Frontend  
-✅ **Cachea datos** que no cambian frecuente  
-✅ **Implementa debounce** en búsquedas en tiempo real  
+Valida siempre antes de crear recursos  
+Usa filtros en busquedas (no traer todo)  
+Maneja errores apropiadamente en Frontend  
+Cachea datos que no cambian frecuente  
+Implementa debounce en busquedas en tiempo real  
 
 ---
 

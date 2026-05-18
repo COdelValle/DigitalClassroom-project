@@ -6,7 +6,7 @@
 
 ---
 
-## 📖 Índice
+## Indice
 
 1. [Configuración Inicial](#configuración-inicial)
 2. [Cliente HTTP](#cliente-http)
@@ -770,7 +770,7 @@ export function ErrorBoundary({ children }) {
 
 ## Best Practices
 
-### ✅ DO's
+### DO's
 
 ```javascript
 // 1. Usar hooks personalizados para lógica reutilizable
@@ -799,30 +799,30 @@ try {
 }
 ```
 
-### ❌ DON'Ts
+### DON'Ts
 
 ```javascript
 // NO: Hacerlo directamente en el componente sin hook
 const [students, setStudents] = useState([]);
 useEffect(() => {
-  axios.get('/students').then(...) // ❌ Evitar
+  axios.get('/students').then(...) // Evitar
 }, []);
 
 // NO: Ignorar errores
 try {
   await api.call();
-} catch (err) {} // ❌ NUNCA
+} catch (err) {} // NUNCA
 
 // NO: Traer TODOS los datos sin filtros
-GET /api/v1/students  // ❌ Mejor con paginación
+GET /api/v1/students  // Mejor con paginacion
 
 // NO: Múltiples llamadas simultáneas sin control
 Promise.all([
-  api1(), api2(), api3(), api4(), api5() // ❌ Puede saturar
+  api1(), api2(), api3(), api4(), api5() // Puede saturar
 ])
 
 // NO: Secrets en el código
-const token = 'abc123xyz'; // ❌ Usar variables de entorno
+const token = 'abc123xyz'; // Usar variables de entorno
 ```
 
 ---
