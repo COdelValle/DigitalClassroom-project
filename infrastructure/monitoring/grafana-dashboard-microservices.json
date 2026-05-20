@@ -1,0 +1,65 @@
+{
+  "dashboard": {
+    "title": "Digital Classroom - Microservicios Overview",
+    "description": "Monitoreo de todos los microservicios de Digital Classroom",
+    "tags": ["microservices", "spring-boot", "production"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "title": "Estado de Servicios (HTTP 200)",
+        "targets": [
+          {
+            "expr": "up{job=~\"assessment-manager|student-manager|classroom-manager|bff-web\"}"
+          }
+        ],
+        "type": "stat",
+        "unit": "short"
+      },
+      {
+        "title": "Tiempo de Respuesta (ms)",
+        "targets": [
+          {
+            "expr": "http_server_requests_seconds_max{service=~\".*\"} * 1000"
+          }
+        ],
+        "type": "graph"
+      },
+      {
+        "title": "Errores por Servicio (últimas 5 min)",
+        "targets": [
+          {
+            "expr": "increase(http_server_requests_seconds_count{status=~\"5..\"}[5m])"
+          }
+        ],
+        "type": "graph"
+      },
+      {
+        "title": "Throughput (Peticiones/min)",
+        "targets": [
+          {
+            "expr": "rate(http_server_requests_seconds_count[1m])"
+          }
+        ],
+        "type": "graph"
+      },
+      {
+        "title": "Uso de Memoria (MB)",
+        "targets": [
+          {
+            "expr": "jvm_memory_used_bytes{area=\"heap\"} / 1024 / 1024"
+          }
+        ],
+        "type": "graph"
+      },
+      {
+        "title": "Conexiones BD - Assessment Manager",
+        "targets": [
+          {
+            "expr": "hikaricp_connections_active{job=\"assessment-manager\"}"
+          }
+        ],
+        "type": "stat"
+      }
+    ]
+  }
+}

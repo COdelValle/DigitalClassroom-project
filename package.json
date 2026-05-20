@@ -1,0 +1,22 @@
+{
+  "name": "digital-classroom",
+  "version": "1.0.0",
+  "description": "Plataforma de libro de clases digital - Digital Classroom Project",
+  "private": true,
+  "scripts": {
+    "frontend:dev": "cd frontend && npm run dev",
+    "frontend:build": "cd frontend && npm run build",
+    "frontend:test": "cd frontend && npm run test"
+  },
+  "keywords": [
+    "digital-classroom",
+    "education",
+    "management"
+  ],
+  "author": "Digital Classroom Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tu-organizacion/DigitalClassroom-project.git"
+  }
+}

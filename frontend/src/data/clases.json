@@ -1,0 +1,10 @@
+[
+  { "id": 1, "nombre": "Matemáticas", "profesor": "María González", "salon": "A101" },
+  { "id": 2, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B102" },
+  { "id": 3, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C201" },
+  { "id": 4, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B203" },
+  { "id": 5, "nombre": "Ciencias", "profesor": "Ana Torres", "salon": "C102" },
+  { "id": 6, "nombre": "Educación Física", "profesor": "Jorge Paredes", "salon": "G101" },
+  { "id": 7, "nombre": "Artes", "profesor": "Sofía Blanco", "salon": "D104" },
+  { "id": 8, "nombre": "Tecnología", "profesor": "Luis Gómez", "salon": "E202" }
+]

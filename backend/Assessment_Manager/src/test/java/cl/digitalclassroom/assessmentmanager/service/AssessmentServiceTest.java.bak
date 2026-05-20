@@ -1,0 +1,140 @@
+package cl.digitalclassroom.assessmentmanager.service;
+
+import cl.digitalclassroom.assessmentmanager.model.Assessment;
+import cl.digitalclassroom.assessmentmanager.model.dto.request.AssessmentRequestDTO;
+import cl.digitalclassroom.assessmentmanager.model.dto.response.AssessmentResponseDTO;
+import cl.digitalclassroom.assessmentmanager.repository.AssessmentRepository;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+/**
+ * Tests para AssessmentService
+ */
+@ExtendWith(MockitoExtension.class)
+class AssessmentServiceTest {
+
+    @Mock
+    private AssessmentRepository assessmentRepository;
+
+    @InjectMocks
+    private AssessmentService assessmentService;
+
+    private Assessment assessment;
+    private AssessmentRequestDTO requestDTO;
+
+    @BeforeEach
+    void setUp() {
+        // Crear datos de prueba
+        assessment = new Assessment();
+        assessment.setId(1L);
+        assessment.setTitle("Examen de Matemáticas");
+        assessment.setCourseId(101L);
+        assessment.setExamDate(LocalDate.now());
+        assessment.setIsGraded(false);
+
+        requestDTO = new AssessmentRequestDTO();
+        requestDTO.setTitle("Nuevo Examen");
+        requestDTO.setCourseId(102L);
+        requestDTO.setExamDate(LocalDate.now());
+    }
+
+    @Test
+    void testGetAssessmentById() {
+        // Arrange
+        when(assessmentRepository.findById(1L)).thenReturn(Optional.of(assessment));
+
+        // Act
+        Assessment result = assessmentService.getAssessmentById(1L);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals("Examen de Matemáticas", result.getTitle());
+        assertEquals(101L, result.getCourseId());
+        verify(assessmentRepository, times(1)).findById(1L);
+    }
+
+    @Test
+    void testGetAllAssessments() {
+        // Arrange
+        List<Assessment> assessments = Arrays.asList(assessment);
+        when(assessmentRepository.findAll()).thenReturn(assessments);
+
+        // Act
+        List<Assessment> result = assessmentService.getAllAssessments();
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        verify(assessmentRepository, times(1)).findAll();
+    }
+
+    @Test
+    void testCreateAssessment() {
+        // Arrange
+        Assessment newAssessment = new Assessment();
+        newAssessment.setTitle(requestDTO.getTitle());
+        newAssessment.setCourseId(requestDTO.getCourseId());
+        newAssessment.setExamDate(requestDTO.getExamDate());
+        newAssessment.setIsGraded(false);
+
+        when(assessmentRepository.save(any(Assessment.class))).thenReturn(newAssessment);
+
+        // Act
+        Assessment result = assessmentService.createAssessment(requestDTO);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals("Nuevo Examen", result.getTitle());
+        verify(assessmentRepository, times(1)).save(any(Assessment.class));
+    }
+
+    @Test
+    void testUpdateAssessment() {
+        // Arrange
+        when(assessmentRepository.findById(1L)).thenReturn(Optional.of(assessment));
+        when(assessmentRepository.save(any(Assessment.class))).thenReturn(assessment);
+
+        // Act
+        Assessment result = assessmentService.updateAssessment(1L, requestDTO);
+
+        // Assert
+        assertNotNull(result);
+        verify(assessmentRepository, times(1)).findById(1L);
+        verify(assessmentRepository, times(1)).save(any(Assessment.class));
+    }
+
+    @Test
+    void testDeleteAssessment() {
+        // Arrange
+        when(assessmentRepository.existsById(1L)).thenReturn(true);
+
+        // Act
+        assessmentService.deleteAssessment(1L);
+
+        // Assert
+        verify(assessmentRepository, times(1)).deleteById(1L);
+    }
+
+    @Test
+    void testGetAssessmentByIdNotFound() {
+        // Arrange
+        when(assessmentRepository.findById(999L)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            assessmentService.getAssessmentById(999L);
+        });
+    }
+}
