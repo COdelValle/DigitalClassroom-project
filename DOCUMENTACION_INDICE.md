@@ -22,10 +22,8 @@ bash start-fase2.sh
 
 O manualmente:
 ```bash
-docker-compose -f docker-compose-fase2.yml up -d
+docker-compose up -d
 ```
-
-**Leer**: [FASE_2_README.md](./FASE_2_README.md)
 
 ---
 
