@@ -1,52 +1,377 @@
-# Assessment Manager Microservicio
+# Assessment Manager - Microservicio de Evaluaciones
 
 **Versión**: 1.0.0  
-**Último actualizado**: 16 de Mayo de 2026  
-**Estado**: Produccion
+**Último actualizado**: 19 de mayo de 2026  
+**Estado**: Producción  
+**Puerto**: 8083
 
 ---
 
-## Descripcion
+## 📋 Descripción
 
-El **Assessment Manager** gestiona evaluaciones y calificaciones en el sistema. Es responsable de todo lo relacionado con pruebas, tareas y notas de los estudiantes.
+El **Assessment Manager** es responsable de la gestión completa de evaluaciones y calificaciones en el sistema DigitalClassroom. Implementa la lógica de negocio educativa para registrar, validar y almacenar toda la información académica de evaluaciones de estudiantes.
 
-**Responsabilidades**:
-- Crear y gestionar evaluaciones (encargos)
-- Registrar y modificar calificaciones (notas)
-- Validar estudiantes y cursos
-- Implementar reglas de negocio educativo
-- Proteger datos historicos
+### Responsabilidades Principales
 
-**Stack Tecnológico**:
-- Spring Boot 4.0.6
-- Spring Data JPA + Specifications
-- MariaDB
-- Feign Client (validar con otros servicios)
-- Resilience4j Circuit Breaker
-- Jakarta Validation
-- OpenAPI/Swagger
+- ✅ Crear y gestionar evaluaciones (encargos, tareas, pruebas)
+- ✅ Registrar y modificar calificaciones (notas)
+- ✅ Validar estudiantes y cursos antes de registrar calificaciones
+- ✅ Implementar reglas de negocio educativo
+- ✅ Proteger integridad de datos históricos
+- ✅ Comunicación con otros microservicios mediante Feign Client
+- ✅ Resiliencia ante fallos con Circuit Breaker
+
+### Stack Tecnológico
+
+| Componente | Versión | Propósito |
+|-----------|---------|----------|
+| **Spring Boot** | 4.0.6 | Framework principal |
+| **Spring Data JPA** | - | ORM y persistencia |
+| **Spring Specifications** | - | Consultas dinámicas |
+| **MariaDB** | 10.5+ | Base de datos |
+| **Feign Client** | - | Cliente HTTP declarativo |
+| **Resilience4j** | - | Circuit Breaker y resiliencia |
+| **Jakarta Validation** | - | Validación de datos |
+| **OpenAPI/Swagger** | 3.0 | Documentación de API |
 
 ---
 
-## Inicio Rapido
+## 🔧 Requisitos Previos
 
-### Requisitos
+- **Java**: 21 o superior
+- **Maven**: 3.8 o superior
+- **MariaDB**: 10.5 o superior
+- **Git**: Para control de versiones
 
-- Java 21+
-- MariaDB 10.5+
-- Maven 3.8+
-
-### Instalación
+### Verificar Versiones
 
 ```bash
-cd backend/Assessment_Manager
+java -version
+mvn -v
+mariadb --version
+```
 
-# Compilar
-mvn clean install
+---
 
-# Ejecutar
+## 📦 Instalación
+
+### 1. Clonar el Repositorio
+
+```bash
+git clone https://github.com/usuario/DigitalClassroom-project.git
+cd DigitalClassroom-project/backend/Assessment_Manager
+```
+
+### 2. Configurar la Base de Datos
+
+**Crear base de datos y usuario:**
+
+```sql
+CREATE DATABASE assessment_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER 'assessment_user'@'localhost' IDENTIFIED BY 'assessment_password';
+GRANT ALL PRIVILEGES ON assessment_db.* TO 'assessment_user'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+### 3. Configurar Propiedades de la Aplicación
+
+Editar `src/main/resources/application.yml`:
+
+```yaml
+spring:
+  application:
+    name: assessment-manager
+  datasource:
+    url: jdbc:mariadb://localhost:3306/assessment_db
+    username: assessment_user
+    password: assessment_password
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 8083
+  servlet:
+    context-path: /api/v1
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      classroom-service:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 5s
+        failureRateThreshold: 50
+
+logging:
+  level:
+    root: INFO
+    com.classroom: DEBUG
+```
+
+### 4. Compilar e Instalar Dependencias
+
+```bash
+# Limpiar builds anteriores
+mvn clean
+
+# Compilar y ejecutar tests
+mvn install
+
+# Solo compilar (sin tests)
+mvn install -DskipTests
+```
+
+---
+
+## 🚀 Ejecución
+
+### Opción 1: Maven Spring Boot Plugin
+
+```bash
 mvn spring-boot:run
 ```
+
+**Salida esperada:**
+```
+...
+2026-05-19 10:30:15.123  INFO 12345 --- [main] c.classroom.AssessmentApplication       : Started AssessmentApplication in 8.234 seconds
+2026-05-19 10:30:15.234  INFO 12345 --- [main] c.classroom.AssessmentApplication       : Server started on port 8083
+```
+
+### Opción 2: Ejecutar JAR Compilado
+
+```bash
+mvn clean package
+
+# Ejecutar el JAR
+java -jar target/assessment-manager-1.0.0.jar
+```
+
+### Opción 3: Docker
+
+```bash
+docker build -t assessment-manager:1.0.0 .
+
+docker run -d \
+  --name assessment-manager \
+  -p 8083:8083 \
+  -e SPRING_DATASOURCE_URL=jdbc:mariadb://mariadb:3306/assessment_db \
+  -e SPRING_DATASOURCE_USERNAME=assessment_user \
+  -e SPRING_DATASOURCE_PASSWORD=assessment_password \
+  --link mariadb:mariadb \
+  assessment-manager:1.0.0
+```
+
+---
+
+## 🧪 Testing
+
+### Ejecutar Todos los Tests
+
+```bash
+mvn test
+```
+
+### Ejecutar Tests de Clase Específica
+
+```bash
+mvn test -Dtest=AssessmentServiceTest
+```
+
+### Ejecutar Tests con Cobertura
+
+```bash
+mvn clean test jacoco:report
+# Reporte en: target/site/jacoco/index.html
+```
+
+### Tests Disponibles
+
+- **Unit Tests**: `src/test/java/com/classroom/service/`
+- **Integration Tests**: `src/test/java/com/classroom/integration/`
+- **Controller Tests**: `src/test/java/com/classroom/controller/`
+
+---
+
+## 📚 API Documentation
+
+Una vez que la aplicación está corriendo, accede a la documentación interactiva:
+
+**Swagger UI**: http://localhost:8083/api/v1/swagger-ui.html
+
+**OpenAPI JSON**: http://localhost:8083/api/v1/v3/api-docs
+
+### Endpoints Principales
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| GET | `/assessments` | Obtener todas las evaluaciones |
+| POST | `/assessments` | Crear nueva evaluación |
+| GET | `/assessments/{id}` | Obtener evaluación por ID |
+| PUT | `/assessments/{id}` | Actualizar evaluación |
+| DELETE | `/assessments/{id}` | Eliminar evaluación |
+| POST | `/grades` | Registrar calificación |
+| GET | `/grades/student/{studentId}` | Obtener calificaciones del estudiante |
+| GET | `/grades/assessment/{assessmentId}` | Obtener calificaciones de evaluación |
+
+---
+
+## 🔍 Verificar Salud del Servicio
+
+```bash
+curl http://localhost:8083/api/v1/actuator/health
+```
+
+**Respuesta esperada:**
+```json
+{
+  "status": "UP",
+  "components": {
+    "db": {"status": "UP"},
+    "circuitBreakers": {"status": "UP"}
+  }
+}
+```
+
+---
+
+## 🐛 Solución de Problemas
+
+### Error: Puerto 8083 ya está en uso
+
+```bash
+# En Windows
+netstat -ano | findstr :8083
+taskkill /PID <PID> /F
+
+# En macOS/Linux
+lsof -i :8083
+kill -9 <PID>
+```
+
+### Error: Conexión a Base de Datos Rechazada
+
+1. Verificar que MariaDB está corriendo:
+   ```bash
+   # En Windows
+   Get-Service | Where-Object {$_.Name -like "*mariadb*"} | Start-Service
+   ```
+
+2. Verificar credenciales en `application.yml`
+
+3. Verificar puerto MariaDB (por defecto 3306):
+   ```bash
+   mysql -h localhost -u assessment_user -p assessment_db
+   ```
+
+### Error: Compilación Fallida
+
+```bash
+# Limpiar y reconstruir
+mvn clean install -U
+
+# Reconstruir índices de dependencias
+mvn dependency:resolve -U
+```
+
+---
+
+## 📖 Estructura del Proyecto
+
+```
+Assessment_Manager/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/classroom/
+│   │   │       ├── controller/     # Controladores REST
+│   │   │       ├── service/        # Lógica de negocio
+│   │   │       ├── repository/     # Acceso a datos
+│   │   │       ├── entity/         # Entidades JPA
+│   │   │       ├── dto/            # Data Transfer Objects
+│   │   │       ├── exception/      # Manejo de excepciones
+│   │   │       └── config/         # Configuración
+│   │   └── resources/
+│   │       ├── application.yml     # Configuración principal
+│   │       └── db/                 # Scripts SQL
+│   └── test/
+│       └── java/                   # Tests unitarios e integración
+├── pom.xml                          # Configuración Maven
+├── Dockerfile                       # Configuración Docker
+└── README.md                        # Este archivo
+```
+
+---
+
+## 🔐 Seguridad
+
+- ✅ Validación de entrada en todos los endpoints
+- ✅ Manejo seguro de excepciones sin exponer información sensible
+- ✅ Circuit Breaker para proteger de servicios degradados
+- ✅ Timeouts configurables para evitar bloqueos
+- ✅ Logging seguro sin datos sensibles
+
+---
+
+## 📝 Variables de Entorno
+
+```bash
+# Base de datos
+SPRING_DATASOURCE_URL=jdbc:mariadb://localhost:3306/assessment_db
+SPRING_DATASOURCE_USERNAME=assessment_user
+SPRING_DATASOURCE_PASSWORD=assessment_password
+
+# Aplicación
+SERVER_PORT=8083
+SPRING_PROFILES_ACTIVE=production
+
+# Otros microservicios
+CLASSROOM_SERVICE_URL=http://localhost:8082
+STUDENT_SERVICE_URL=http://localhost:8081
+```
+
+---
+
+## 🤝 Contribuir
+
+1. Crear rama siguiendo GitFlow: `feature/nombre-feature`
+2. Hacer commit con mensajes descriptivos
+3. Ejecutar tests antes de push
+4. Crear Pull Request hacia `develop`
+5. Esperar revisión antes de merge
+
+---
+
+## 📄 Licencia
+
+Este proyecto es parte de DigitalClassroom y está bajo licencia educativa.
+
+---
+
+## 👥 Soporte
+
+Para problemas o preguntas:
+1. Revisar los logs: `tail -f target/app.log`
+2. Consultar documentación de endpoints: `/api/v1/swagger-ui.html`
+3. Contactar al equipo de desarrollo
+
+**Última verificación**: 19 de mayo de 2026 ✓
 
 **Puerto por defecto**: `8083`
 
