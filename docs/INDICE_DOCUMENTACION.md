@@ -15,7 +15,7 @@ Este archivo te ayuda a navegar toda la documentación del proyecto DigitalClass
 
 ### 🟢 Nivel 1: Empezar Aquí (Nuevos Miembros)
 
-**1. [README.md](README.md)**
+**1. [README.md](../README.md)**
 - Descripción general del proyecto
 - Arquitectura de alto nivel
 - Inicio rápido
@@ -57,12 +57,12 @@ Este archivo te ayuda a navegar toda la documentación del proyecto DigitalClass
 - 5,500+ líneas
 
 **6. Backend READMEs** (en `backend/*/`)
-- [Assessment Manager](backend/Assessment_Manager/README.md) ✓ COMPLETO
-- [Student Manager](backend/Student_Manager/README.md) ⏳ TEMPLATE
-- [Classroom Manager](backend/Classroom_Manager/README.md) ⏳ TEMPLATE
-- [BFF Web](backend/BFF_Web/README.md) ⏳ TEMPLATE
+- [Assessment Manager](../backend/Assessment_Manager/README.md) ✓ COMPLETO
+- [Student Manager](../backend/Student_Manager/README.md) ⏳ TEMPLATE
+- [Classroom Manager](../backend/Classroom_Manager/README.md) ⏳ TEMPLATE
+- [BFF Web](../backend/BFF_Web/README.md) ⏳ TEMPLATE
 
-**7. [Frontend README](frontend/README.md)**
+**7. [Frontend README](../frontend/README.md)**
 - Setup de React + Vite
 - Comandos principales
 - Integración con backend
@@ -75,30 +75,30 @@ Este archivo te ayuda a navegar toda la documentación del proyecto DigitalClass
 ### Backend
 
 #### Assessment Manager (Evaluaciones)
-- 📖 [README Completo](backend/Assessment_Manager/README.md)
+- 📖 [README Completo](../backend/Assessment_Manager/README.md)
 - 📍 Puerto: 8083
 - 🔄 Gestión de evaluaciones y calificaciones
 - ✅ Installación, ejecución, testing, troubleshooting
 
 #### Student Manager (Estudiantes)
-- 📖 [README](backend/Student_Manager/README.md)
+- 📖 [README](../backend/Student_Manager/README.md)
 - 📍 Puerto: 8081
 - 🔄 Gestión de información de estudiantes
 
 #### Classroom Manager (Aulas)
-- 📖 [README](backend/Classroom_Manager/README.md)
+- 📖 [README](../backend/Classroom_Manager/README.md)
 - 📍 Puerto: 8082
 - 🔄 Gestión de clases y horarios
 
 #### BFF Web (Backend For Frontend)
-- 📖 [README](backend/BFF_Web/README.md)
+- 📖 [README](../backend/BFF_Web/README.md)
 - 📍 Puerto: 8080
 - 🔄 Orquestación de servicios
 
 ### Frontend
 
 #### React + Vite
-- 📖 [README](frontend/README.md)
+- 📖 [README](../frontend/README.md)
 - 📍 Puerto: 5173
 - 🔄 Interfaz de usuario
 
@@ -118,12 +118,12 @@ Este archivo te ayuda a navegar toda la documentación del proyecto DigitalClass
    - Sección: "12 Pasos Detallados"
    - Usar ejemplos de código
 
-2. Referencia: [Assessment Manager README](backend/Assessment_Manager/README.md)
+2. Referencia: [Assessment Manager README](../backend/Assessment_Manager/README.md)
    - Como plantilla de README
 
 ### "Quiero empezar a desarrollar"
 
-1. Leer: [README.md](README.md)
+1. Leer: [README.md](../README.md)
    - Inicio Rápido
 
 2. Leer: [PLAN_BRANCHING_GITFLOW.md](PLAN_BRANCHING_GITFLOW.md)
@@ -134,16 +134,16 @@ Este archivo te ayuda a navegar toda la documentación del proyecto DigitalClass
 
 ### "Quiero ejecutar todo localmente"
 
-1. Seguir: [README.md](README.md)
+1. Seguir: [README.md](../README.md)
    - Sección: "Inicio Rápido"
 
 2. Referencias de cada servicio:
-   - [Assessment Manager](backend/Assessment_Manager/README.md)
-   - [Frontend](frontend/README.md)
+   - [Assessment Manager](../backend/Assessment_Manager/README.md)
+   - [Frontend](../frontend/README.md)
 
 ### "Tengo un bug, ¿dónde reporto?"
 
-1. Ver: [README del servicio específico](backend/Assessment_Manager/README.md)
+1. Ver: [README del servicio específico](../backend/Assessment_Manager/README.md)
    - Sección: "Solución de Problemas"
 
 2. Si es sobre procesos:
@@ -326,32 +326,32 @@ DigitalClassroom-project/
 ## 🎓 Para Diferentes Roles
 
 ### Developer Backend
-1. [README.md](README.md) - Overview
+1. [README.md](../README.md) - Overview
 2. [PLAN_BRANCHING_GITFLOW.md](PLAN_BRANCHING_GITFLOW.md) - Git workflow
-3. [backend/Assessment_Manager/README.md](backend/Assessment_Manager/README.md) - Tu servicio
+3. [backend/Assessment_Manager/README.md](../backend/Assessment_Manager/README.md) - Tu servicio
 4. [PATRONES_Y_ARQUETIPOS.md](PATRONES_Y_ARQUETIPOS.md) - Arquitectura
 
 ### Developer Frontend
-1. [README.md](README.md) - Overview
+1. [README.md](../README.md) - Overview
 2. [PLAN_BRANCHING_GITFLOW.md](PLAN_BRANCHING_GITFLOW.md) - Git workflow
-3. [frontend/README.md](frontend/README.md) - Tu componente
-4. [backend/BFF_Web/README.md](backend/BFF_Web/README.md) - API a usar
+3. [frontend/README.md](../frontend/README.md) - Tu componente
+4. [backend/BFF_Web/README.md](../backend/BFF_Web/README.md) - API a usar
 
 ### Architect/Tech Lead
 1. [PATRONES_Y_ARQUETIPOS.md](PATRONES_Y_ARQUETIPOS.md) - Core
-2. [README.md](README.md) - Overview
+2. [README.md](../README.md) - Overview
 3. [GUIA_ARQUETIPOS.md](GUIA_ARQUETIPOS.md) - Extensibilidad
 
 ### Project Manager
-1. [README.md](README.md) - Overview
+1. [README.md](../README.md) - Overview
 2. [PLAN_BRANCHING_GITFLOW.md](PLAN_BRANCHING_GITFLOW.md) - Timeline/process
 3. [RESUMEN_EJECUTIVO.md](RESUMEN_EJECUTIVO.md) - Metrics
 
 ### New Member
-1. [README.md](README.md) - Start here
+1. [README.md](../README.md) - Start here
 2. [PATRONES_Y_ARQUETIPOS.md](PATRONES_Y_ARQUETIPOS.md) - Why it's this way
 3. [PLAN_BRANCHING_GITFLOW.md](PLAN_BRANCHING_GITFLOW.md) - How we work
-4. [Specific README](backend/Assessment_Manager/README.md) - Your component
+4. [Specific README](../backend/Assessment_Manager/README.md) - Your component
 
 ---
 
@@ -377,7 +377,7 @@ Nivel 3 (Según Tarea):
 ## 🔗 Enlaces Rápidos
 
 ### 🌍 Principales
-- [README Principal](README.md) o [Alternativa](README_NUEVO.md)
+- [README Principal](../README.md) o [Alternativa](README_NUEVO.md)
 - [Resumen Ejecutivo](RESUMEN_EJECUTIVO.md)
 
 ### 🏗️ Arquitectura
@@ -388,13 +388,13 @@ Nivel 3 (Según Tarea):
 - [Plan de Branching GitFlow](PLAN_BRANCHING_GITFLOW.md)
 
 ### 🔧 Backend Services
-- [Assessment Manager](backend/Assessment_Manager/README.md)
-- [Student Manager](backend/Student_Manager/README.md)
-- [Classroom Manager](backend/Classroom_Manager/README.md)
-- [BFF Web](backend/BFF_Web/README.md)
+- [Assessment Manager](../backend/Assessment_Manager/README.md)
+- [Student Manager](../backend/Student_Manager/README.md)
+- [Classroom Manager](../backend/Classroom_Manager/README.md)
+- [BFF Web](../backend/BFF_Web/README.md)
 
 ### 💻 Frontend
-- [Frontend React](frontend/README.md)
+- [Frontend React](../frontend/README.md)
 
 ### 📊 Status
 - [Documentación Completada](DOCUMENTACION_COMPLETADA.md)
