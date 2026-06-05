@@ -228,7 +228,7 @@ curl -X POST http://localhost:8081/api/v1/students \
     "birthDate": "2008-03-15",
     "allergies": ["Maní"],
     "legalRepresentatives": [{
-      "rut": "12.345.678-9",
+      "rut": "11.920.072-5",
       "fullName": "María García",
       "email": "maria@example.com",
       "phoneNumber": ["+56912345678"],

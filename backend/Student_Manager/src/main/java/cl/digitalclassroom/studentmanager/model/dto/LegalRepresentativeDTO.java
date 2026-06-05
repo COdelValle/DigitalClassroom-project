@@ -20,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @Embeddable
 public class LegalRepresentativeDTO {
-    @Schema(example = "12.345.678-9")
+    @Schema(example = "11.920.072-5")
     @NotBlank(message = "El RUT del representante no puede esta vacio")
     @NotNull(message = "El RUT del representante es obligatorio")
     @RUT(message = "RUT no valido")
