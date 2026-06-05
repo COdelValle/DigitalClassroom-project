@@ -1,0 +1,127 @@
+package cl.digitalclassroom.studentmanager.service;
+
+import cl.digitalclassroom.studentmanager.model.Student;
+import cl.digitalclassroom.studentmanager.model.dto.request.StudentRequestDTO;
+import cl.digitalclassroom.studentmanager.repository.StudentRepository;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+/**
+ * Tests para StudentService
+ */
+@ExtendWith(MockitoExtension.class)
+class StudentServiceTest {
+
+    @Mock
+    private StudentRepository studentRepository;
+
+    @InjectMocks
+    private StudentService studentService;
+
+    private Student student;
+    private StudentRequestDTO requestDTO;
+
+    @BeforeEach
+    void setUp() {
+        student = new Student();
+        student.setId(1L);
+        student.setFirstName("Juan");
+        student.setLastName("Pérez");
+        student.setEmail("juan.perez@example.com");
+        student.setRut("12345678-9");
+
+        requestDTO = new StudentRequestDTO();
+        requestDTO.setFirstName("Carlos");
+        requestDTO.setLastName("García");
+        requestDTO.setEmail("carlos.garcia@example.com");
+        requestDTO.setRut("87654321-0");
+    }
+
+    @Test
+    void testGetStudentById() {
+        // Arrange
+        when(studentRepository.findById(1L)).thenReturn(Optional.of(student));
+
+        // Act
+        Student result = studentService.getStudentById(1L);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals("Juan", result.getFirstName());
+        assertEquals("juan.perez@example.com", result.getEmail());
+        verify(studentRepository, times(1)).findById(1L);
+    }
+
+    @Test
+    void testGetAllStudents() {
+        // Arrange
+        List<Student> students = Arrays.asList(student);
+        when(studentRepository.findAll()).thenReturn(students);
+
+        // Act
+        List<Student> result = studentService.getAllStudents();
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        verify(studentRepository, times(1)).findAll();
+    }
+
+    @Test
+    void testCreateStudent() {
+        // Arrange
+        Student newStudent = new Student();
+        newStudent.setFirstName(requestDTO.getFirstName());
+        newStudent.setLastName(requestDTO.getLastName());
+        newStudent.setEmail(requestDTO.getEmail());
+        newStudent.setRut(requestDTO.getRut());
+
+        when(studentRepository.save(any(Student.class))).thenReturn(newStudent);
+
+        // Act
+        Student result = studentService.createStudent(requestDTO);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals("Carlos", result.getFirstName());
+        verify(studentRepository, times(1)).save(any(Student.class));
+    }
+
+    @Test
+    void testUpdateStudent() {
+        // Arrange
+        when(studentRepository.findById(1L)).thenReturn(Optional.of(student));
+        when(studentRepository.save(any(Student.class))).thenReturn(student);
+
+        // Act
+        Student result = studentService.updateStudent(1L, requestDTO);
+
+        // Assert
+        assertNotNull(result);
+        verify(studentRepository, times(1)).findById(1L);
+        verify(studentRepository, times(1)).save(any(Student.class));
+    }
+
+    @Test
+    void testDeleteStudent() {
+        // Arrange
+        when(studentRepository.existsById(1L)).thenReturn(true);
+
+        // Act
+        studentService.deleteStudent(1L);
+
+        // Assert
+        verify(studentRepository, times(1)).deleteById(1L);
+    }
+}

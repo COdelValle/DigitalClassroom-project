@@ -1,0 +1,88 @@
+package cl.digitalclassroom.assessmentmanager.security;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Tests para JwtTokenProvider
+ */
+@SpringBootTest
+class JwtTokenProviderTest {
+
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
+
+    private String testToken;
+
+    @BeforeEach
+    void setUp() {
+        // Generar un token de prueba
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("role", "ADMIN");
+        testToken = jwtTokenProvider.generateToken("testuser", claims);
+    }
+
+    @Test
+    void testGenerateToken() {
+        // Act
+        String token = jwtTokenProvider.generateToken("user1", "USER");
+
+        // Assert
+        assertNotNull(token);
+        assertFalse(token.isEmpty());
+    }
+
+    @Test
+    void testValidateToken() {
+        // Act
+        boolean isValid = jwtTokenProvider.validateToken(testToken);
+
+        // Assert
+        assertTrue(isValid);
+    }
+
+    @Test
+    void testGetUsernameFromToken() {
+        // Act
+        String username = jwtTokenProvider.getUsernameFromToken(testToken);
+
+        // Assert
+        assertEquals("testuser", username);
+    }
+
+    @Test
+    void testGetRoleFromToken() {
+        // Act
+        String role = jwtTokenProvider.getRoleFromToken(testToken);
+
+        // Assert
+        assertEquals("ADMIN", role);
+    }
+
+    @Test
+    void testValidateInvalidToken() {
+        // Act
+        boolean isValid = jwtTokenProvider.validateToken("invalid.token.here");
+
+        // Assert
+        assertFalse(isValid);
+    }
+
+    @Test
+    void testTokenWithDifferentRoles() {
+        // Arrange
+        String adminToken = jwtTokenProvider.generateToken("admin", "ADMIN");
+        String userToken = jwtTokenProvider.generateToken("user", "USER");
+
+        // Act & Assert
+        assertEquals("ADMIN", jwtTokenProvider.getRoleFromToken(adminToken));
+        assertEquals("USER", jwtTokenProvider.getRoleFromToken(userToken));
+    }
+}

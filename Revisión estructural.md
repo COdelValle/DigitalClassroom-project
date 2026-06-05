@@ -1,20 +1,20 @@
-# 📋 REVISIÓN ESTRUCTURAL - DigitalClassroom-project
+# REVISION ESTRUCTURAL - DigitalClassroom-project
 
 ---
-## 🎯 Propósito del Proyecto
+## Proposito del Proyecto
 Plataforma digital de libro de clases que permite:
 - Registrar información académica
 - Gestionar asistencia de estudiantes
 - Registrar calificaciones
 - Facilitar el acceso a información para docentes y personal administrativo
 ---
-## 🏗️ Arquitectura General
+## Arquitectura General
 El proyecto sigue una arquitectura de microservicios con:
 - **Backend:** 4 microservicios independientes (Maven)
 - **Frontend:** Aplicación React moderna
 - **Infraestructura:** Docker, Kubernetes y monitoreo con Prometheus/Grafana
 ---
-## 🔧 BACKEND (Java/Spring Boot 4.0.6)
+## BACKEND (Java/Spring Boot 4.0.6)
 ### Estructura de Microservicios:
 #### BFF_Web (Backend For Frontend)
 - Puerto: API Gateway/Orquestador
@@ -52,7 +52,7 @@ El proyecto sigue una arquitectura de microservicios con:
 
 ---
 
-## 💻 FRONTEND (React 19.2.5 + Vite)
+## FRONTEND (React 19.2.5 + Vite)
 Stack:
 - Framework: React 19.2.5
 - Build Tool: Vite 8.0.10
@@ -65,7 +65,7 @@ Configuración:
 
 ---
 
-## 🐳 INFRAESTRUCTURA
+## INFRAESTRUCTURA
 Docker:
 - docker-compose.yaml: Vacío (sin configuración actualmente)
 - Dockerfiles: Presentes en cada microservicio (Assessment_Manager, BFF_Web, Classroom_Manager, Student_Manager, frontend)
@@ -85,7 +85,7 @@ Monitoreo:
 
 ---
 
-## 📦 Dependencias Principales Identificadas
+## Dependencias Principales Identificadas
 Backend:
 - Spring Boot 4.0.6
 - Spring Cloud 2025.1.1
@@ -104,15 +104,15 @@ Frontend:
 
 ---
 
-## ⚠️ ESTADO ACTUAL - Observaciones
-✅ Completado:
+## ESTADO ACTUAL - Observaciones
+Completado:
 - Estructura de microservicios bien definida
 - Backend con tecnologías modernas
 - Frontend con stack actualizado
 - Dockerfiles en cada servicio
 - Configuración de dependencias
 
-⚠️ Pendiente/Vacío:
+Pendiente/Vacio:
 - Docker Compose: Sin servicios configurados (BD, Redis, etc.)
 - Kubernetes: Sin deployments, services, o configuraciones de K8s
 - Nginx: Sin configuración de reverse proxy
@@ -126,7 +126,7 @@ Frontend:
 
 ---
 
-## 📁 Estructura resumida:
+## Estructura resumida:
 ```
 DigitalClassroom-project/
 ├── backend/                    (Monorepo Maven)

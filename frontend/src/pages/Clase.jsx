@@ -1,20 +1,71 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Card, ListGroup, Badge, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { searchCourses } from "../services/classroomService";
 import alumnos from "../data/alumnos.json";
 
 function Clase() {
   const [alumno, setAlumno] = useState(null);
+  const [cursos, setCursos] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const rut = localStorage.getItem("userRut") || "";
-    const encontrado = alumnos.find((estudiante) => estudiante.rut === rut);
-    const seleccionado = encontrado || alumnos[0];
-    setAlumno(seleccionado);
+    const loadClasses = async () => {
+      try {
+        setLoading(true);
+        const rut = localStorage.getItem("userRut") || "";
+        const encontrado = alumnos.find((estudiante) => estudiante.rut === rut);
+        const seleccionado = encontrado || alumnos[0];
+        setAlumno(seleccionado);
+
+        // Intenta obtener cursos del backend
+        try {
+          const cursosData = await searchCourses();
+          setCursos(cursosData || []);
+        } catch (err) {
+          console.warn("No se pudieron obtener cursos del backend, usando datos locales:", err.message);
+          // Usa datos locales como fallback
+          if (seleccionado.clases) {
+            setCursos(seleccionado.clases);
+          }
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadClasses();
   }, []);
 
-  if (!alumno) {
+  if (loading) {
+    return (
+      <div className="py-5">
+        <Container>
+          <div className="d-flex justify-content-center">
+            <div className="spinner-border text-primary" role="status">
+              <span className="visually-hidden">Cargando...</span>
+            </div>
+          </div>
+        </Container>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="py-5">
+        <Container>
+          <div className="alert alert-danger">Error: {error}</div>
+        </Container>
+      </div>
+    );
+  }
+
+  if (!alumno && cursos.length === 0) {
     return <div className="py-5">Cargando las clases...</div>;
   }
 
@@ -75,7 +126,7 @@ function Clase() {
                 <Card.Title>Lista de clases</Card.Title>
                 <Card.Text>Selecciona una clase para ver todos sus detalles.</Card.Text>
                 <ListGroup variant="flush">
-                  {alumno.clases.map((clase) => (
+                  {(cursos.length > 0 ? cursos : alumno?.clases || []).map((clase) => (
                     <ListGroup.Item
                       key={clase.id}
                       action
@@ -84,9 +135,9 @@ function Clase() {
                       style={{ cursor: "pointer" }}
                     >
                       <div>
-                        <strong>{clase.nombre}</strong>
+                        <strong>{clase.nombre || clase.name || clase.title}</strong>
                         <div className="text-muted" style={{ fontSize: "0.9rem" }}>
-                          {clase.profesor} · {clase.salon}
+                          {clase.profesor || clase.teacher || "Profesor"} · {clase.salon || clase.room || "Aula"}
                         </div>
                       </div>
                       <Badge bg="primary">Ver detalles</Badge>

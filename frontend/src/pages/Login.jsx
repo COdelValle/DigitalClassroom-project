@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Alert } from "react-bootstrap";
+import { getStudentProfile, getStudentFull } from "../services/studentService";
 import alumnos from "../data/alumnos.json";
 import usuarios from "../data/users.json";
 
@@ -12,30 +13,51 @@ function Login() {
 
   const cleanRut = (value) => value.replace(/[-\.]/g, "").trim();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setIsLoading(true);
 
-    const rutLimpio = cleanRut(form.rut);
-    const password = form.password.trim();
+    try {
+      const rutLimpio = cleanRut(form.rut);
+      const password = form.password.trim();
 
-    // Buscar en alumnos primero
-    let user = alumnos.find(a => a.rut === rutLimpio && a.password === password);
+      // Buscar en datos locales (fallback)
+      let user = alumnos.find(a => a.rut === rutLimpio && a.password === password);
 
-    // Si no encuentra, buscar en usuarios
-    if (!user) {
-      user = usuarios.find(u => u.rut === rutLimpio && u.password === password);
-    }
+      // Si no encuentra, buscar en usuarios
+      if (!user) {
+        user = usuarios.find(u => u.rut === rutLimpio && u.password === password);
+      }
 
-    if (user) {
-      localStorage.setItem("userRut", user.rut);
-      localStorage.setItem("userRole", user.rol);
-      // Disparar evento para actualizar otros componentes
-      window.dispatchEvent(new Event('storage'));
-      navigate(user.rol === "profesor" ? "/profesor" : "/clase");
-    } else {
-      setError("Credenciales incorrectas. Verifica tu RUT y contraseña.");
+      if (user) {
+        localStorage.setItem("userRut", user.rut);
+        localStorage.setItem("userRole", user.rol || "estudiante");
+        localStorage.setItem("userId", user.id || "");
+
+        // Intenta obtener datos adicionales del backend
+        if (user.id) {
+          try {
+            const role = user.rol || "estudiante";
+            if (role === "estudiante") {
+              const profileData = await getStudentProfile(user.id);
+              localStorage.setItem("userProfile", JSON.stringify(profileData));
+            }
+          } catch (err) {
+            console.warn("No se pudo obtener perfil del backend:", err.message);
+            // Continúa sin los datos del backend
+          }
+        }
+
+        // Disparar evento para actualizar otros componentes
+        window.dispatchEvent(new Event('storage'));
+        navigate(user.rol === "profesor" ? "/profesor" : "/clase");
+      } else {
+        setError("Credenciales incorrectas. Verifica tu RUT y contraseña.");
+        setIsLoading(false);
+      }
+    } catch (err) {
+      setError("Error en el login: " + err.message);
       setIsLoading(false);
     }
   };

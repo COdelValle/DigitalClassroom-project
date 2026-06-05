@@ -1,0 +1,136 @@
+package cl.digitalclassroom.assessmentmanager.controller;
+
+import cl.digitalclassroom.assessmentmanager.model.Assessment;
+import cl.digitalclassroom.assessmentmanager.model.dto.request.AssessmentRequestDTO;
+import cl.digitalclassroom.assessmentmanager.service.AssessmentService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+/**
+ * Tests para AssessmentController
+ */
+@SpringBootTest
+@AutoConfigureMockMvc
+class AssessmentControllerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockBean
+    private AssessmentService assessmentService;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    private Assessment assessment;
+    private AssessmentRequestDTO requestDTO;
+
+    @BeforeEach
+    void setUp() {
+        assessment = new Assessment();
+        assessment.setId(1L);
+        assessment.setTitle("Examen de Matemáticas");
+        assessment.setCourseId(101L);
+        assessment.setExamDate(LocalDate.now());
+        assessment.setIsGraded(false);
+
+        requestDTO = new AssessmentRequestDTO();
+        requestDTO.setTitle("Nuevo Examen");
+        requestDTO.setCourseId(102L);
+        requestDTO.setExamDate(LocalDate.now());
+    }
+
+    @Test
+    void testGetAllAssessments() throws Exception {
+        // Arrange
+        List<Assessment> assessments = Arrays.asList(assessment);
+        when(assessmentService.getAllAssessments()).thenReturn(assessments);
+
+        // Act & Assert
+        mockMvc.perform(get("/api/v1/assessments")
+                .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$[0].id").value(1))
+            .andExpect(jsonPath("$[0].title").value("Examen de Matemáticas"));
+    }
+
+    @Test
+    void testGetAssessmentById() throws Exception {
+        // Arrange
+        when(assessmentService.getAssessmentById(1L)).thenReturn(assessment);
+
+        // Act & Assert
+        mockMvc.perform(get("/api/v1/assessments/1")
+                .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.id").value(1))
+            .andExpect(jsonPath("$.title").value("Examen de Matemáticas"));
+    }
+
+    @Test
+    void testCreateAssessment() throws Exception {
+        // Arrange
+        Assessment newAssessment = new Assessment();
+        newAssessment.setId(2L);
+        newAssessment.setTitle(requestDTO.getTitle());
+        newAssessment.setCourseId(requestDTO.getCourseId());
+        newAssessment.setExamDate(requestDTO.getExamDate());
+
+        when(assessmentService.createAssessment(any(AssessmentRequestDTO.class)))
+            .thenReturn(newAssessment);
+
+        // Act & Assert
+        mockMvc.perform(post("/api/v1/assessments")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(requestDTO)))
+            .andExpect(status().isCreated())
+            .andExpect(jsonPath("$.id").value(2))
+            .andExpect(jsonPath("$.title").value("Nuevo Examen"));
+    }
+
+    @Test
+    void testUpdateAssessment() throws Exception {
+        // Arrange
+        Assessment updatedAssessment = assessment;
+        updatedAssessment.setTitle("Examen Actualizado");
+
+        when(assessmentService.updateAssessment(eq(1L), any(AssessmentRequestDTO.class)))
+            .thenReturn(updatedAssessment);
+
+        // Act & Assert
+        mockMvc.perform(put("/api/v1/assessments/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(requestDTO)))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.id").value(1));
+    }
+
+    @Test
+    void testDeleteAssessment() throws Exception {
+        // Arrange
+        doNothing().when(assessmentService).deleteAssessment(1L);
+
+        // Act & Assert
+        mockMvc.perform(delete("/api/v1/assessments/1")
+                .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isNoContent());
+    }
+}

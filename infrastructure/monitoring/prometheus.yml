@@ -1,0 +1,60 @@
+# Prometheus Configuration - Digital Classroom
+# Scraping de métricas de todos los microservicios
+
+global:
+  scrape_interval: 15s      # Por defecto, scrapear cada 15 segundos
+  evaluation_interval: 15s  # Evaluar reglas cada 15 segundos
+  external_labels:
+    monitor: 'digital-classroom'
+    environment: 'development'
+
+# Archivos de reglas
+rule_files:
+  # - "alert_rules.yml"  # Descomentar cuando tengas reglas de alertas
+
+# Configuración de scraping
+scrape_configs:
+  # Prometheus mismo
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Assessment Manager
+  - job_name: 'assessment-manager'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['assessment-manager:8083']
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        replacement: 'assessment-manager'
+
+  # Student Manager
+  - job_name: 'student-manager'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['student-manager:8081']
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        replacement: 'student-manager'
+
+  # Classroom Manager
+  - job_name: 'classroom-manager'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['classroom-manager:8084']
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        replacement: 'classroom-manager'
+
+  # BFF Web
+  - job_name: 'bff-web'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['bff-web:8080']
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        replacement: 'bff-web'
