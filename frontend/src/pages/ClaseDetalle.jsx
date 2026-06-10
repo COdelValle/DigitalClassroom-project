@@ -20,53 +20,59 @@ function ClaseDetalle() {
     const loadAlumno = async () => {
       const rut = localStorage.getItem("userRut") || "";
       const encontrado = alumnos.find((estudiante) => estudiante.rut === rut);
-      const seleccionado = encontrado || alumnos[0];
-      setAlumno(seleccionado);
-      return seleccionado;
+
+      if (!encontrado) {
+        setError("No se encontró tu información en los datos locales.");
+        setLoading(false);
+        return null;
+      }
+
+      setAlumno(encontrado);
+      return encontrado;
     };
 
     loadAlumno().then((alumnoData) => {
       if (alumnoData?.id) {
-        loadCourseData(claseId, alumnoData.id);
+        loadCourseData(claseId, alumnoData);
       }
     });
   }, [claseId]);
 
-  const loadCourseData = async (courseId, studentId) => {
+  const loadCourseData = async (courseId, student) => {
     try {
       setLoading(true);
+      setError(null);
+
+      const cursoLocal = student?.clases?.find((c) => c.id.toString() === courseId);
 
       // Intenta obtener datos del curso
       try {
         const cursoData = await getCourse(courseId);
         setCurso(cursoData);
       } catch (err) {
-        console.warn("No se pudo obtener curso:", err.message);
-        // Usa datos locales como fallback
-        if (alumno?.clases) {
-          const claseLocal = alumno.clases.find(c => c.id.toString() === courseId);
-          setCurso(claseLocal);
+        if (cursoLocal) {
+          setCurso(cursoLocal);
+        } else {
+          console.warn("No se pudo obtener curso:", err.message);
         }
       }
 
       // Intenta obtener calificaciones del estudiante
       try {
-        const notasData = await searchGrades({ studentId });
+        const notasData = await searchGrades({ studentId: student.id });
         setNotas(notasData || []);
       } catch (err) {
-        console.warn("No se pudieron obtener notas:", err.message);
-        // Usa datos locales como fallback
-        if (alumno?.clases) {
-          const claseLocal = alumno.clases.find(c => c.id.toString() === courseId);
-          if (claseLocal?.notas) {
-            setNotas(claseLocal.notas);
-          }
+        if (cursoLocal?.notas) {
+          setNotas(cursoLocal.notas);
+        } else {
+          console.warn("No se pudieron obtener notas:", err.message);
+          setNotas([]);
         }
       }
 
       // Intenta obtener reporte completo del estudiante
       try {
-        const reportCardData = await getStudentReportCard(studentId);
+        const reportCardData = await getStudentReportCard(student.id);
         setReportCard(reportCardData);
       } catch (err) {
         console.warn("No se pudo obtener reporte de calificaciones:", err.message);
@@ -77,30 +83,6 @@ function ClaseDetalle() {
       setLoading(false);
     }
   };
-
-  if (loading) {
-    return (
-      <div className="py-5">
-        <Container>
-          <div className="d-flex justify-content-center">
-            <div className="spinner-border text-primary" role="status">
-              <span className="visually-hidden">Cargando...</span>
-            </div>
-          </div>
-        </Container>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="py-5">
-        <Container>
-          <div className="alert alert-danger">Error: {error}</div>
-        </Container>
-      </div>
-    );
-  }
 
   const promedioActual = useMemo(() => {
     if (!notas || notas.length === 0) return "-";
@@ -115,11 +97,22 @@ function ClaseDetalle() {
     return 'success';
   };
 
-  if (!alumno) {
-    return <div className="py-5">Cargando información del alumno...</div>;
-  }
+  let content;
 
-  return (
+  if (loading) {
+    content = (
+      <div className="d-flex justify-content-center">
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Cargando...</span>
+        </div>
+      </div>
+    );
+  } else if (error) {
+    content = <div className="alert alert-danger">Error: {error}</div>;
+  } else if (!alumno) {
+    content = <div>Cargando información del alumno...</div>;
+  } else {
+    content = (
     <div className="py-5">
       <style>
         {`
@@ -275,6 +268,9 @@ function ClaseDetalle() {
       </Container>
     </div>
   );
+  }
+
+  return content;
 }
 
 export default ClaseDetalle;

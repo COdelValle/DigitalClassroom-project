@@ -95,7 +95,7 @@ function GestionClase() {
     const percentage = alumnosClase.length > 0 ? Math.round((presentCount / alumnosClase.length) * 100) : 0;
     setAlumnosClase(prev => prev.map(alumno => {
       const updatedClases = alumno.clases.map(c => {
-        if (c.id === clase.id) {
+        if (c.id === curso.id) {
           return { ...c, asistencia: percentage };
         }
         return c;
@@ -130,6 +130,10 @@ function GestionClase() {
         if (alumno.id === selectedAlumno.id) {
           const updatedClases = alumno.clases.map(c => {
             if (c.id === curso.id) {
+              // Asegura que exista el array de notas
+              if (!c.notas) {
+                c.notas = [];
+              }
               let updatedNotas;
               if (editingNoteIndex !== null) {
                 updatedNotas = [...c.notas];
@@ -152,14 +156,16 @@ function GestionClase() {
   };
 
   const handleEditNote = (index) => {
-    const claseAlumno = selectedAlumno.clases.find((c) => c.id === curso.id);
-    const nota = claseAlumno.notas[index];
-    setFormData({
-      periodo: nota.periodo,
-      nota: nota.puntaje,
-      comentario: nota.comentario
-    });
-    setEditingNoteIndex(index);
+    const claseAlumno = selectedAlumno?.clases?.find((c) => c.id === curso.id);
+    if (claseAlumno?.notas && claseAlumno.notas[index]) {
+      const nota = claseAlumno.notas[index];
+      setFormData({
+        periodo: nota.periodo,
+        nota: nota.puntaje,
+        comentario: nota.comentario
+      });
+      setEditingNoteIndex(index);
+    }
   };
 
   const handleChange = (e) => {
@@ -302,7 +308,7 @@ function GestionClase() {
               <h5>Notas existentes</h5>
               {selectedAlumno && (
                 <ListGroup variant="flush" className="mb-3">
-                  {selectedAlumno.clases.find((c) => c.id === clase.id).notas.map((nota, index) => (
+                  {selectedAlumno.clases.find((c) => c.id === curso.id)?.notas.map((nota, index) => (
                     <ListGroup.Item key={index} className="d-flex justify-content-between align-items-center">
                       <div>
                         <strong>{nota.periodo}:</strong> {nota.puntaje} - {nota.comentario}
@@ -312,7 +318,7 @@ function GestionClase() {
                       </Button>
                     </ListGroup.Item>
                   ))}
-                  {selectedAlumno.clases.find((c) => c.id === clase.id).notas.length === 0 && (
+                  {selectedAlumno.clases.find((c) => c.id === curso.id)?.notas.length === 0 && (
                     <ListGroup.Item>No hay notas registradas.</ListGroup.Item>
                   )}
                 </ListGroup>

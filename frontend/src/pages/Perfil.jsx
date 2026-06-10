@@ -56,6 +56,19 @@ function Perfil() {
     return clases.filter((clase) => clase.profesor === usuario.nombre);
   }, [usuario, esProfesor]);
 
+  const totalEstudiantesProfesor = useMemo(() => {
+    if (!esProfesor || clasesProfesor.length === 0) return 0;
+    const estudiantesUnicos = new Set();
+    clasesProfesor.forEach((clase) => {
+      alumnos.forEach((alumno) => {
+        if (alumno.clases?.some((c) => c.id === clase.id)) {
+          estudiantesUnicos.add(alumno.id);
+        }
+      });
+    });
+    return estudiantesUnicos.size;
+  }, [esProfesor, clasesProfesor]);
+
   if (!usuario) {
     return (
       <div className="d-flex justify-content-center align-items-center min-vh-100">
@@ -234,7 +247,7 @@ function Perfil() {
           <Col lg={6} className="mb-4">
             <div className="stats-card slide-in-right">
               <div className="stats-number">
-                {esProfesor ? "—" : usuario.clases.reduce((acc, clase) => acc + clase.notas.length, 0)}
+                {esProfesor ? totalEstudiantesProfesor : usuario.clases.reduce((acc, clase) => acc + clase.notas.length, 0)}
               </div>
               <div className="stats-label">
                 {esProfesor ? "Estudiantes" : "Evaluaciones"}
@@ -284,34 +297,58 @@ function Perfil() {
                   <>
                     {clasesProfesor.length > 0 ? (
                       <div>
-                        {clasesProfesor.map((clase, index) => (
-                          <div
-                            key={clase.id}
-                            className="class-item fade-in-up"
-                            style={{ animationDelay: `${0.4 + index * 0.1}s` }}
-                          >
-                            <div className="d-flex justify-content-between align-items-start">
-                              <div className="flex-grow-1">
-                                <div style={{ fontSize: '0.85rem', color: '#999', letterSpacing: '0.5px', marginBottom: '0.4rem' }}>
-                                  CLASE {index + 1}
+                        {clasesProfesor.map((clase, index) => {
+                          const estudiantesClase = alumnos.filter((al) =>
+                            al.clases?.some((c) => c.id === clase.id)
+                          );
+                          return (
+                            <div
+                              key={clase.id}
+                              className="class-item fade-in-up"
+                              style={{ animationDelay: `${0.4 + index * 0.1}s` }}
+                            >
+                              <div className="d-flex justify-content-between align-items-start">
+                                <div className="flex-grow-1">
+                                  <div style={{ fontSize: '0.85rem', color: '#999', letterSpacing: '0.5px', marginBottom: '0.4rem' }}>
+                                    CLASE {index + 1}
+                                  </div>
+                                  <strong className="d-block mb-1" style={{ fontSize: '1.05rem' }}>{clase.nombre}</strong>
+                                  <div className="text-muted" style={{ fontSize: '0.9rem' }}>
+                                    Sala {clase.salon}
+                                  </div>
                                 </div>
-                                <strong className="d-block mb-1" style={{ fontSize: '1.05rem' }}>{clase.nombre}</strong>
-                                <div className="text-muted" style={{ fontSize: '0.9rem' }}>
-                                  Sala {clase.salon}
+                                <div className="d-flex flex-column align-items-end ms-3" style={{ minWidth: 120 }}>
+                                  <Button
+                                    variant="outline-secondary"
+                                    size="sm"
+                                    className="mb-2"
+                                    onClick={() => navigate(`/profesor`)}
+                                    style={{ whiteSpace: 'nowrap' }}
+                                  >
+                                    Ver
+                                  </Button>
+                                  <Badge bg="secondary">{estudiantesClase.length} alumnos</Badge>
                                 </div>
                               </div>
-                              <Button
-                                variant="outline-secondary"
-                                size="sm"
-                                className="ms-3"
-                                onClick={() => navigate(`/profesor`)}
-                                style={{ whiteSpace: 'nowrap' }}
-                              >
-                                Ver
-                              </Button>
+
+                              {estudiantesClase.length > 0 && (
+                                <ListGroup variant="flush" className="mt-3">
+                                  {estudiantesClase.map((est) => (
+                                    <ListGroup.Item key={est.id} className="d-flex justify-content-between align-items-center">
+                                      <div>
+                                        <strong>{est.nombre}</strong>
+                                        <div className="text-muted" style={{ fontSize: '0.85rem' }}>{est.rut}</div>
+                                      </div>
+                                      <Button variant="link" size="sm" onClick={() => { localStorage.setItem('userRut', est.rut); navigate('/perfil'); }}>
+                                        Ver perfil
+                                      </Button>
+                                    </ListGroup.Item>
+                                  ))}
+                                </ListGroup>
+                              )}
                             </div>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
                     ) : (
                       <div className="text-center py-4 text-muted">

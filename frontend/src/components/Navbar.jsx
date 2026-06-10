@@ -111,14 +111,14 @@ function NavbarComponent() {
             {userRole === "alumno" ? (
               <>
                 <Nav.Link as={Link} to="/clase">Mis Clases</Nav.Link>
-                <Nav.Link as={Link} to="/assessments">📋 Evaluaciones</Nav.Link>
+                <Nav.Link as={Link} to="/notas">Mis Notas</Nav.Link>
                 <Nav.Link as={Link} to="/perfil">Perfil</Nav.Link>
                 <Nav.Link onClick={handleLogout} className="nav-link-logout">Cerrar sesión</Nav.Link>
               </>
             ) : userRole === "profesor" ? (
               <>
                 <Nav.Link as={Link} to="/profesor">Portal Profesor</Nav.Link>
-                <Nav.Link as={Link} to="/assessments">📋 Evaluaciones</Nav.Link>
+                <Nav.Link as={Link} to="/assessments">Evaluaciones</Nav.Link>
                 <Nav.Link as={Link} to="/perfil">Perfil</Nav.Link>
                 <Nav.Link onClick={handleLogout} className="nav-link-logout">Cerrar sesión</Nav.Link>
               </>

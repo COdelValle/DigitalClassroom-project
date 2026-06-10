@@ -40,6 +40,8 @@ export default function AssessmentsList() {
     courseId: "",
     examDate: "",
   });
+  const userRole = localStorage.getItem("userRole") || "";
+  const isProfesor = userRole === "profesor";
 
   /**
    * Carga las evaluaciones del backend al montar el componente
@@ -53,15 +55,82 @@ export default function AssessmentsList() {
       setLoading(true);
       setError(null);
 
-      // 🔍 DEBUG: Ver datos reales del backend
+      // Cargar datos del backend
       const data = await searchAssessments();
-      console.log("✅ Assessments cargados del backend:", data);
 
-      setAssessments(data || []);
+      // Si no hay datos, usar ejemplos locales
+      if (!data || data.length === 0) {
+        const mockData = [
+          {
+            id: 1,
+            title: "Evaluación de Matemáticas - Unidad 1",
+            courseId: 1,
+            examDate: "2026-06-15",
+            isGraded: false,
+            grades: [],
+          },
+          {
+            id: 2,
+            title: "Quiz de Lenguaje",
+            courseId: 2,
+            examDate: "2026-06-12",
+            isGraded: true,
+            grades: [
+              { studentId: 1, score: 6.5 },
+              { studentId: 2, score: 7.0 },
+            ],
+          },
+          {
+            id: 3,
+            title: "Examen de Inglés",
+            courseId: 3,
+            examDate: "2026-06-20",
+            isGraded: false,
+            grades: [{ studentId: 3, score: 5.8 }],
+          },
+        ];
+        setAssessments(mockData);
+        console.log("📌 Usando datos de ejemplo (sin backend):", mockData);
+      } else {
+        setAssessments(data);
+        console.log("✅ Evaluaciones cargadas del backend:", data);
+      }
     } catch (err) {
       const errorMsg = `Error cargando evaluaciones: ${err.message}`;
       console.error("❌", errorMsg, err);
-      setError(errorMsg);
+      
+      // Fallback a datos de ejemplo en caso de error
+      const mockData = [
+        {
+          id: 1,
+          title: "Evaluación de Matemáticas - Unidad 1",
+          courseId: 1,
+          examDate: "2026-06-15",
+          isGraded: false,
+          grades: [],
+        },
+        {
+          id: 2,
+          title: "Quiz de Lenguaje",
+          courseId: 2,
+          examDate: "2026-06-12",
+          isGraded: true,
+          grades: [
+            { studentId: 1, score: 6.5 },
+            { studentId: 2, score: 7.0 },
+          ],
+        },
+        {
+          id: 3,
+          title: "Examen de Inglés",
+          courseId: 3,
+          examDate: "2026-06-20",
+          isGraded: false,
+          grades: [{ studentId: 3, score: 5.8 }],
+        },
+      ];
+      setAssessments(mockData);
+      setError("⚠️ No se pudo conectar al backend. Mostrando ejemplos de prueba.");
     } finally {
       setLoading(false);
     }
@@ -71,6 +140,7 @@ export default function AssessmentsList() {
    * Abre modal para crear nueva evaluación
    */
   const handleCreateNew = () => {
+    if (!isProfesor) return;
     setIsEditing(false);
     setEditingId(null);
     setFormData({ title: "", courseId: "", examDate: "" });
@@ -81,7 +151,7 @@ export default function AssessmentsList() {
    * Abre modal para editar evaluación
    */
   const handleEdit = (assessment) => {
-    console.log("📝 Editando assessment:", assessment);
+    if (!isProfesor) return;
     setIsEditing(true);
     setEditingId(assessment.id);
     setFormData({
@@ -107,13 +177,11 @@ export default function AssessmentsList() {
 
       if (isEditing) {
         // EDITAR (PUT)
-        console.log("🔄 Actualizando assessment:", editingId, formData);
         const updated = await updateAssessment(editingId, {
           title: formData.title,
           courseId: parseInt(formData.courseId),
           examDate: formData.examDate || null,
         });
-        console.log("✅ Assessment actualizado:", updated);
 
         // Actualizar local
         setAssessments(
@@ -121,13 +189,11 @@ export default function AssessmentsList() {
         );
       } else {
         // CREAR (POST)
-        console.log("➕ Creando assessment:", formData);
         const created = await createAssessment({
           title: formData.title,
           courseId: parseInt(formData.courseId),
           examDate: formData.examDate || null,
         });
-        console.log("✅ Assessment creado:", created);
 
         // Agregar a local
         setAssessments([...assessments, created]);
@@ -136,7 +202,6 @@ export default function AssessmentsList() {
       setShowModal(false);
     } catch (err) {
       const errorMsg = `Error guardando: ${err.message}`;
-      console.error("❌", errorMsg, err);
       setError(errorMsg);
     }
   };
@@ -145,6 +210,8 @@ export default function AssessmentsList() {
    * Elimina una evaluación con confirmación
    */
   const handleDelete = async (id, title) => {
+    if (!isProfesor) return;
+
     if (
       !window.confirm(
         `¿Eliminar evaluación "${title}"? Esta acción no se puede deshacer.`
@@ -155,15 +222,12 @@ export default function AssessmentsList() {
 
     try {
       setError(null);
-      console.log("🗑️ Eliminando assessment:", id);
       await deleteAssessment(id);
-      console.log("✅ Assessment eliminado");
 
       // Remover de local
       setAssessments(assessments.filter((a) => a.id !== id));
     } catch (err) {
       const errorMsg = `Error eliminando: ${err.message}`;
-      console.error("❌", errorMsg, err);
       setError(errorMsg);
     }
   };
@@ -191,19 +255,22 @@ export default function AssessmentsList() {
     <Container className="mt-4">
       <Row className="mb-4">
         <Col md={8}>
-          <h2>📋 Evaluaciones (Assessments)</h2>
+          <h2>Evaluaciones</h2>
           <small className="text-muted">
             Conectado a: Assessment Manager (puerto 8083)
           </small>
+          {!isProfesor && (
+            <p className="text-muted mt-2 mb-0">
+              Solo los profesores pueden crear o modificar evaluaciones.
+            </p>
+          )}
         </Col>
         <Col md={4} className="text-end">
-          <Button
-            variant="success"
-            onClick={handleCreateNew}
-            className="mb-3"
-          >
-            ➕ Nueva Evaluación
-          </Button>
+          {isProfesor && (
+            <Button variant="success" onClick={handleCreateNew} className="mb-3">
+              Nueva Evaluación
+            </Button>
+          )}
         </Col>
       </Row>
 
@@ -222,9 +289,11 @@ export default function AssessmentsList() {
       {assessments.length === 0 ? (
         <Card className="text-center p-5">
           <p className="text-muted">No hay evaluaciones disponibles</p>
-          <Button variant="primary" onClick={handleCreateNew}>
-            Crear primera evaluación
-          </Button>
+          {isProfesor && (
+            <Button variant="primary" onClick={handleCreateNew}>
+              Crear primera evaluación
+            </Button>
+          )}
         </Card>
       ) : (
         <Card>
@@ -270,23 +339,29 @@ export default function AssessmentsList() {
                     </span>
                   </td>
                   <td>
-                    <Button
-                      variant="outline-primary"
-                      size="sm"
-                      onClick={() => handleEdit(assessment)}
-                      className="me-2"
-                    >
-                      ✏️ Editar
-                    </Button>
-                    <Button
-                      variant="outline-danger"
-                      size="sm"
-                      onClick={() =>
-                        handleDelete(assessment.id, assessment.title)
-                      }
-                    >
-                      🗑️ Eliminar
-                    </Button>
+                    {isProfesor ? (
+                      <>
+                        <Button
+                          variant="outline-primary"
+                          size="sm"
+                          onClick={() => handleEdit(assessment)}
+                          className="me-2"
+                        >
+                          Editar
+                        </Button>
+                        <Button
+                          variant="outline-danger"
+                          size="sm"
+                          onClick={() =>
+                            handleDelete(assessment.id, assessment.title)
+                          }
+                        >
+                          Eliminar
+                        </Button>
+                      </>
+                    ) : (
+                      <span className="text-muted">Solo lectura</span>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -298,9 +373,7 @@ export default function AssessmentsList() {
       {/* Modal Crear/Editar */}
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>
         <Modal.Header closeButton>
-          <Modal.Title>
-            {isEditing ? "📝 Editar Evaluación" : "➕ Nueva Evaluación"}
-          </Modal.Title>
+          <Modal.Title>{isEditing ? "Editar Evaluación" : "Nueva Evaluación"}</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
@@ -353,21 +426,6 @@ export default function AssessmentsList() {
           </Button>
         </Modal.Footer>
       </Modal>
-
-      {/* Debug info (solo en desarrollo) */}
-      {import.meta.env.VITE_DEBUG_MODE === "true" && (
-        <Card className="mt-4 bg-light">
-          <Card.Body>
-            <small>
-              <strong>🔍 DEBUG (desarrollador):</strong>
-              <br />
-              Assessments en estado: {assessments.length}
-              <br />
-              Abre la consola (F12) para ver console.log() de operaciones
-            </small>
-          </Card.Body>
-        </Card>
-      )}
     </Container>
   );
 }

@@ -1,10 +1,49 @@
 [
-  { "id": 1, "nombre": "Matemáticas", "profesor": "María González", "salon": "A101" },
-  { "id": 2, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B102" },
-  { "id": 3, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C201" },
-  { "id": 4, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B203" },
-  { "id": 5, "nombre": "Ciencias", "profesor": "Ana Torres", "salon": "C102" },
-  { "id": 6, "nombre": "Educación Física", "profesor": "Jorge Paredes", "salon": "G101" },
-  { "id": 7, "nombre": "Artes", "profesor": "Sofía Blanco", "salon": "D104" },
-  { "id": 8, "nombre": "Tecnología", "profesor": "Luis Gómez", "salon": "E202" }
+  { "id": 1, "nombre": "Matemáticas", "profesor": "María González", "salon": "A101", "nivel": 4, "seccion": "A", "curso": "4° Medio A" },
+  { "id": 2, "nombre": "Matemáticas", "profesor": "María González", "salon": "A102", "nivel": 4, "seccion": "B", "curso": "4° Medio B" },
+  { "id": 3, "nombre": "Matemáticas", "profesor": "María González", "salon": "A103", "nivel": 3, "seccion": "A", "curso": "3° Medio A" },
+  { "id": 4, "nombre": "Matemáticas", "profesor": "María González", "salon": "A104", "nivel": 3, "seccion": "B", "curso": "3° Medio B" },
+  { "id": 5, "nombre": "Matemáticas", "profesor": "María González", "salon": "A105", "nivel": 2, "seccion": "A", "curso": "2° Medio A" },
+  
+  { "id": 6, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B102", "nivel": 4, "seccion": "A", "curso": "4° Medio A" },
+  { "id": 7, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B103", "nivel": 4, "seccion": "C", "curso": "4° Medio C" },
+  { "id": 8, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B104", "nivel": 3, "seccion": "C", "curso": "3° Medio C" },
+  { "id": 9, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B105", "nivel": 2, "seccion": "B", "curso": "2° Medio B" },
+  { "id": 10, "nombre": "Lenguaje", "profesor": "Verónica Andrade", "salon": "B106", "nivel": 1, "seccion": "A", "curso": "1° Medio A" },
+  
+  { "id": 11, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C201", "nivel": 4, "seccion": "B", "curso": "4° Medio B" },
+  { "id": 12, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C202", "nivel": 4, "seccion": "D", "curso": "4° Medio D" },
+  { "id": 13, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C203", "nivel": 3, "seccion": "D", "curso": "3° Medio D" },
+  { "id": 14, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C204", "nivel": 2, "seccion": "C", "curso": "2° Medio C" },
+  { "id": 15, "nombre": "Inglés", "profesor": "Carolina Smith", "salon": "C205", "nivel": 1, "seccion": "B", "curso": "1° Medio B" },
+  
+  { "id": 16, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B203", "nivel": 4, "seccion": "C", "curso": "4° Medio C" },
+  { "id": 17, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B204", "nivel": 4, "seccion": "E", "curso": "4° Medio E" },
+  { "id": 18, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B205", "nivel": 3, "seccion": "E", "curso": "3° Medio E" },
+  { "id": 19, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B206", "nivel": 2, "seccion": "D", "curso": "2° Medio D" },
+  { "id": 20, "nombre": "Historia", "profesor": "Felipe Ramírez", "salon": "B207", "nivel": 1, "seccion": "C", "curso": "1° Medio C" },
+  
+  { "id": 21, "nombre": "Ciencias", "profesor": "Ana Torres", "salon": "C102", "nivel": 4, "seccion": "A", "curso": "4° Medio A" },
+  { "id": 22, "nombre": "Ciencias", "profesor": "Ana Torres", "salon": "C103", "nivel": 3, "seccion": "A", "curso": "3° Medio A" },
+  { "id": 23, "nombre": "Ciencias", "profesor": "Ana Torres", "salon": "C104", "nivel": 3, "seccion": "B", "curso": "3° Medio B" },
+  { "id": 24, "nombre": "Ciencias", "profesor": "Ana Torres", "salon": "C105", "nivel": 2, "seccion": "E", "curso": "2° Medio E" },
+  { "id": 25, "nombre": "Ciencias", "profesor": "Ana Torres", "salon": "C106", "nivel": 1, "seccion": "D", "curso": "1° Medio D" },
+  
+  { "id": 26, "nombre": "Educación Física", "profesor": "Jorge Paredes", "salon": "G101", "nivel": 4, "seccion": "B", "curso": "4° Medio B" },
+  { "id": 27, "nombre": "Educación Física", "profesor": "Jorge Paredes", "salon": "G102", "nivel": 4, "seccion": "C", "curso": "4° Medio C" },
+  { "id": 28, "nombre": "Educación Física", "profesor": "Jorge Paredes", "salon": "G103", "nivel": 3, "seccion": "C", "curso": "3° Medio C" },
+  { "id": 29, "nombre": "Educación Física", "profesor": "Jorge Paredes", "salon": "G104", "nivel": 2, "seccion": "A", "curso": "2° Medio A" },
+  { "id": 30, "nombre": "Educación Física", "profesor": "Jorge Paredes", "salon": "G105", "nivel": 1, "seccion": "E", "curso": "1° Medio E" },
+  
+  { "id": 31, "nombre": "Artes", "profesor": "Sofía Blanco", "salon": "D104", "nivel": 4, "seccion": "D", "curso": "4° Medio D" },
+  { "id": 32, "nombre": "Artes", "profesor": "Sofía Blanco", "salon": "D105", "nivel": 4, "seccion": "E", "curso": "4° Medio E" },
+  { "id": 33, "nombre": "Artes", "profesor": "Sofía Blanco", "salon": "D106", "nivel": 3, "seccion": "D", "curso": "3° Medio D" },
+  { "id": 34, "nombre": "Artes", "profesor": "Sofía Blanco", "salon": "D107", "nivel": 2, "seccion": "B", "curso": "2° Medio B" },
+  { "id": 35, "nombre": "Artes", "profesor": "Sofía Blanco", "salon": "D108", "nivel": 1, "seccion": "A", "curso": "1° Medio A" },
+  
+  { "id": 36, "nombre": "Tecnología", "profesor": "Luis Gómez", "salon": "E202", "nivel": 4, "seccion": "A", "curso": "4° Medio A" },
+  { "id": 37, "nombre": "Tecnología", "profesor": "Luis Gómez", "salon": "E203", "nivel": 4, "seccion": "B", "curso": "4° Medio B" },
+  { "id": 38, "nombre": "Tecnología", "profesor": "Luis Gómez", "salon": "E204", "nivel": 3, "seccion": "E", "curso": "3° Medio E" },
+  { "id": 39, "nombre": "Tecnología", "profesor": "Luis Gómez", "salon": "E205", "nivel": 2, "seccion": "C", "curso": "2° Medio C" },
+  { "id": 40, "nombre": "Tecnología", "profesor": "Luis Gómez", "salon": "E206", "nivel": 1, "seccion": "B", "curso": "1° Medio B" }
 ]
