@@ -31,16 +31,16 @@ docker-compose up -d
 
 1. **Entender la arquitectura**: Leer [GUIA_MICROSERVICIOS.md](./backend/GUIA_MICROSERVICIOS.md)
 2. **Configurar e iniciar**: Seguir instrucciones en cada `README.md`:
-   - [Student Manager](./backend/Student_Manager/README.md)
-   - [Classroom Manager](./backend/Classroom_Manager/README.md)
-   - [Assessment Manager](./backend/Assessment_Manager/README.md)
-   - [BFF Web](./backend/BFF_Web/README.md)
+   - [Student Manager](../backend/Student_Manager/README.md)
+   - [Classroom Manager](../backend/Classroom_Manager/README.md)
+   - [Assessment Manager](../backend/Assessment_Manager/README.md)
+   - [BFF Web](../backend/BFF_Web/README.md)
 3. **Explorar endpoints**: Ir a http://localhost:{puerto}/docs (Swagger UI)
 4. **Casos de uso**: Ver sección "Flujos de Trabajo" en la guía
 
 ### Para Desarrolladores de Frontend
 
-1. **Leer tutorial completo**: [TUTORIAL_FRONTEND.md](./TUTORIAL_FRONTEND.md)
+1. **Leer tutorial completo**: [TUTORIAL_FRONTEND.md](TUTORIAL_FRONTEND.md)
 2. **Configurar clientes HTTP**: Seguir sección "Cliente HTTP"
 3. **Crear servicios API**: Copiar ejemplos de `studentService`, `classroomService`, etc.
 4. **Usar hooks**: Implementar `useStudents`, `useClassrooms`, etc.
@@ -71,7 +71,7 @@ docker-compose up -d
   - Comunicación entre servicios
   - 4,500+ líneas de referencia
 
-- **[ENDPOINTS_DOCUMENTATION.md](./backend/ENDPOINTS_DOCUMENTATION.md)** (Versión Anterior)
+- **[ENDPOINTS_DOCUMENTATION.md](../backend/ENDPOINTS_DOCUMENTATION.md)** (Versión Anterior)
   - Referencia rápida de endpoints
   - Ejemplos de request/response
   - Casos de uso
@@ -80,10 +80,10 @@ docker-compose up -d
 
 | Servicio | Puerta | README |
 |----------|--------|--------|
-| **Student Manager** | 8081 | [README.md](./backend/Student_Manager/README.md) |
-| **Classroom Manager** | 8084 | [README.md](./backend/Classroom_Manager/README.md) |
-| **Assessment Manager** | 8083 | [README.md](./backend/Assessment_Manager/README.md) |
-| **BFF Web** | 8085 | [README.md](./backend/BFF_Web/README.md) |
+| **Student Manager** | 8081 | [README.md](../backend/Student_Manager/README.md) |
+| **Classroom Manager** | 8084 | [README.md](../backend/Classroom_Manager/README.md) |
+| **Assessment Manager** | 8083 | [README.md](../backend/Assessment_Manager/README.md) |
+| **BFF Web** | 8085 | [README.md](../backend/BFF_Web/README.md) |
 
 Cada README contiene:
 - Descripción del servicio
@@ -102,7 +102,7 @@ Cada README contiene:
 
 #### Documentación Principal
 
-- **[TUTORIAL_FRONTEND.md](./TUTORIAL_FRONTEND.md)** ** LEER PRIMERO**
+- **[TUTORIAL_FRONTEND.md](TUTORIAL_FRONTEND.md)** ** LEER PRIMERO**
   - Configuración de clientes HTTP (Axios)
   - Servicios API (studentService, classroomService, etc.)
   - Hooks personalizados (useStudents, useClassrooms, etc.)
@@ -115,10 +115,10 @@ Cada README contiene:
 
 #### Archivos Existentes
 
-- [README.md](./frontend/README.md) - Setup básico React
-- [package.json](./frontend/package.json) - Dependencias
-- [vite.config.js](./frontend/vite.config.js) - Configuración Vite
-- [src/pages/](./frontend/src/pages) - Páginas de ejemplo
+- [README.md](../frontend/README.md) - Setup básico React
+- [package.json](../frontend/package.json) - Dependencias
+- [vite.config.js](../frontend/vite.config.js) - Configuración Vite
+- [src/pages/](../frontend/src/pages) - Páginas de ejemplo
 
 ---
 
@@ -129,10 +129,10 @@ Cada README contiene:
 **¿Cómo crear un estudiante?**
 → [GUIA_MICROSERVICIOS.md - Crear Estudiante](./backend/GUIA_MICROSERVICIOS.md#1-crear-estudiante)  
 → Backend: POST `/api/v1/students`  
-→ Frontend: [TUTORIAL_FRONTEND.md - Ejemplo StudentForm](./TUTORIAL_FRONTEND.md#archivo-srccomponentsstudentformjsx)
+→ Frontend: [TUTORIAL_FRONTEND.md - Ejemplo StudentForm](TUTORIAL_FRONTEND.md#archivo-srccomponentsstudentformjsx)
 
 **¿Cómo conectar desde React?**
-→ [TUTORIAL_FRONTEND.md](./TUTORIAL_FRONTEND.md) (sección Cliente HTTP)
+→ [TUTORIAL_FRONTEND.md](TUTORIAL_FRONTEND.md) (sección Cliente HTTP)
 
 **¿Cuál es la estructura de datos de Student?**
 → [GUIA_MICROSERVICIOS.md - Entidad Student](./backend/GUIA_MICROSERVICIOS.md#entidad-student)
@@ -141,11 +141,11 @@ Cada README contiene:
 → [GUIA_MICROSERVICIOS.md - Comunicación Entre Microservicios](./backend/GUIA_MICROSERVICIOS.md#comunicación-entre-microservicios)
 
 **¿Qué validaciones tiene el RUT?**
-→ [Student_Manager/README.md - Seguridad](./backend/Student_Manager/README.md#-seguridad)  
-→ [TUTORIAL_FRONTEND.md - Validadores](./TUTORIAL_FRONTEND.md#validadores)
+→ [Student_Manager/README.md - Seguridad](../backend/Student_Manager/README.md#-seguridad)  
+→ [TUTORIAL_FRONTEND.md - Validadores](TUTORIAL_FRONTEND.md#validadores)
 
 **¿Cómo manejar errores en el frontend?**
-→ [TUTORIAL_FRONTEND.md - Manejo de Errores](./TUTORIAL_FRONTEND.md#manejo-de-errores)
+→ [TUTORIAL_FRONTEND.md - Manejo de Errores](TUTORIAL_FRONTEND.md#manejo-de-errores)
 
 **¿Qué es Circuit Breaker?**
 → [GUIA_MICROSERVICIOS.md - Circuit Breaker](./backend/GUIA_MICROSERVICIOS.md#circuit-breaker-resilience4j)
@@ -282,7 +282,7 @@ fetch('http://localhost:8081/api/v1/students')
 **R**: Cada servicio es independiente, tiene su BD, y se comunica vía HTTP. Ver sección "Arquitectura" en la guía.
 
 ### P: ¿Cómo conecto mi app React?
-**R**: Sigue [TUTORIAL_FRONTEND.md](./TUTORIAL_FRONTEND.md) paso a paso.
+**R**: Sigue [TUTORIAL_FRONTEND.md](TUTORIAL_FRONTEND.md) paso a paso.
 
 ### P: ¿Qué pasa si un servicio falla?
 **R**: Circuit Breaker detiene el fallo inmediatamente. Ver sección "Circuit Breaker" en la guía.
@@ -291,7 +291,7 @@ fetch('http://localhost:8081/api/v1/students')
 **R**: Cada README tiene sección "Ejemplos" con cURL y JavaScript.
 
 ### P: ¿Cómo validar un RUT en el frontend?
-**R**: [TUTORIAL_FRONTEND.md - Validadores](./TUTORIAL_FRONTEND.md#validadores)
+**R**: [TUTORIAL_FRONTEND.md - Validadores](TUTORIAL_FRONTEND.md#validadores)
 
 ### P: ¿Cómo deploying a producción?
 **R**: Ver [infrastructure/docker/docker-compose.yaml](./infrastructure/docker/docker-compose.yaml) u [infrastructure/k8s/](./infrastructure/k8s/)
@@ -322,7 +322,7 @@ fetch('http://localhost:8081/api/v1/students')
 
 ### Desarrollador Frontend (React)
 
-1. Leer: [TUTORIAL_FRONTEND.md](./TUTORIAL_FRONTEND.md)
+1. Leer: [TUTORIAL_FRONTEND.md](TUTORIAL_FRONTEND.md)
 2. Configurar variables de entorno
 3. Copiar ejemplos de `src/api/` y `src/hooks/`
 4. Crear componentes reutilizables

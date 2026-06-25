@@ -210,9 +210,9 @@ open http://localhost:5173
 
 ### Documentación General
 
-- [📋 Patrones y Arquetipos](PATRONES_Y_ARQUETIPOS.md) - Explicación de patrones de diseño utilizados
-- [🌳 Plan de Branching GitFlow](PLAN_BRANCHING_GITFLOW.md) - Estrategia de versionado y branching
-- [🏗️ Guía de Arquetipos](GUIA_ARQUETIPOS.md) - Cómo crear nuevos microservicios
+- [📋 Patrones y Arquetipos](docs/PATRONES_Y_ARQUETIPOS.md) - Explicación de patrones de diseño utilizados
+- [🌳 Plan de Branching GitFlow](docs/PLAN_BRANCHING_GITFLOW.md) - Estrategia de versionado y branching
+- [🏗️ Guía de Arquetipos](docs/GUIA_ARQUETIPOS.md) - Cómo crear nuevos microservicios
 - [📖 Documentación de Endpoints](backend/ENDPOINTS_DOCUMENTATION.md) - API REST completa
 - [📘 Guía de Microservicios](backend/GUIA_MICROSERVICIOS.md) - Arquitectura detallada
 
@@ -468,7 +468,7 @@ Verificar que BFF tiene CORS configurado para http://localhost:5173
    - Pasar tests
    - Mergear cuando esté aprobado
 
-Para detalles ver: [Plan de Branching GitFlow](PLAN_BRANCHING_GITFLOW.md)
+Para detalles ver: [Plan de Branching GitFlow](docs/PLAN_BRANCHING_GITFLOW.md)
 
 ---
 
@@ -585,9 +585,9 @@ Este proyecto es parte de un trabajo académico de educación superior.
 
 ### Para Entender el Proyecto
 
-1. Empezar por: [Patrones y Arquetipos](PATRONES_Y_ARQUETIPOS.md)
-2. Luego: [Plan de Branching GitFlow](PLAN_BRANCHING_GITFLOW.md)
-3. Finalmente: [Guía de Arquetipos](GUIA_ARQUETIPOS.md)
+1. Empezar por: [Patrones y Arquetipos](docs/PATRONES_Y_ARQUETIPOS.md)
+2. Luego: [Plan de Branching GitFlow](docs/PLAN_BRANCHING_GITFLOW.md)
+3. Finalmente: [Guía de Arquetipos](docs/GUIA_ARQUETIPOS.md)
 
 ### Para Desarrollar
 

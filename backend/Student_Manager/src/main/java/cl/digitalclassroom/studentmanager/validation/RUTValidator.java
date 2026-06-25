@@ -15,7 +15,7 @@ public class RUTValidator implements ConstraintValidator<RUT, String> {
         if (value == null) return false;
 
         String rut = value.replace(".", "").replace("-", "").toUpperCase().trim();
-        if (rut.length() < 2) return false;
+        if (rut.length() < 8) return false;
 
         String numberPart = rut.substring(0, rut.length() - 1);
         char dvChar = rut.charAt(rut.length() - 1);
