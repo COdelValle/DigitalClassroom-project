@@ -1,5 +1,5 @@
--- Data.sql: Datos iniciales para Assessment_Manager
--- Se ejecuta automáticamente en el startup
+-- Data.sql: Datos iniciales para Assessment_Manager (solo pruebas)
+-- Se ejecuta automáticamente en el startup del profile test
 
 -- Limpiar datos existentes (para reinicialización)
 DELETE FROM grade;

@@ -193,7 +193,7 @@ class StudentControllerE2ETest {
 
         // 2. Crear segundo estudiante
         StudentRequestDTO student2 = StudentRequestDTO.builder()
-                .rut("18.456.789-0")
+                .rut("18.456.789-K")
                 .firstName("María")
                 .lastName("Rodríguez")
                 .birthDate(validStudentRequest.getBirthDate())
@@ -233,7 +233,7 @@ class StudentControllerE2ETest {
         mockMvc.perform(post("/api/v1/students")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(validStudentRequest)))
-                .andExpect(status().is5xxServerError());
+                .andExpect(status().is4xxClientError());
 
         // 3. Verificar que solo uno existe
         mockMvc.perform(get("/api/v1/students"))
@@ -345,7 +345,7 @@ class StudentControllerE2ETest {
         // Crear 10 estudiantes
         for (int i = 0; i < 10; i++) {
             StudentRequestDTO student = StudentRequestDTO.builder()
-                    .rut(String.format("1%d.000.00%d-%d", i, i, (i + 1) % 10))
+                    .rut(buildValidRut(10_000_000 + i))
                     .firstName("Estudiante" + i)
                     .lastName("Prueba")
                     .birthDate(validStudentRequest.getBirthDate())
@@ -431,6 +431,19 @@ class StudentControllerE2ETest {
         mockMvc.perform(get("/api/v1/students/" + nonExistentId + "/exists"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("false"));
+    }
+
+    private static String buildValidRut(int number) {
+        String formattedNumber = String.format("%,d", number).replace(',', '.');
+        int rut = number;
+        int m = 0;
+        int s = 1;
+        while (rut != 0) {
+            s = (s + (rut % 10) * (9 - m++ % 6)) % 11;
+            rut /= 10;
+        }
+        char dv = s == 0 ? 'K' : (char) ('0' + s - 1);
+        return formattedNumber + "-" + dv;
     }
 
     // Clase auxiliar para ArrayList

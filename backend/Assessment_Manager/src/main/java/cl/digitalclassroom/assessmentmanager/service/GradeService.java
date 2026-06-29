@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -79,7 +80,14 @@ public class GradeService {
                 .registrationDate(LocalDateTime.now())
                 .build();
 
-        assessment.getGrades().add(grade);
+        var grades = assessment.getGrades();
+        if (grades == null) {
+            grades = new ArrayList<>();
+        } else {
+            grades = new ArrayList<>(grades);
+        }
+        grades.add(grade);
+        assessment.setGrades(grades);
 
         assessmentRepository.save(assessment);
 

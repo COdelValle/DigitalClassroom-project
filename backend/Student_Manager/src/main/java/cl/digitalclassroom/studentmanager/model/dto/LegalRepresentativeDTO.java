@@ -2,7 +2,10 @@ package cl.digitalclassroom.studentmanager.model.dto;
 
 import cl.digitalclassroom.studentmanager.validation.Phone;
 import cl.digitalclassroom.studentmanager.validation.RUT;
+import cl.digitalclassroom.studentmanager.model.converter.StringListConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -36,7 +39,9 @@ public class LegalRepresentativeDTO {
     private String email;
 
     @Schema(example = "+56 9 1111 2222")
+    @Convert(converter = StringListConverter.class)
     @Size(min = 1, message = "Debe proporcionar al menos un número de teléfono")
+    @Column(name = "phone_number")
     private List<@Phone String> phoneNumber;
 
     @Schema(example = "Padre, Madre, Tutor Legal")

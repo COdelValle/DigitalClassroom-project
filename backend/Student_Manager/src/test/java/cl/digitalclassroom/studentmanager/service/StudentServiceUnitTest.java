@@ -143,7 +143,7 @@ class StudentServiceUnitTest {
     void testFindAllForTableSuccess() {
         Student student2 = Student.builder()
                 .id(2L)
-                .rut("18.456.789-0")
+                .rut("18.456.789-K")
                 .firstName("María")
                 .lastName("Rodríguez")
                 .build();

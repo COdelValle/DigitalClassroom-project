@@ -172,7 +172,7 @@ class StudentControllerTest {
                 studentShortResponse,
                 StudentShortResponseDTO.builder()
                         .id(2L)
-                        .rut("18.456.789-0")
+                        .rut("18.456.789-K")
                         .fullName("María Rodríguez")
                         .build()
         );

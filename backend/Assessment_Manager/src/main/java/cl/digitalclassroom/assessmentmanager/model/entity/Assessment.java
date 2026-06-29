@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,9 +25,10 @@ public class Assessment {
     private Long courseId;
     private LocalDate examDate;
 
+    @Builder.Default
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "assessment_id")
-    private List<Grade> grades;
+    private List<Grade> grades = new ArrayList<>();
 
     private boolean isGraded;
 }

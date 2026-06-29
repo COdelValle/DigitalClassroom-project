@@ -75,7 +75,7 @@ class StudentControllerIntegrationTest {
                 .build();
 
         testStudent = Student.builder()
-                .rut("18.456.789-0")
+                .rut("18.456.789-K")
                 .firstName("María")
                 .lastName("Rodríguez")
                 .birthDate(birthDate)
@@ -138,7 +138,7 @@ class StudentControllerIntegrationTest {
         mockMvc.perform(post("/api/v1/students")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(validStudentRequest)))
-                .andExpect(status().is5xxServerError());
+                .andExpect(status().is4xxClientError());
     }
 
     @Test
@@ -196,7 +196,7 @@ class StudentControllerIntegrationTest {
     void testGetAllStudentsIntegration() throws Exception {
         mockMvc.perform(get("/api/v1/students"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", isA(ArrayList.class)))
+                .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$[0].id").isNumber())
                 .andExpect(jsonPath("$[0].rut").exists())
                 .andExpect(jsonPath("$[0].fullName").exists());
@@ -247,7 +247,7 @@ class StudentControllerIntegrationTest {
         mockMvc.perform(get("/api/v1/students/" + id + "/profile"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(id))
-                .andExpect(jsonPath("$.rut").value("18.456.789-0"))
+                .andExpect(jsonPath("$.rut").value("18.456.789-K"))
                 .andExpect(jsonPath("$.fullName").value("María Rodríguez"))
                 .andExpect(jsonPath("$.emergencyContacts").isArray());
     }
@@ -292,7 +292,7 @@ class StudentControllerIntegrationTest {
         mockMvc.perform(get("/api/v1/students/" + id + "/full"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(id))
-                .andExpect(jsonPath("$.rut").value("18.456.789-0"))
+                .andExpect(jsonPath("$.rut").value("18.456.789-K"))
                 .andExpect(jsonPath("$.firstName").value("María"))
                 .andExpect(jsonPath("$.lastName").value("Rodríguez"))
                 .andExpect(jsonPath("$.birthDate").exists())
@@ -324,7 +324,7 @@ class StudentControllerIntegrationTest {
     @DisplayName("GET /api/v1/students/{id}/full - debe incluir nombre intermedio si existe")
     void testGetFullDetailIncludesMiddleName() throws Exception {
         StudentRequestDTO requestWithMiddle = StudentRequestDTO.builder()
-                .rut("17.789.012-3")
+                .rut("17.789.012-K")
                 .firstName("Pedro")
                 .middleName("Luis")
                 .lastName("Martínez")
@@ -340,7 +340,7 @@ class StudentControllerIntegrationTest {
 
         List<Student> students = studentRepository.findAll();
         Student createdStudent = students.stream()
-                .filter(s -> s.getRut().equals("17.789.012-3"))
+                .filter(s -> s.getRut().equals("17.789.012-K"))
                 .findFirst()
                 .orElseThrow();
 
@@ -359,7 +359,7 @@ class StudentControllerIntegrationTest {
         Long id = testStudent.getId();
 
         StudentRequestDTO updateRequest = StudentRequestDTO.builder()
-                .rut("18.456.789-0")
+                .rut("18.456.789-K")
                 .firstName("María Elena")
                 .lastName("Rodríguez López")
                 .birthDate(testStudent.getBirthDate())
@@ -380,7 +380,7 @@ class StudentControllerIntegrationTest {
     @DisplayName("PUT /api/v1/students/{id} - debe retornar 404 si ID no existe")
     void testUpdateStudentReturns404() throws Exception {
         StudentRequestDTO updateRequest = StudentRequestDTO.builder()
-                .rut("18.456.789-0")
+                .rut("18.456.789-K")
                 .firstName("Test")
                 .lastName("Test")
                 .birthDate(new Date())
@@ -406,7 +406,7 @@ class StudentControllerIntegrationTest {
         Long id = testStudent.getId();
 
         StudentRequestDTO updateRequest = StudentRequestDTO.builder()
-                .rut("18.456.789-0")
+                .rut("18.456.789-K")
                 .firstName("Updated Name")
                 .lastName("Updated Last")
                 .birthDate(testStudent.getBirthDate())

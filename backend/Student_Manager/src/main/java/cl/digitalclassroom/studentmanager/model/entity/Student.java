@@ -1,7 +1,9 @@
 package cl.digitalclassroom.studentmanager.model.entity;
 
-import cl.digitalclassroom.studentmanager.validation.RUT;
+import cl.digitalclassroom.studentmanager.model.converter.LegalRepresentativeListConverter;
+import cl.digitalclassroom.studentmanager.model.converter.StringListConverter;
 import cl.digitalclassroom.studentmanager.model.dto.LegalRepresentativeDTO;
+import cl.digitalclassroom.studentmanager.validation.RUT;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
@@ -47,15 +49,13 @@ public class Student {
     @Column(nullable = false)
     private Date birthDate;
 
+    @Convert(converter = StringListConverter.class)
+    @Column(nullable = true, length = 1000)
     @NotEmpty(message = "Debe registrar al menos una alergia o 'Ninguna'")
-    @Column(nullable = true)
     private List<String> allergies;
 
-    @ElementCollection
-    @CollectionTable(
-            name = "student_representatives",
-            joinColumns = @JoinColumn(name = "student_id", nullable = false)
-    )
+    @Convert(converter = LegalRepresentativeListConverter.class)
+    @Column(name = "legal_representatives", nullable = true, columnDefinition = "CLOB")
     @NotEmpty(message = "Tiene que haber al menos 1 representante")
     @Valid
     private List<LegalRepresentativeDTO> legalRepresentatives;

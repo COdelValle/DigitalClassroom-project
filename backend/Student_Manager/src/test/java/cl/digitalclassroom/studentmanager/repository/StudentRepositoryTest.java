@@ -132,7 +132,7 @@ class StudentRepositoryTest {
         studentRepository.save(testStudent);
 
         Student student2 = Student.builder()
-                .rut("18.456.789-0")
+                .rut("18.456.789-K")
                 .firstName("María")
                 .lastName("Rodríguez")
                 .birthDate(testStudent.getBirthDate())
@@ -266,7 +266,7 @@ class StudentRepositoryTest {
         long countBefore = studentRepository.count();
 
         Student student2 = Student.builder()
-                .rut("18.456.789-0")
+                .rut("18.456.789-K")
                 .firstName("Test")
                 .lastName("Student")
                 .birthDate(testStudent.getBirthDate())
@@ -289,7 +289,7 @@ class StudentRepositoryTest {
         studentRepository.save(testStudent);
 
         Student student2 = Student.builder()
-                .rut("18.456.789-0")
+                .rut("18.456.789-K")
                 .firstName("Test")
                 .lastName("Student")
                 .birthDate(testStudent.getBirthDate())
@@ -353,7 +353,7 @@ class StudentRepositoryTest {
         assertThat(studentRepository.count()).isEqualTo(1);
 
         Student student2 = Student.builder()
-                .rut("18.456.789-0")
+                .rut("18.456.789-K")
                 .firstName("Test")
                 .lastName("Student")
                 .birthDate(testStudent.getBirthDate())
